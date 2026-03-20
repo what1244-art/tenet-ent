@@ -67,24 +67,20 @@ contactForm.addEventListener('submit', async (e) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await fetch(CONFIG.APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        action: 'submitInquiry',
-        name: data.name,
-        phone: data.phone,
-        type: typeLabels[data.type] || data.type,
-        message: data.message || ''
-      })
+    var params = new URLSearchParams({
+      action: 'submitInquiry',
+      name: data.name,
+      phone: data.phone,
+      type: typeLabels[data.type] || data.type,
+      message: data.message || ''
     });
+    await fetch(CONFIG.APPS_SCRIPT_URL + '?' + params.toString(), { method: 'GET' });
     showToast('문의가 접수되었습니다! 빠르게 연락드리겠습니다.');
     contactForm.reset();
   } catch (err) {
-    // Apps Script 미연동 시 기존 방식으로 폴백
-    const message =
-      `[TENET 문의]\n이름: ${data.name}\n연락처: ${data.phone}\n` +
-      `유형: ${typeLabels[data.type] || data.type}\n메시지: ${data.message || '(없음)'}`;
+    var message =
+      '[TENET 문의]\n이름: ' + data.name + '\n연락처: ' + data.phone +
+      '\n유형: ' + (typeLabels[data.type] || data.type) + '\n메시지: ' + (data.message || '(없음)');
     if (navigator.clipboard) {
       await navigator.clipboard.writeText(message);
       showToast('문의 내용이 복사되었습니다. 카카오톡 또는 전화로 보내주세요!');
