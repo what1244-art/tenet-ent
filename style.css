@@ -928,7 +928,7 @@ ul { list-style: none; }
 }
 
 .refund-panel.open {
-  max-height: 800px;
+  max-height: 1200px;
 }
 
 .refund-panel .policy-content {
