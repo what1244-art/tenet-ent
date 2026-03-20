@@ -46,39 +46,56 @@ document.querySelectorAll(
 
 // Contact form
 const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
+const typeLabels = {
+  bandclub: '밴드클럽 신청',
+  rehearsal: '합주실 예약',
+  recording: '녹음실 예약',
+  lesson: '레슨 문의',
+  oneday: '무료 원데이 클래스',
+  other: '기타'
+};
+
+contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = '전송 중...';
+  submitBtn.disabled = true;
 
   const formData = new FormData(contactForm);
   const data = Object.fromEntries(formData);
 
-  // Format message for tel link or alert
-  const typeLabels = {
-    bandclub: '밴드클럽 신청',
-    rehearsal: '합주실 예약',
-    recording: '녹음실 예약',
-    lesson: '레슨 문의',
-    oneday: '무료 원데이 클래스',
-    other: '기타'
-  };
-
-  const message =
-    `[TENET 문의]\n` +
-    `이름: ${data.name}\n` +
-    `연락처: ${data.phone}\n` +
-    `유형: ${typeLabels[data.type] || data.type}\n` +
-    `메시지: ${data.message || '(없음)'}`;
-
-  // Copy to clipboard and show confirmation
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(message).then(() => {
-      showToast('문의 내용이 복사되었습니다. 카카오톡 또는 전화로 보내주세요!');
+  try {
+    await fetch(CONFIG.APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'submitInquiry',
+        name: data.name,
+        phone: data.phone,
+        type: typeLabels[data.type] || data.type,
+        message: data.message || ''
+      })
     });
-  } else {
-    showToast('전화(010-3081-3730)로 문의해주세요!');
+    showToast('문의가 접수되었습니다! 빠르게 연락드리겠습니다.');
+    contactForm.reset();
+  } catch (err) {
+    // Apps Script 미연동 시 기존 방식으로 폴백
+    const message =
+      `[TENET 문의]\n이름: ${data.name}\n연락처: ${data.phone}\n` +
+      `유형: ${typeLabels[data.type] || data.type}\n메시지: ${data.message || '(없음)'}`;
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(message);
+      showToast('문의 내용이 복사되었습니다. 카카오톡 또는 전화로 보내주세요!');
+    } else {
+      showToast('전화(010-3081-3730)로 문의해주세요!');
+    }
+    contactForm.reset();
   }
 
-  contactForm.reset();
+  submitBtn.textContent = originalText;
+  submitBtn.disabled = false;
 });
 
 // Toast notification
