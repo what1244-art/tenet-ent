@@ -886,6 +886,25 @@ ul { list-style: none; }
   box-shadow: none;
 }
 
+/* ===== BANDCLUB FAQ ===== */
+.bandclub-faq {
+  margin-top: 80px;
+  padding-top: 60px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.bandclub-faq-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.bandclub-faq .faq-list {
+  margin-top: 24px;
+  max-width: 100%;
+}
+
 /* ===== REFUND TOGGLE ===== */
 .refund-toggle-wrap {
   margin-top: 48px;
