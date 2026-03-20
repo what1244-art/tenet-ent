@@ -886,6 +886,59 @@ ul { list-style: none; }
   box-shadow: none;
 }
 
+/* ===== REFUND TOGGLE ===== */
+.refund-toggle-wrap {
+  margin-top: 48px;
+}
+
+.refund-toggle-btn {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  color: var(--gray);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 16px 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all var(--transition);
+}
+
+.refund-toggle-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.refund-toggle-icon {
+  transition: transform var(--transition);
+}
+
+.refund-toggle-btn.active .refund-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.refund-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.refund-panel.open {
+  max-height: 800px;
+}
+
+.refund-panel .policy-content {
+  margin-top: 24px;
+  padding: 32px;
+  background: rgba(0,0,0,0.2);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
 /* ===== FAQ ===== */
 .faq-list {
   max-width: 720px;

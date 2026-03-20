@@ -241,6 +241,18 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
+// Refund policy toggle
+const refundToggle = document.getElementById('refundToggle');
+const refundPanel = document.getElementById('refundPanel');
+if (refundToggle && refundPanel) {
+  refundToggle.addEventListener('click', () => {
+    refundToggle.classList.toggle('active');
+    refundPanel.classList.toggle('open');
+    const label = refundToggle.querySelector('span:first-child');
+    label.textContent = refundPanel.classList.contains('open') ? '환불 규정 닫기' : '환불 규정 보기';
+  });
+}
+
 // Load projects on page load
 loadProjects();
 
