@@ -976,6 +976,82 @@ ul { list-style: none; }
   }
 }
 
+/* ===== PORTFOLIO LIGHTBOX ===== */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 3000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  cursor: pointer;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-inner {
+  max-width: 900px;
+  width: 100%;
+  cursor: default;
+  position: relative;
+}
+
+.lightbox-img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  display: block;
+}
+
+.lightbox-caption {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.lightbox-caption .portfolio-tag {
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.lightbox-caption h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 8px 0 4px;
+}
+
+.lightbox-caption p {
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--transition);
+  line-height: 1;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+}
+
+.portfolio-item {
+  cursor: pointer;
+}
+
 /* ===== BANDCLUB FAQ ===== */
 .bandclub-faq {
   margin-top: 80px;

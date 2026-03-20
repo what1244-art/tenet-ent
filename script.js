@@ -281,7 +281,7 @@ async function loadPortfolio() {
 
     if (!data.items || data.items.length === 0) return; // 기본 카드 유지
 
-    grid.innerHTML = data.items.map(item => `
+    grid.innerHTML = data.items.map(function(item) { return `
       <div class="portfolio-item">
         <div class="portfolio-img">
           <img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.title)}" loading="lazy"
@@ -293,7 +293,8 @@ async function loadPortfolio() {
           <p>${escapeHtml(item.description)}${item.date ? ' | ' + escapeHtml(item.date) : ''}</p>
         </div>
       </div>
-    `).join('');
+    `; }).join('');
+    attachPortfolioClicks();
   } catch (err) {
     // Sheets 미연동 시 기본 카드 유지
   }
@@ -302,6 +303,59 @@ async function loadPortfolio() {
 // Load projects and portfolio on page load
 loadProjects();
 loadPortfolio();
+
+// Portfolio Lightbox
+var lightbox = document.getElementById('lightbox');
+var lightboxImg = document.getElementById('lightboxImg');
+var lightboxTag = document.getElementById('lightboxTag');
+var lightboxTitle = document.getElementById('lightboxTitle');
+var lightboxDesc = document.getElementById('lightboxDesc');
+var lightboxClose = document.getElementById('lightboxClose');
+
+function openLightbox(imgSrc, tag, title, desc) {
+  lightboxImg.src = imgSrc;
+  lightboxImg.alt = title;
+  lightboxTag.textContent = tag;
+  lightboxTitle.textContent = title;
+  lightboxDesc.textContent = desc;
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+lightboxClose.addEventListener('click', function(e) {
+  e.stopPropagation();
+  closeLightbox();
+});
+
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// Attach click to portfolio items
+function attachPortfolioClicks() {
+  document.querySelectorAll('.portfolio-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var img = item.querySelector('.portfolio-img img');
+      var tag = item.querySelector('.portfolio-tag');
+      var title = item.querySelector('.portfolio-info h3');
+      var desc = item.querySelector('.portfolio-info p');
+      if (img) {
+        openLightbox(img.src, tag ? tag.textContent : '', title ? title.textContent : '', desc ? desc.textContent : '');
+      }
+    });
+  });
+}
+
+attachPortfolioClicks();
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
