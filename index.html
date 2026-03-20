@@ -13,6 +13,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <!-- PortOne SDK -->
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </head>
 <body>
 
@@ -28,7 +30,8 @@
         <li><a href="#studio">합주실 · 녹음실</a></li>
         <li><a href="#lesson">레슨</a></li>
         <li><a href="#equipment">장비</a></li>
-        <li><a href="bandclub-pay.html">밴드클럽 결제</a></li>
+        <li><a href="#bandclub-pay">결제</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact" class="nav-cta">예약 · 문의</a></li>
       </ul>
     </div>
@@ -98,7 +101,7 @@
             <span class="price-amount">20~30만원</span>
             <span class="price-note">8주 패키지 / 합주실·코칭·공연 포함</span>
           </div>
-          <a href="bandclub-pay.html" class="btn btn-primary">밴드클럽 결제하기</a>
+          <a href="#bandclub-pay" class="btn btn-primary">밴드클럽 결제하기</a>
         </div>
         <div class="section-visual">
           <div class="visual-card visual-card-1">
@@ -106,6 +109,164 @@
               <span>BAND<br>CLUB</span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Band Club Payment -->
+  <section class="section section-light" id="bandclub-pay">
+    <div class="container">
+      <div class="section-label">PAYMENT</div>
+      <h2 class="section-title">밴드클럽 <span class="hero-accent">결제</span></h2>
+      <p class="section-subtitle">프로젝트를 선택하고 네이버페이로 간편하게 결제하세요</p>
+      <div id="projectsContainer">
+        <div class="projects-loading">
+          <div class="spinner"></div>
+          <p>프로젝트 목록을 불러오는 중...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-dark" id="faq">
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>밴드클럽은 어떤 프로그램인가요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>밴드클럽은 8주 동안 팀을 이루어 합주하고, 마지막 주에 라이브 공연을 하는 프로그램입니다. 레벨·장르·스케줄에 맞춰 팀을 매칭해드리며, 매주 전문 세션맨의 코칭이 포함됩니다.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>악기를 잘 못 쳐도 참여할 수 있나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>네, 가능합니다. 기본적인 코드 연주가 가능한 수준이면 참여할 수 있습니다. 레벨에 맞는 팀으로 매칭해드리며, 코칭을 통해 함께 성장합니다.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>결제 금액에 무엇이 포함되어 있나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>8주간의 합주실 사용료, 전문 코칭비, 최종 공연 참가, 공연 영상·사진 촬영이 모두 포함되어 있습니다. 개인 악기 외 추가 비용은 없습니다.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>결제 후 환불이 가능한가요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>프로그램 시작 7일 전까지 전액 환불이 가능합니다. 시작 후에는 진행 주차에 따라 부분 환불이 적용됩니다. 자세한 내용은 아래 환불 규정을 확인해주세요.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>팀은 어떻게 구성되나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>보컬·기타·베이스·드럼·키보드 파트별로 모집하며, 레벨과 선호 장르, 가능한 시간대를 고려해 팀을 구성합니다. 결제 시 파트와 선호사항을 입력해주시면 됩니다.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>문의는 어디로 하면 되나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>전화 010-3081-3730 또는 카카오톡으로 문의해주세요. 운영시간 외에도 메시지를 남겨주시면 확인 후 답변드립니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Refund Policy -->
+  <section class="section section-light" id="refund">
+    <div class="container">
+      <div class="section-label">POLICY</div>
+      <h2 class="section-title">환불 규정</h2>
+      <div class="policy-content">
+        <div class="policy-block">
+          <h3>1. 청약철회 (전자상거래법 제17조)</h3>
+          <p>결제일로부터 7일 이내, 프로그램 시작 전이라면 전액 환불이 가능합니다.</p>
+        </div>
+        <div class="policy-block">
+          <h3>2. 프로그램 시작 전 환불</h3>
+          <ul>
+            <li>프로그램 시작 7일 전까지: 전액 환불</li>
+            <li>프로그램 시작 3~6일 전: 결제 금액의 90% 환불</li>
+            <li>프로그램 시작 1~2일 전: 결제 금액의 80% 환불</li>
+          </ul>
+        </div>
+        <div class="policy-block">
+          <h3>3. 프로그램 시작 후 환불</h3>
+          <ul>
+            <li>1~2주차: 결제 금액의 70% 환불</li>
+            <li>3~4주차: 결제 금액의 50% 환불</li>
+            <li>5주차 이후: 환불 불가 (용역 제공이 상당 부분 진행된 경우)</li>
+          </ul>
+        </div>
+        <div class="policy-block">
+          <h3>4. 환불 불가 사유</h3>
+          <ul>
+            <li>수강생의 개인 사정에 의한 불참 (팀 활동 특성상)</li>
+            <li>프로그램 종료 후 환불 요청</li>
+          </ul>
+        </div>
+        <div class="policy-block">
+          <h3>5. 환불 절차</h3>
+          <p>환불 요청은 전화(010-3081-3730) 또는 카카오톡으로 접수해주세요. 접수 후 영업일 기준 3~5일 이내에 환불 처리됩니다. 네이버페이 결제 건은 네이버페이를 통해 환불됩니다.</p>
+        </div>
+        <div class="policy-block">
+          <h3>6. 프로그램 취소 시</h3>
+          <p>최소 인원 미달 등 운영 사정으로 프로그램이 취소되는 경우, 결제 금액 전액을 환불해드립니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Info -->
+  <section class="section section-dark" id="business-info">
+    <div class="container">
+      <div class="section-label">BUSINESS</div>
+      <h2 class="section-title">사업자 정보</h2>
+      <div class="business-grid">
+        <div class="business-item">
+          <h4>상호명</h4>
+          <p>테넷 엔터테인먼트</p>
+        </div>
+        <div class="business-item">
+          <h4>대표자</h4>
+          <p>신주호</p>
+        </div>
+        <div class="business-item">
+          <h4>사업자등록번호</h4>
+          <p>709-59-00653</p>
+        </div>
+        <div class="business-item">
+          <h4>주소</h4>
+          <p>서울 성북구 돌곶이로 9길 14</p>
+        </div>
+        <div class="business-item">
+          <h4>연락처</h4>
+          <p>010-3081-3730</p>
+        </div>
+        <div class="business-item">
+          <h4>이메일</h4>
+          <p>tlswngh1244@naver.com</p>
         </div>
       </div>
     </div>
@@ -363,6 +524,8 @@
           <a href="#bandclub">밴드클럽</a>
           <a href="#studio">합주실 · 녹음실</a>
           <a href="#lesson">레슨</a>
+          <a href="#faq">FAQ</a>
+          <a href="#refund">환불규정</a>
           <a href="#contact">문의</a>
         </div>
         <div class="footer-copy">
@@ -372,6 +535,11 @@
       </div>
     </div>
   </footer>
+
+  <!-- Payment Result Modal -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal-content" id="modalContent"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>

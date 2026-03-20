@@ -37,7 +37,8 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll(
   '.section-title, .section-subtitle, .section-desc, ' +
   '.feature-list li, .studio-card, .equip-card, .lesson-track, ' +
-  '.flow-step, .contact-item, .price-badge, .visual-card'
+  '.flow-step, .contact-item, .price-badge, .visual-card, ' +
+  '.faq-item, .policy-block, .business-item'
 ).forEach(el => {
   el.classList.add('fade-up');
   observer.observe(el);
@@ -116,6 +117,132 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
+// ===== PAYMENT SYSTEM =====
+const CONFIG = {
+  PORTONE_MERCHANT_ID: 'YOUR_MERCHANT_ID',
+  PORTONE_CHANNEL_KEY: 'YOUR_CHANNEL_KEY',
+  APPS_SCRIPT_URL: 'YOUR_APPS_SCRIPT_WEB_APP_URL'
+};
+
+async function loadProjects() {
+  const container = document.getElementById('projectsContainer');
+  if (!container) return;
+
+  try {
+    const res = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=getProjects`);
+    const data = await res.json();
+
+    if (!data.projects || data.projects.length === 0) {
+      container.innerHTML = '<div class="projects-empty"><p>현재 모집 중인 프로젝트가 없습니다.<br>새로운 프로젝트가 열리면 안내드리겠습니다.</p></div>';
+      return;
+    }
+
+    const cards = data.projects.map(project => {
+      const isOpen = project.status === '오픈';
+      const formattedPrice = Number(project.price).toLocaleString();
+      return `
+        <div class="project-card">
+          <span class="project-status ${isOpen ? 'open' : 'closed'}">${isOpen ? '모집중' : '마감'}</span>
+          <h3>${escapeHtml(project.name)}</h3>
+          <p class="project-desc">${escapeHtml(project.description || '')}</p>
+          <div class="project-price">${formattedPrice}원</div>
+          <p class="project-price-note">8주 패키지 / 합주실·코칭·공연 포함</p>
+          <button class="btn-pay" ${isOpen ? '' : 'disabled'}
+            onclick="startPayment('${escapeHtml(project.id)}', '${escapeHtml(project.name)}', ${project.price})">
+            ${isOpen ? '네이버페이 결제' : '마감된 프로젝트입니다'}
+          </button>
+        </div>`;
+    }).join('');
+
+    container.innerHTML = `<div class="projects-grid">${cards}</div>`;
+  } catch (err) {
+    container.innerHTML = '<div class="projects-empty"><p>현재 모집 중인 프로젝트가 없습니다.<br>새로운 프로젝트가 열리면 안내드리겠습니다.</p></div>';
+  }
+}
+
+function startPayment(projectId, projectName, amount) {
+  if (CONFIG.PORTONE_MERCHANT_ID === 'YOUR_MERCHANT_ID') {
+    showToast('결제 시스템 준비 중입니다. 전화(010-3081-3730)로 문의해주세요.');
+    return;
+  }
+
+  const IMP = window.IMP;
+  IMP.init(CONFIG.PORTONE_MERCHANT_ID);
+
+  IMP.request_pay({
+    pg: `naverpay.${CONFIG.PORTONE_CHANNEL_KEY}`,
+    pay_method: 'card',
+    merchant_uid: `bandclub_${projectId}_${Date.now()}`,
+    name: `[밴드클럽] ${projectName}`,
+    amount: amount,
+    naverProducts: [{
+      categoryType: 'ETC', categoryId: 'ETC',
+      uid: projectId, name: `밴드클럽 - ${projectName}`, count: 1,
+    }],
+    m_redirect_url: window.location.href
+  }, async function(rsp) {
+    if (rsp.success) {
+      try {
+        await fetch(CONFIG.APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'verifyPayment', imp_uid: rsp.imp_uid,
+            merchant_uid: rsp.merchant_uid, project_id: projectId,
+            project_name: projectName, amount: amount,
+            buyer_name: rsp.buyer_name || '', buyer_tel: rsp.buyer_tel || '',
+          })
+        });
+      } catch (e) {}
+      showPaymentResult(true, projectName);
+    } else {
+      showPaymentResult(false, rsp.error_msg || '결제가 취소되었습니다.');
+    }
+  });
+}
+
+function showPaymentResult(success, message) {
+  const modal = document.getElementById('paymentModal');
+  const content = document.getElementById('modalContent');
+  if (success) {
+    content.innerHTML = `
+      <div class="modal-icon success">&#10003;</div>
+      <h2>결제가 완료되었습니다</h2>
+      <p>${escapeHtml(message)} 프로젝트에 등록되었습니다.<br>OT 일정 및 상세 안내는 카카오톡으로 발송됩니다.</p>
+      <button class="modal-close" onclick="closeModal()">확인</button>`;
+  } else {
+    content.innerHTML = `
+      <div class="modal-icon fail">&#10007;</div>
+      <h2>결제 실패</h2>
+      <p>${escapeHtml(message)}</p>
+      <button class="modal-close" onclick="closeModal()">닫기</button>`;
+  }
+  modal.classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('paymentModal').classList.remove('active');
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// FAQ toggle
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+    if (!isActive) item.classList.add('active');
+  });
+});
+
+// Load projects on page load
+loadProjects();
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
