@@ -270,8 +270,38 @@ if (refundToggle && refundPanel) {
   });
 }
 
-// Load projects on page load
+// Load portfolio from Sheets
+async function loadPortfolio() {
+  const grid = document.getElementById('portfolioGrid');
+  if (!grid) return;
+
+  try {
+    const res = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=getPortfolio`);
+    const data = await res.json();
+
+    if (!data.items || data.items.length === 0) return; // 기본 카드 유지
+
+    grid.innerHTML = data.items.map(item => `
+      <div class="portfolio-item">
+        <div class="portfolio-img">
+          <img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.title)}" loading="lazy"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="portfolio-info">
+          <span class="portfolio-tag">${escapeHtml(item.category)}</span>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.description)}${item.date ? ' | ' + escapeHtml(item.date) : ''}</p>
+        </div>
+      </div>
+    `).join('');
+  } catch (err) {
+    // Sheets 미연동 시 기본 카드 유지
+  }
+}
+
+// Load projects and portfolio on page load
 loadProjects();
+loadPortfolio();
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
