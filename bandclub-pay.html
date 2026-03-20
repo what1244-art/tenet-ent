@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>밴드클럽 결제 | TENET Entertainment</title>
+  <meta name="description" content="TENET 밴드클럽 프로젝트 결제 페이지. 8주 완성형 밴드 프로그램.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- PortOne SDK -->
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <style>
+    /* ===== Payment Page Specific ===== */
+    .pay-hero {
+      padding: 140px 0 60px;
+      background: var(--black);
+      text-align: center;
+    }
+
+    .pay-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .pay-hero p {
+      color: var(--gray);
+      font-size: 1rem;
+    }
+
+    /* Project Cards */
+    .projects-section {
+      padding: 60px 0 80px;
+      background: var(--black);
+    }
+
+    .projects-loading {
+      text-align: center;
+      padding: 60px 0;
+      color: var(--gray);
+    }
+
+    .projects-loading .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(232, 197, 71, 0.2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .projects-empty {
+      text-align: center;
+      padding: 60px 0;
+      color: var(--gray);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: all var(--transition);
+    }
+
+    .project-card:hover {
+      border-color: rgba(232, 197, 71, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .project-status {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .project-status.open {
+      background: rgba(232, 197, 71, 0.15);
+      color: var(--accent);
+    }
+
+    .project-status.closed {
+      background: rgba(255,255,255,0.05);
+      color: var(--gray);
+    }
+
+    .project-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .project-card .project-desc {
+      font-size: 0.9rem;
+      color: var(--light-gray);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .project-price {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .project-price-note {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    .btn-pay {
+      width: 100%;
+      padding: 16px;
+      background: #03c75a;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-pay:hover {
+      background: #02b350;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(3, 199, 90, 0.3);
+    }
+
+    .btn-pay:disabled {
+      background: rgba(255,255,255,0.1);
+      color: var(--gray);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-pay svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 80px 0;
+      background: var(--dark);
+    }
+
+    .faq-list {
+      max-width: 720px;
+      margin: 40px auto 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 20px 0;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color var(--transition);
+    }
+
+    .faq-question:hover {
+      color: var(--accent);
+    }
+
+    .faq-question .faq-icon {
+      font-size: 1.2rem;
+      color: var(--accent);
+      transition: transform var(--transition);
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      padding-bottom: 20px;
+    }
+
+    .faq-answer p {
+      font-size: 0.9rem;
+      color: var(--light-gray);
+      line-height: 1.7;
+    }
+
+    /* Refund Policy */
+    .policy-section {
+      padding: 80px 0;
+      background: var(--black);
+    }
+
+    .policy-content {
+      max-width: 720px;
+      margin: 40px auto 0;
+    }
+
+    .policy-block {
+      margin-bottom: 32px;
+    }
+
+    .policy-block h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .policy-block p,
+    .policy-block li {
+      font-size: 0.9rem;
+      color: var(--light-gray);
+      line-height: 1.8;
+    }
+
+    .policy-block ul {
+      padding-left: 0;
+    }
+
+    .policy-block li {
+      padding: 4px 0;
+    }
+
+    .policy-block li::before {
+      content: '- ';
+      color: var(--accent);
+    }
+
+    /* Business Info */
+    .business-info {
+      padding: 60px 0;
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .business-item h4 {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .business-item p {
+      font-size: 0.85rem;
+      color: var(--light-gray);
+    }
+
+    /* Payment Result Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .modal-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 1.8rem;
+    }
+
+    .modal-icon.success {
+      background: rgba(3, 199, 90, 0.15);
+      color: #03c75a;
+    }
+
+    .modal-icon.fail {
+      background: rgba(255, 82, 82, 0.15);
+      color: #ff5252;
+    }
+
+    .modal-content h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .modal-content p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .modal-close {
+      padding: 12px 32px;
+      background: var(--accent);
+      color: var(--black);
+      border: none;
+      border-radius: 100px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .modal-close:hover {
+      background: var(--accent-dark);
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-bottom: 24px;
+      transition: color var(--transition);
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .business-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .modal-content {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">TENET</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#bandclub">밴드클럽</a></li>
+        <li><a href="index.html#studio">합주실 · 녹음실</a></li>
+        <li><a href="index.html#lesson">레슨</a></li>
+        <li><a href="index.html#contact" class="nav-cta">예약 · 문의</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="pay-hero">
+    <div class="container">
+      <a href="index.html" class="back-link">&larr; 메인으로 돌아가기</a>
+      <h1>밴드클럽 <span class="hero-accent">결제</span></h1>
+      <p>프로젝트를 선택하고 네이버페이로 간편하게 결제하세요</p>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="projects-section">
+    <div class="container">
+      <div id="projectsContainer">
+        <div class="projects-loading">
+          <div class="spinner"></div>
+          <p>프로젝트 목록을 불러오는 중...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>밴드클럽은 어떤 프로그램인가요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>밴드클럽은 8주 동안 팀을 이루어 합주하고, 마지막 주에 라이브 공연을 하는 프로그램입니다. 레벨·장르·스케줄에 맞춰 팀을 매칭해드리며, 매주 전문 세션맨의 코칭이 포함됩니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>악기를 잘 못 쳐도 참여할 수 있나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>네, 가능합니다. 기본적인 코드 연주가 가능한 수준이면 참여할 수 있습니다. 레벨에 맞는 팀으로 매칭해드리며, 코칭을 통해 함께 성장합니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>결제 금액에 무엇이 포함되어 있나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>8주간의 합주실 사용료, 전문 코칭비, 최종 공연 참가, 공연 영상·사진 촬영이 모두 포함되어 있습니다. 개인 악기 외 추가 비용은 없습니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>결제 후 환불이 가능한가요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>프로그램 시작 7일 전까지 전액 환불이 가능합니다. 시작 후에는 진행 주차에 따라 부분 환불이 적용됩니다. 자세한 내용은 아래 환불 규정을 확인해주세요.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>팀은 어떻게 구성되나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>보컬·기타·베이스·드럼·키보드 파트별로 모집하며, 레벨과 선호 장르, 가능한 시간대를 고려해 팀을 구성합니다. 결제 시 파트와 선호사항을 입력해주시면 됩니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>문의는 어디로 하면 되나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>전화 010-3081-3730 또는 카카오톡으로 문의해주세요. 운영시간 외에도 메시지를 남겨주시면 확인 후 답변드립니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Refund Policy -->
+  <section class="policy-section" id="refund">
+    <div class="container">
+      <div class="section-label">POLICY</div>
+      <h2 class="section-title">환불 규정</h2>
+
+      <div class="policy-content">
+        <div class="policy-block">
+          <h3>1. 청약철회 (전자상거래법 제17조)</h3>
+          <p>결제일로부터 7일 이내, 프로그램 시작 전이라면 전액 환불이 가능합니다.</p>
+        </div>
+
+        <div class="policy-block">
+          <h3>2. 프로그램 시작 전 환불</h3>
+          <ul>
+            <li>프로그램 시작 7일 전까지: 전액 환불</li>
+            <li>프로그램 시작 3~6일 전: 결제 금액의 90% 환불</li>
+            <li>프로그램 시작 1~2일 전: 결제 금액의 80% 환불</li>
+          </ul>
+        </div>
+
+        <div class="policy-block">
+          <h3>3. 프로그램 시작 후 환불</h3>
+          <ul>
+            <li>1~2주차: 결제 금액의 70% 환불</li>
+            <li>3~4주차: 결제 금액의 50% 환불</li>
+            <li>5주차 이후: 환불 불가 (용역 제공이 상당 부분 진행된 경우)</li>
+          </ul>
+        </div>
+
+        <div class="policy-block">
+          <h3>4. 환불 불가 사유</h3>
+          <ul>
+            <li>수강생의 개인 사정에 의한 불참 (팀 활동 특성상)</li>
+            <li>프로그램 종료 후 환불 요청</li>
+          </ul>
+        </div>
+
+        <div class="policy-block">
+          <h3>5. 환불 절차</h3>
+          <p>환불 요청은 전화(010-3081-3730) 또는 카카오톡으로 접수해주세요. 접수 후 영업일 기준 3~5일 이내에 환불 처리됩니다. 네이버페이 결제 건은 네이버페이를 통해 환불됩니다.</p>
+        </div>
+
+        <div class="policy-block">
+          <h3>6. 프로그램 취소 시</h3>
+          <p>최소 인원 미달 등 운영 사정으로 프로그램이 취소되는 경우, 결제 금액 전액을 환불해드립니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Info -->
+  <section class="business-info">
+    <div class="container">
+      <div class="business-grid">
+        <div class="business-item">
+          <h4>상호명</h4>
+          <p>테넷 엔터테인먼트</p>
+        </div>
+        <div class="business-item">
+          <h4>대표자</h4>
+          <p>신주호</p>
+        </div>
+        <div class="business-item">
+          <h4>사업자등록번호</h4>
+          <p>709-59-00653</p>
+        </div>
+        <div class="business-item">
+          <h4>주소</h4>
+          <p>서울 성북구 돌곶이로 9길 14</p>
+        </div>
+        <div class="business-item">
+          <h4>연락처</h4>
+          <p>010-3081-3730</p>
+        </div>
+        <div class="business-item">
+          <h4>이메일</h4>
+          <p>tlswngh1244@naver.com</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-logo">TENET Entertainment</span>
+          <p>창작 인프라 기반 음악 생태계</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html#bandclub">밴드클럽</a>
+          <a href="index.html#studio">합주실 · 녹음실</a>
+          <a href="#faq">FAQ</a>
+          <a href="#refund">환불규정</a>
+        </div>
+        <div class="footer-copy">
+          &copy; 2026 TENET Entertainment. All rights reserved.<br>
+          사업자번호: 709-59-00653
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Payment Result Modal -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal-content" id="modalContent">
+      <!-- Filled dynamically -->
+    </div>
+  </div>
+
+  <script>
+  // ===== CONFIG =====
+  // TODO: 포트원 가입 후 아래 값을 교체해주세요
+  const CONFIG = {
+    PORTONE_MERCHANT_ID: 'YOUR_MERCHANT_ID',       // 포트원 가맹점 식별코드
+    PORTONE_CHANNEL_KEY: 'YOUR_CHANNEL_KEY',        // 포트원 채널키 (네이버페이)
+    APPS_SCRIPT_URL: 'YOUR_APPS_SCRIPT_WEB_APP_URL' // Google Apps Script 배포 URL
+  };
+
+  // ===== LOAD PROJECTS =====
+  async function loadProjects() {
+    const container = document.getElementById('projectsContainer');
+
+    try {
+      const res = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=getProjects`);
+      const data = await res.json();
+
+      if (!data.projects || data.projects.length === 0) {
+        container.innerHTML = `
+          <div class="projects-empty">
+            <p>현재 모집 중인 프로젝트가 없습니다.<br>새로운 프로젝트가 열리면 안내드리겠습니다.</p>
+          </div>`;
+        return;
+      }
+
+      const cards = data.projects.map(project => {
+        const isOpen = project.status === '오픈';
+        const formattedPrice = Number(project.price).toLocaleString();
+
+        return `
+          <div class="project-card">
+            <span class="project-status ${isOpen ? 'open' : 'closed'}">
+              ${isOpen ? '모집중' : '마감'}
+            </span>
+            <h3>${escapeHtml(project.name)}</h3>
+            <p class="project-desc">${escapeHtml(project.description || '')}</p>
+            <div class="project-price">${formattedPrice}원</div>
+            <p class="project-price-note">8주 패키지 / 합주실·코칭·공연 포함</p>
+            <button
+              class="btn-pay"
+              ${isOpen ? '' : 'disabled'}
+              onclick="startPayment('${escapeHtml(project.id)}', '${escapeHtml(project.name)}', ${project.price})"
+            >
+              ${isOpen
+                ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> 네이버페이 결제'
+                : '마감된 프로젝트입니다'}
+            </button>
+          </div>`;
+      }).join('');
+
+      container.innerHTML = `<div class="projects-grid">${cards}</div>`;
+    } catch (err) {
+      container.innerHTML = `
+        <div class="projects-empty">
+          <p>프로젝트 목록을 불러오지 못했습니다.<br>잠시 후 다시 시도해주세요.</p>
+        </div>`;
+      console.error('Failed to load projects:', err);
+    }
+  }
+
+  // ===== PAYMENT =====
+  function startPayment(projectId, projectName, amount) {
+    if (CONFIG.PORTONE_MERCHANT_ID === 'YOUR_MERCHANT_ID') {
+      alert('결제 시스템 준비 중입니다. 잠시 후 다시 시도해주세요.');
+      return;
+    }
+
+    const IMP = window.IMP;
+    IMP.init(CONFIG.PORTONE_MERCHANT_ID);
+
+    const merchantUid = `bandclub_${projectId}_${Date.now()}`;
+
+    IMP.request_pay({
+      pg: `naverpay.${CONFIG.PORTONE_CHANNEL_KEY}`,
+      pay_method: 'card',
+      merchant_uid: merchantUid,
+      name: `[밴드클럽] ${projectName}`,
+      amount: amount,
+      buyer_name: '',
+      buyer_tel: '',
+      buyer_email: '',
+      naverProducts: [{
+        categoryType: 'ETC',
+        categoryId: 'ETC',
+        uid: projectId,
+        name: `밴드클럽 - ${projectName}`,
+        count: 1,
+      }],
+      m_redirect_url: window.location.href
+    }, async function(rsp) {
+      if (rsp.success) {
+        // Verify payment on backend
+        try {
+          const verifyRes = await fetch(CONFIG.APPS_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'verifyPayment',
+              imp_uid: rsp.imp_uid,
+              merchant_uid: rsp.merchant_uid,
+              project_id: projectId,
+              project_name: projectName,
+              amount: amount,
+              buyer_name: rsp.buyer_name || '',
+              buyer_tel: rsp.buyer_tel || '',
+            })
+          });
+          const result = await verifyRes.json();
+
+          if (result.success) {
+            showPaymentResult(true, projectName);
+          } else {
+            showPaymentResult(false, '결제 검증에 실패했습니다. 고객센터로 문의해주세요.');
+          }
+        } catch (err) {
+          showPaymentResult(true, projectName);
+        }
+      } else {
+        showPaymentResult(false, rsp.error_msg || '결제가 취소되었습니다.');
+      }
+    });
+  }
+
+  // ===== PAYMENT RESULT MODAL =====
+  function showPaymentResult(success, message) {
+    const modal = document.getElementById('paymentModal');
+    const content = document.getElementById('modalContent');
+
+    if (success) {
+      content.innerHTML = `
+        <div class="modal-icon success">&#10003;</div>
+        <h2>결제가 완료되었습니다</h2>
+        <p>${escapeHtml(message)} 프로젝트에 등록되었습니다.<br>
+        OT 일정 및 상세 안내는 카카오톡으로 발송됩니다.</p>
+        <button class="modal-close" onclick="closeModal()">확인</button>`;
+    } else {
+      content.innerHTML = `
+        <div class="modal-icon fail">&#10007;</div>
+        <h2>결제 실패</h2>
+        <p>${escapeHtml(message)}</p>
+        <button class="modal-close" onclick="closeModal()">닫기</button>`;
+    }
+
+    modal.classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('paymentModal').classList.remove('active');
+  }
+
+  // ===== FAQ TOGGLE =====
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isActive = item.classList.contains('active');
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+      // Toggle current
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+  // ===== MOBILE NAV =====
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // ===== UTIL =====
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // ===== INIT =====
+  loadProjects();
+  </script>
+
+</body>
+</html>
