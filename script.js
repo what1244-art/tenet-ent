@@ -308,7 +308,13 @@ var lightboxTitle = document.getElementById('lightboxTitle');
 var lightboxDesc = document.getElementById('lightboxDesc');
 var lightboxClose = document.getElementById('lightboxClose');
 
+if (!lightbox) {
+  // lightbox 요소가 없는 페이지에서는 빈 함수로 대체
+  var attachPortfolioClicks = function() {};
+}
+
 function openLightbox(imgSrc, tag, title, desc) {
+  if (!lightbox) return;
   lightboxImg.src = imgSrc;
   lightboxImg.alt = title;
   lightboxTag.textContent = tag;
@@ -319,16 +325,17 @@ function openLightbox(imgSrc, tag, title, desc) {
 }
 
 function closeLightbox() {
+  if (!lightbox) return;
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
 }
 
-lightboxClose.addEventListener('click', function(e) {
+if (lightboxClose) lightboxClose.addEventListener('click', function(e) {
   e.stopPropagation();
   closeLightbox();
 });
 
-lightbox.addEventListener('click', function(e) {
+if (lightbox) lightbox.addEventListener('click', function(e) {
   if (e.target === lightbox) closeLightbox();
 });
 
