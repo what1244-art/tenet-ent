@@ -1,0 +1,352 @@
+/* ===== MIMM Theme Override: White & Black ===== */
+body.mimm-theme {
+  background: #ffffff;
+  color: #111111;
+}
+
+.mimm-theme .nav {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.mimm-theme .nav.scrolled {
+  background: rgba(255,255,255,0.98);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.mimm-theme .nav-logo {
+  color: #111;
+  letter-spacing: 6px;
+}
+
+.mimm-theme .nav-links a {
+  color: #555;
+  opacity: 1;
+}
+
+.mimm-theme .nav-links a:hover { color: #111; }
+
+.mimm-theme .nav-cta {
+  background: #111 !important;
+  color: #fff !important;
+}
+
+.mimm-theme .nav-cta:hover {
+  background: #333 !important;
+}
+
+.mimm-theme .nav-toggle span {
+  background: #111;
+}
+
+.mimm-theme .nav-links {
+  background: rgba(255,255,255,0.98);
+}
+
+/* Hero */
+.mimm-hero {
+  background: #ffffff !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mimm-hero::before { display: none; }
+.mimm-hero .hero-overlay { display: none; }
+
+.mimm-hero .hero-content {
+  padding-top: 80px;
+}
+
+.mimm-logo-text {
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 900;
+  letter-spacing: 16px;
+  color: #111;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.mimm-logo-sub {
+  font-size: 0.85rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 48px;
+}
+
+.mimm-hero .hero-actions .btn-primary {
+  background: #111;
+  color: #fff;
+}
+
+.mimm-hero .hero-actions .btn-primary:hover {
+  background: #333;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.mimm-hero .hero-actions .btn-outline {
+  color: #111;
+  border-color: rgba(0,0,0,0.2);
+}
+
+.mimm-hero .hero-actions .btn-outline:hover {
+  border-color: #111;
+  color: #111;
+}
+
+.mimm-hero .hero-scroll span { color: #ccc; }
+.mimm-hero .hero-scroll-line {
+  background: linear-gradient(to bottom, #111, transparent);
+}
+
+/* Carousel */
+.carousel-section {
+  padding: 0 0 80px;
+  background: #fff;
+}
+
+.carousel-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide {
+  min-width: 60%;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+.carousel-slide img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.carousel-slide:not(.active) img {
+  opacity: 0.4;
+  transform: scale(0.92);
+}
+
+.carousel-slide.active img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  color: #111;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.carousel-btn:hover {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.carousel-btn-prev { left: 16px; }
+.carousel-btn-next { right: 16px; }
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: #111;
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* Sections */
+.mimm-theme .section-dark {
+  background: #fafafa;
+}
+
+.mimm-theme .section-light {
+  background: #ffffff;
+}
+
+.mimm-theme .section-label {
+  color: #999;
+}
+
+.mimm-theme .section-title {
+  color: #111;
+}
+
+.mimm-theme .section-subtitle {
+  color: #888;
+}
+
+.mimm-theme .section-desc {
+  color: #555;
+}
+
+.mimm-theme .lesson-track {
+  background: #f5f5f5;
+  border-left-color: #111;
+}
+
+.mimm-theme .lesson-track h4 { color: #111; }
+.mimm-theme .lesson-track p { color: #666; }
+
+.mimm-theme .feature-icon {
+  background: rgba(0,0,0,0.06);
+  color: #111;
+}
+
+.mimm-theme .feature-list strong { color: #111; }
+.mimm-theme .feature-list span { color: #888; }
+
+.mimm-theme .btn-primary {
+  background: #111;
+  color: #fff;
+}
+
+.mimm-theme .btn-primary:hover {
+  background: #333;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.mimm-theme .btn-secondary {
+  background: rgba(0,0,0,0.05);
+  color: #111;
+}
+
+.mimm-theme .btn-secondary:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+/* Studio Cards */
+.mimm-theme .studio-card {
+  background: #fff;
+  border-color: rgba(0,0,0,0.08);
+}
+
+.mimm-theme .studio-card:hover {
+  border-color: rgba(0,0,0,0.2);
+}
+
+.mimm-theme .studio-card h3 { color: #111; }
+.mimm-theme .studio-location { color: #999; }
+
+.mimm-theme .studio-features li {
+  color: #555;
+  border-bottom-color: rgba(0,0,0,0.04);
+}
+
+.mimm-theme .studio-features li::before { color: #111; }
+
+/* Contact */
+.mimm-theme .contact-item h4 { color: #999; }
+.mimm-theme .contact-item a { color: #111; }
+.mimm-theme .contact-item a:hover { color: #555; }
+.mimm-theme .contact-item p { color: #555; }
+
+.mimm-theme .form-group label { color: #999; }
+
+.mimm-theme .form-group input,
+.mimm-theme .form-group select,
+.mimm-theme .form-group textarea {
+  background: #f5f5f5;
+  border-color: rgba(0,0,0,0.1);
+  color: #111;
+}
+
+.mimm-theme .form-group input:focus,
+.mimm-theme .form-group select:focus,
+.mimm-theme .form-group textarea:focus {
+  border-color: #111;
+}
+
+.mimm-theme .form-group select option {
+  background: #fff;
+  color: #111;
+}
+
+/* Map */
+.mimm-theme .map-section iframe {
+  filter: none;
+}
+
+/* Footer */
+.mimm-theme .footer {
+  background: #111;
+  color: #fff;
+  border-top: none;
+}
+
+.mimm-theme .footer-logo { color: #fff; }
+.mimm-theme .footer-brand p { color: #888; }
+.mimm-theme .footer-links a { color: #888; }
+.mimm-theme .footer-links a:hover { color: #fff; }
+.mimm-theme .footer-copy { color: #666; }
+
+/* Fade-up for mimm */
+.mimm-theme .fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.mimm-theme .fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .carousel-slide { min-width: 80%; }
+  .carousel-btn { width: 40px; height: 40px; font-size: 1rem; }
+  .mimm-logo-text { letter-spacing: 8px; }
+
+  .mimm-theme .nav-links {
+    background: rgba(255,255,255,0.98);
+  }
+
+  .mimm-theme .studio-grid {
+    grid-template-columns: 1fr;
+  }
+}

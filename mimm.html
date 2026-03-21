@@ -11,10 +11,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mimm.css">
 </head>
-<body>
+<body class="mimm-theme">
 
-  <nav class="nav" id="nav">
+  <nav class="nav scrolled" id="nav">
     <div class="nav-inner">
       <a href="mimm.html" class="nav-logo">MIMM</a>
       <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기">
@@ -32,18 +33,10 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero" id="hero">
-    <div class="hero-overlay"></div>
+  <section class="hero mimm-hero" id="hero">
     <div class="hero-content">
-      <p class="hero-label">Seoul Seongbuk-gu</p>
-      <h1 class="hero-title">
-        실용음악 · 연기 · 뮤지컬<br>
-        <span class="hero-accent">레슨 전문</span>
-      </h1>
-      <p class="hero-sub">
-        서울예대 · 동아방송대 · 호원대 · 홍익대 출신 강사진<br>
-        무료 원데이 클래스로 부담 없이 시작하세요
-      </p>
+      <div class="mimm-logo-text">MIMM</div>
+      <p class="mimm-logo-sub">Music · Acting · Musical</p>
       <div class="hero-actions">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSflRVltewWIE3SdPrR1B65OVUpgIKVLCtxC_5iHblem41vTWg/viewform?usp=header" target="_blank" class="btn btn-primary">무료 원데이 신청</a>
         <a href="tel:01030813730" class="btn btn-outline">전화 문의</a>
@@ -52,6 +45,35 @@
     <div class="hero-scroll">
       <span>scroll</span>
       <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Photo Carousel -->
+  <section class="carousel-section">
+    <div class="carousel-wrapper">
+      <button class="carousel-btn carousel-btn-prev" id="carouselPrev">&larr;</button>
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide active">
+          <img src="images/room-1.jpg" alt="연습실 1" loading="lazy">
+        </div>
+        <div class="carousel-slide">
+          <img src="images/room-2.jpg" alt="연습실 2" loading="lazy">
+        </div>
+        <div class="carousel-slide">
+          <img src="images/room-3.jpg" alt="연습실 3" loading="lazy">
+        </div>
+        <div class="carousel-slide">
+          <img src="images/room-4.jpg" alt="연습실 4" loading="lazy">
+        </div>
+        <div class="carousel-slide">
+          <img src="images/hero-studio.jpg" alt="합주실" loading="lazy">
+        </div>
+        <div class="carousel-slide">
+          <img src="images/recording-studio.jpg" alt="녹음실" loading="lazy">
+        </div>
+      </div>
+      <button class="carousel-btn carousel-btn-next" id="carouselNext">&rarr;</button>
+      <div class="carousel-dots" id="carouselDots"></div>
     </div>
   </section>
 
@@ -144,7 +166,6 @@
       <div class="section-label">03</div>
       <h2 class="section-title">보유 시설</h2>
       <p class="section-subtitle">연습부터 녹음까지 한 곳에서</p>
-
       <div class="studio-grid">
         <div class="studio-card">
           <div class="studio-card-visual">
@@ -276,5 +297,58 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+  // Carousel
+  (function() {
+    var track = document.getElementById('carouselTrack');
+    var slides = track ? track.querySelectorAll('.carousel-slide') : [];
+    var prevBtn = document.getElementById('carouselPrev');
+    var nextBtn = document.getElementById('carouselNext');
+    var dotsContainer = document.getElementById('carouselDots');
+    if (!track || slides.length === 0) return;
+
+    var current = 0;
+    var total = slides.length;
+
+    // Create dots
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('data-index', i);
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-index')));
+      });
+      dotsContainer.appendChild(dot);
+    }
+
+    function goTo(index) {
+      current = index;
+      if (current < 0) current = total - 1;
+      if (current >= total) current = 0;
+
+      var slideWidth = slides[0].offsetWidth;
+      var offset = -(current * slideWidth) + (track.parentElement.offsetWidth / 2) - (slideWidth / 2);
+      track.style.transform = 'translateX(' + offset + 'px)';
+
+      slides.forEach(function(s, i) {
+        s.classList.toggle('active', i === current);
+      });
+
+      var dots = dotsContainer.querySelectorAll('.carousel-dot');
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    prevBtn.addEventListener('click', function() { goTo(current - 1); });
+    nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+    // Init position
+    goTo(0);
+
+    // Recalc on resize
+    window.addEventListener('resize', function() { goTo(current); });
+  })();
+  </script>
 </body>
 </html>
