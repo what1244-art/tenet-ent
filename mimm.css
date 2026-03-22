@@ -114,7 +114,7 @@ body.mimm-theme {
 
 .carousel-wrapper {
   position: relative;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -125,17 +125,17 @@ body.mimm-theme {
 }
 
 .carousel-slide {
-  min-width: 35%;
-  padding: 0 4px;
+  min-width: 50%;
+  padding: 0 8px;
   flex-shrink: 0;
 }
 
 .carousel-slide img {
   width: 100%;
-  height: 80px;
+  aspect-ratio: 4/3;
   object-fit: cover;
-  border-radius: 6px;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
