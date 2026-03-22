@@ -108,7 +108,7 @@ body.mimm-theme {
 
 /* Carousel */
 .carousel-section {
-  padding: 0 0 80px;
+  padding: 0 0 24px;
   background: #fff;
 }
 
@@ -182,7 +182,7 @@ body.mimm-theme {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 24px;
+  margin-top: 12px;
 }
 
 .carousel-dot {
