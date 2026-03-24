@@ -135,7 +135,7 @@ document.head.appendChild(style);
 const CONFIG = {
   PORTONE_MERCHANT_ID: 'YOUR_MERCHANT_ID',
   PORTONE_CHANNEL_KEY: 'YOUR_CHANNEL_KEY',
-  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzexiGY-zXCXcOgWH2S3g0bGVBh5kLvsAqn3C2Wp97_6iKf0mdlPbeKVE8kzxSRlbJs/exec'
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbw-k6vMYtvA1qTVLFNyclsTTd_9gmL9y19YTf9pQ8gPuAApoMijN737F9IM672_mrDq/exec'
 };
 
 async function loadProjects() {
