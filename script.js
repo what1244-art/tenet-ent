@@ -182,6 +182,16 @@ async function loadProjects() {
           ${startDateText ? `<p class="project-date">${startDateText}</p>` : ''}
           <div class="project-price">${formattedPrice}원</div>
           <p class="project-price-note">8주 패키지 / 합주실·코칭·공연 포함</p>
+          ${isOpen ? `<select class="part-select" id="part-${project.id}">
+            <option value="">파트를 선택해주세요</option>
+            <option value="보컬">보컬</option>
+            <option value="기타">기타</option>
+            <option value="세컨기타">세컨기타</option>
+            <option value="베이스">베이스</option>
+            <option value="드럼">드럼</option>
+            <option value="건반">건반</option>
+            <option value="세컨건반">세컨건반</option>
+          </select>` : ''}
           <button class="btn-pay" ${btnDisabled}
             onclick="startPayment('${escapeHtml(project.id)}', '${escapeHtml(project.name)}', ${project.price})">
             ${btnText}
@@ -196,6 +206,14 @@ async function loadProjects() {
 }
 
 function startPayment(projectId, projectName, amount) {
+  const partSelect = document.getElementById(`part-${projectId}`);
+  const part = partSelect ? partSelect.value : '';
+
+  if (!part) {
+    showToast('파트를 선택해주세요!');
+    return;
+  }
+
   if (CONFIG.PORTONE_MERCHANT_ID === 'YOUR_MERCHANT_ID') {
     showToast('결제 시스템 준비 중입니다. 전화(010-3081-3730)로 문의해주세요.');
     return;
@@ -212,7 +230,7 @@ function startPayment(projectId, projectName, amount) {
     amount: amount,
     naverProducts: [{
       categoryType: 'ETC', categoryId: 'ETC',
-      uid: projectId, name: `밴드클럽 - ${projectName}`, count: 1,
+      uid: projectId, name: `밴드클럽 - ${projectName} (${part})`, count: 1,
     }],
     m_redirect_url: window.location.href
   }, async function(rsp) {
@@ -226,6 +244,7 @@ function startPayment(projectId, projectName, amount) {
             merchant_uid: rsp.merchant_uid, project_id: projectId,
             project_name: projectName, amount: amount,
             buyer_name: rsp.buyer_name || '', buyer_tel: rsp.buyer_tel || '',
+            part: part,
           })
         });
       } catch (e) {}
