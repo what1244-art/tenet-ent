@@ -153,19 +153,38 @@ async function loadProjects() {
 
     const cards = data.projects.map(project => {
       const isOpen = project.status === '오픈';
+      const isUpcoming = project.status === '오픈예정';
       const formattedPrice = Number(project.price).toLocaleString();
       const startDateText = project.startDate ? `시작일: ${project.startDate}` : '';
+
+      let statusClass = 'closed';
+      let statusLabel = '마감';
+      let btnText = '마감된 프로젝트입니다';
+      let btnDisabled = 'disabled';
+
+      if (isOpen) {
+        statusClass = 'open';
+        statusLabel = '모집중';
+        btnText = '네이버페이 결제';
+        btnDisabled = '';
+      } else if (isUpcoming) {
+        statusClass = 'upcoming';
+        statusLabel = '오픈예정';
+        btnText = '오픈 준비중입니다';
+        btnDisabled = 'disabled';
+      }
+
       return `
         <div class="project-card">
-          <span class="project-status ${isOpen ? 'open' : 'closed'}">${isOpen ? '모집중' : '마감'}</span>
+          <span class="project-status ${statusClass}">${statusLabel}</span>
           <h3>${escapeHtml(project.name)}</h3>
           <p class="project-desc">${escapeHtml(project.description || '')}</p>
           ${startDateText ? `<p class="project-date">${startDateText}</p>` : ''}
           <div class="project-price">${formattedPrice}원</div>
           <p class="project-price-note">8주 패키지 / 합주실·코칭·공연 포함</p>
-          <button class="btn-pay" ${isOpen ? '' : 'disabled'}
+          <button class="btn-pay" ${btnDisabled}
             onclick="startPayment('${escapeHtml(project.id)}', '${escapeHtml(project.name)}', ${project.price})">
-            ${isOpen ? '네이버페이 결제' : '마감된 프로젝트입니다'}
+            ${btnText}
           </button>
         </div>`;
     }).join('');

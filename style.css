@@ -854,6 +854,11 @@ body:has(.nav-logo[href="mimm.html"]) .hero {
   line-height: 1.6;
 }
 
+.project-status.upcoming {
+  background: rgba(100, 180, 255, 0.15);
+  color: #64b4ff;
+}
+
 .project-date {
   font-size: 0.85rem;
   color: var(--accent);
