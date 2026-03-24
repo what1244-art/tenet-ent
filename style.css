@@ -854,6 +854,17 @@ body:has(.nav-logo[href="mimm.html"]) .hero {
   line-height: 1.6;
 }
 
+.project-date {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 16px;
+  padding: 6px 12px;
+  background: rgba(232, 197, 71, 0.1);
+  border-radius: 6px;
+  display: inline-block;
+}
+
 .project-price {
   font-size: 1.8rem;
   font-weight: 900;

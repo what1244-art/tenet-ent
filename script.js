@@ -154,11 +154,13 @@ async function loadProjects() {
     const cards = data.projects.map(project => {
       const isOpen = project.status === '오픈';
       const formattedPrice = Number(project.price).toLocaleString();
+      const startDateText = project.startDate ? `시작일: ${project.startDate}` : '';
       return `
         <div class="project-card">
           <span class="project-status ${isOpen ? 'open' : 'closed'}">${isOpen ? '모집중' : '마감'}</span>
           <h3>${escapeHtml(project.name)}</h3>
           <p class="project-desc">${escapeHtml(project.description || '')}</p>
+          ${startDateText ? `<p class="project-date">${startDateText}</p>` : ''}
           <div class="project-price">${formattedPrice}원</div>
           <p class="project-price-note">8주 패키지 / 합주실·코칭·공연 포함</p>
           <button class="btn-pay" ${isOpen ? '' : 'disabled'}
