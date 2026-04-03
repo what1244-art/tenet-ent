@@ -471,8 +471,9 @@ async function sendMessage() {
   try {
     await fetch(API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sender: currentUser, message: text })
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ sender: currentUser, message: text }),
+      redirect: 'follow'
     });
     // Refresh to get server timestamp
     await fetchMessages();
