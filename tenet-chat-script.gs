@@ -8,34 +8,62 @@
  * 4. 웹 앱으로 배포 (누구나 접근 가능)
  */
 
-const SHEET_NAME = 'Chat';
-const MAX_MESSAGES = 50;
+var SHEET_NAME = 'Chat';
+var MAX_MESSAGES = 50;
 
 function doGet(e) {
   try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+    var params = e ? e.parameter : {};
+    var action = params.action || 'read';
+
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
 
     if (!sheet) {
       return createJsonResponse({ error: 'Sheet not found' });
     }
 
-    const lastRow = sheet.getLastRow();
+    // 메시지 보내기 (GET으로 처리)
+    if (action === 'send') {
+      var sender = params.sender;
+      var message = params.message;
+
+      if (!sender || !message) {
+        return createJsonResponse({ error: 'Missing sender or message' });
+      }
+
+      var allowedMembers = ['영민', '주호', '혜림', '요한'];
+      if (allowedMembers.indexOf(sender) === -1) {
+        return createJsonResponse({ error: 'Unknown member' });
+      }
+
+      var timestamp = new Date();
+      sheet.appendRow([timestamp, sender, message]);
+
+      return createJsonResponse({ success: true, timestamp: timestamp.toISOString() });
+    }
+
+    // 메시지 읽기
+    var lastRow = sheet.getLastRow();
 
     if (lastRow <= 1) {
       return createJsonResponse({ messages: [] });
     }
 
-    const startRow = Math.max(2, lastRow - MAX_MESSAGES + 1);
-    const numRows = lastRow - startRow + 1;
-    const data = sheet.getRange(startRow, 1, numRows, 3).getValues();
+    var startRow = Math.max(2, lastRow - MAX_MESSAGES + 1);
+    var numRows = lastRow - startRow + 1;
+    var data = sheet.getRange(startRow, 1, numRows, 3).getValues();
 
-    const messages = data
-      .filter(row => row[0] && row[1] && row[2])
-      .map(row => ({
-        timestamp: new Date(row[0]).toISOString(),
-        sender: row[1].toString().trim(),
-        message: row[2].toString()
-      }));
+    var messages = [];
+    for (var i = 0; i < data.length; i++) {
+      var row = data[i];
+      if (row[0] && row[1] && row[2]) {
+        messages.push({
+          timestamp: new Date(row[0]).toISOString(),
+          sender: row[1].toString().trim(),
+          message: row[2].toString()
+        });
+      }
+    }
 
     return createJsonResponse({ messages: messages });
 
@@ -45,43 +73,7 @@ function doGet(e) {
 }
 
 function doPost(e) {
-  try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-
-    if (!sheet) {
-      return createJsonResponse({ error: 'Sheet not found' });
-    }
-
-    let body;
-    if (e.postData) {
-      body = JSON.parse(e.postData.contents);
-    } else {
-      return createJsonResponse({ error: 'No data received' });
-    }
-
-    const sender = body.sender;
-    const message = body.message;
-
-    if (!sender || !message) {
-      return createJsonResponse({ error: 'Missing sender or message' });
-    }
-
-    const allowedMembers = ['영민', '주호', '혜림', '요한'];
-    if (!allowedMembers.includes(sender)) {
-      return createJsonResponse({ error: 'Unknown member' });
-    }
-
-    const timestamp = new Date();
-    sheet.appendRow([timestamp, sender, message]);
-
-    return createJsonResponse({
-      success: true,
-      timestamp: timestamp.toISOString()
-    });
-
-  } catch (error) {
-    return createJsonResponse({ error: error.message });
-  }
+  return doGet(e);
 }
 
 function createJsonResponse(data) {
@@ -92,11 +84,10 @@ function createJsonResponse(data) {
 
 /**
  * 초기 설정 함수 - 한 번만 실행
- * 시트가 없으면 생성하고 헤더를 추가합니다.
  */
 function setup() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getSheetByName(SHEET_NAME);
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(SHEET_NAME);
 
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
@@ -107,8 +98,7 @@ function setup() {
   sheet.setColumnWidth(2, 80);
   sheet.setColumnWidth(3, 400);
 
-  // 헤더 스타일
-  const headerRange = sheet.getRange(1, 1, 1, 3);
+  var headerRange = sheet.getRange(1, 1, 1, 3);
   headerRange.setFontWeight('bold');
   headerRange.setBackground('#4a90d9');
   headerRange.setFontColor('#ffffff');

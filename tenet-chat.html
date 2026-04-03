@@ -469,12 +469,8 @@ async function sendMessage() {
   scrollToBottom();
 
   try {
-    await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ sender: currentUser, message: text }),
-      redirect: 'follow'
-    });
+    const sendUrl = API_URL + '?action=send&sender=' + encodeURIComponent(currentUser) + '&message=' + encodeURIComponent(text);
+    await fetch(sendUrl);
     // Refresh to get server timestamp
     await fetchMessages();
   } catch (err) {
