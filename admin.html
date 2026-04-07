@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>TENET Admin</title>
+<style>
+  :root {
+    --bg: #0b0b0f;
+    --panel: #15151c;
+    --panel-2: #1d1d27;
+    --line: #2a2a36;
+    --text: #f4f4f7;
+    --muted: #8b8b98;
+    --accent: #ffffff;
+    --danger: #ff4757;
+    --ok: #2ed573;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  /* ---------- Login gate ---------- */
+  #gate {
+    width: 100%;
+    max-width: 360px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+  }
+  #gate h1 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  #gate p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .pin-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .pin-row input {
+    width: 40px;
+    height: 50px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--text);
+    outline: none;
+    transition: border-color .15s;
+  }
+  .pin-row input:focus { border-color: var(--accent); }
+  #gate button {
+    width: 100%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity .15s;
+  }
+  #gate button:hover { opacity: 0.85; }
+  #gate-error {
+    color: var(--danger);
+    font-size: 12px;
+    margin-top: 12px;
+    min-height: 16px;
+  }
+
+  /* ---------- Dashboard ---------- */
+  #dashboard {
+    display: none;
+    width: 100%;
+    max-width: 960px;
+  }
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+  .topbar h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .topbar .meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .logout-btn {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .logout-btn:hover { color: var(--text); border-color: var(--text); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px;
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+    transition: transform .15s, border-color .15s, background .15s;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 140px;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: #444;
+    background: var(--panel-2);
+  }
+  .card .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--panel-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .card .title {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .card .desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: -6px;
+  }
+  .badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 7px;
+    background: var(--danger);
+    color: #fff;
+    border-radius: 11px;
+    font-size: 11px;
+    font-weight: 700;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 3px var(--panel);
+  }
+  .badge.show { display: flex; }
+
+  .section-title {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 28px 0 12px;
+  }
+
+  @media (max-width: 600px) {
+    .topbar h1 { font-size: 18px; }
+    .card { min-height: 120px; padding: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =========================
+     비밀번호 게이트
+     ========================= -->
+<div id="gate">
+  <h1>TENET Admin</h1>
+  <p>관리자 PIN 6자리를 입력하세요</p>
+  <form id="pin-form" class="pin-row" autocomplete="off">
+    <input type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" />
+    <input type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" />
+    <input type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" />
+    <input type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" />
+    <input type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" />
+    <input type="password" inputmode="numeric" maxlength="1" pattern="[0-9]" />
+  </form>
+  <button id="enter-btn">입장</button>
+  <div id="gate-error"></div>
+</div>
+
+<!-- =========================
+     관리자 대시보드
+     ========================= -->
+<div id="dashboard">
+  <div class="topbar">
+    <h1>TENET 관리자 페이지</h1>
+    <div class="meta">
+      <span id="now"></span>
+      <button class="logout-btn" id="logout">로그아웃</button>
+    </div>
+  </div>
+
+  <div class="section-title">문의 · 결제 관리</div>
+  <div class="grid">
+    <a class="card" id="card-inquiry" target="_blank" rel="noopener">
+      <div class="icon">📩</div>
+      <div class="title">문의 내역</div>
+      <div class="desc">홈페이지에서 들어온 문의를 한곳에서 확인합니다.</div>
+      <div class="badge" id="inquiry-badge">0</div>
+    </a>
+    <a class="card" id="card-payment" target="_blank" rel="noopener">
+      <div class="icon">💳</div>
+      <div class="title">밴드클럽 결제내역</div>
+      <div class="desc">결제 기록과 입금 현황을 시트로 확인합니다.</div>
+    </a>
+    <a class="card" id="card-projects" target="_blank" rel="noopener">
+      <div class="icon">🎵</div>
+      <div class="title">밴드클럽 프로젝트 / 금액</div>
+      <div class="desc">프로젝트 등록 · 가격 · 오픈 상태를 관리합니다.</div>
+    </a>
+  </div>
+
+  <div class="section-title">홈페이지 바로가기</div>
+  <div class="grid">
+    <a class="card" href="https://what1244-art.github.io/tenet-ent/" target="_blank" rel="noopener">
+      <div class="icon">🌐</div>
+      <div class="title">TENET 메인</div>
+      <div class="desc">테넷 엔터테인먼트 메인 홈페이지를 새 탭에서 엽니다.</div>
+    </a>
+    <a class="card" href="https://what1244-art.github.io/tenet-ent/bandclub.html" target="_blank" rel="noopener">
+      <div class="icon">🎤</div>
+      <div class="title">밴드클럽</div>
+      <div class="desc">밴드클럽 홈페이지를 새 탭에서 엽니다.</div>
+    </a>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   설정값 — 이 부분만 수정해서 사용하세요.
+   ========================================================= */
+// 관리자 PIN (6자리). 변경하려면 이 숫자를 바꾸세요.
+const ADMIN_PIN = "204060";
+
+// 구글 시트 ID & Apps Script 엔드포인트
+const SHEET_ID = "1QQzXMWJhZJoHph8GQfRFYSC0yXboJnNjXjnBJaodEkQ";
+const SHEET_BASE = "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/edit";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxfFj58_INgDLNWg3QXkeMvQlDwrudnhUXZ5rIweSZOkS2Oc3MK8_3HTWy5N9sij5Aj/exec";
+
+/* ========================================================= */
+
+// 시트 카드 링크 연결
+document.getElementById("card-inquiry").href = SHEET_BASE; // 시트 열고 "문의내역" 탭 클릭
+document.getElementById("card-payment").href = SHEET_BASE; // "결제내역" 탭
+document.getElementById("card-projects").href = SHEET_BASE; // "프로젝트" 탭
+
+// PIN 입력 UX
+const inputs = document.querySelectorAll("#pin-form input");
+inputs.forEach((input, idx) => {
+  input.addEventListener("input", () => {
+    input.value = input.value.replace(/[^0-9]/g, "");
+    if (input.value && idx < inputs.length - 1) inputs[idx + 1].focus();
+  });
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Backspace" && !input.value && idx > 0) inputs[idx - 1].focus();
+    if (e.key === "Enter") { e.preventDefault(); tryEnter(); }
+  });
+});
+inputs[0].focus();
+
+document.getElementById("enter-btn").addEventListener("click", (e) => {
+  e.preventDefault();
+  tryEnter();
+});
+
+function tryEnter() {
+  const pin = Array.from(inputs).map(i => i.value).join("");
+  const errEl = document.getElementById("gate-error");
+  if (pin.length !== 6) {
+    errEl.textContent = "6자리를 모두 입력해 주세요";
+    return;
+  }
+  if (pin !== ADMIN_PIN) {
+    errEl.textContent = "PIN이 올바르지 않습니다";
+    inputs.forEach(i => i.value = "");
+    inputs[0].focus();
+    return;
+  }
+  errEl.textContent = "";
+  sessionStorage.setItem("tenet_admin", "1");
+  showDashboard();
+}
+
+document.getElementById("logout").addEventListener("click", () => {
+  sessionStorage.removeItem("tenet_admin");
+  location.reload();
+});
+
+function showDashboard() {
+  document.getElementById("gate").style.display = "none";
+  document.getElementById("dashboard").style.display = "block";
+  updateClock();
+  setInterval(updateClock, 1000 * 30);
+  loadInquiryCount();
+  setInterval(loadInquiryCount, 1000 * 60); // 1분마다 새로고침
+}
+
+function updateClock() {
+  const d = new Date();
+  const pad = n => String(n).padStart(2, "0");
+  document.getElementById("now").textContent =
+    `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+async function loadInquiryCount() {
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + "?action=getUnreadInquiryCount");
+    const data = await res.json();
+    const badge = document.getElementById("inquiry-badge");
+    const n = Number(data.count || 0);
+    if (n > 0) {
+      badge.textContent = n > 99 ? "99+" : n;
+      badge.classList.add("show");
+    } else {
+      badge.classList.remove("show");
+    }
+  } catch (e) {
+    // 조용히 무시 (Apps Script 미배포 시)
+  }
+}
+
+// 세션 유지
+if (sessionStorage.getItem("tenet_admin") === "1") {
+  showDashboard();
+}
+</script>
+</body>
+</html>
