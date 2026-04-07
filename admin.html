@@ -193,10 +193,13 @@
     <div>
       <div class="section-title">공지 배너 (홈페이지 상단)</div>
       <div class="form">
-        <div class="banner-edit">
-          <input id="banner-text" placeholder="예) 4월 정기 점검 안내" />
-          <label class="switch"><input type="checkbox" id="banner-enabled" /> 표시</label>
-          <button id="banner-save">저장</button>
+        <input id="banner-text" placeholder="공지 내용을 입력하세요" style="margin-bottom:10px;" />
+        <div style="font-size:11px; color:var(--muted); margin-bottom:6px;">테마 선택</div>
+        <div id="banner-themes" style="display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:10px;"></div>
+        <div id="banner-preview" style="border-radius:8px; padding:14px; text-align:center; font-size:13px; font-weight:500; margin-bottom:10px; min-height:46px; display:flex; align-items:center; justify-content:center; gap:8px;"></div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <label class="switch"><input type="checkbox" id="banner-enabled" /> 표시 ON</label>
+          <button id="banner-save" style="margin-left:auto;">저장</button>
         </div>
         <div class="sub" style="font-size:11px; color:var(--muted); margin-top:8px;">메인·밴드클럽 홈페이지 상단에 즉시 반영됩니다.</div>
       </div>
@@ -467,21 +470,71 @@ async function loadPayments() {
   } catch(e) {}
 }
 
+const BANNER_THEMES = {
+  general:    { name: "공지",   icon: "📢", bg: "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)", color: "#fff" },
+  event:      { name: "이벤트", icon: "🎉", bg: "linear-gradient(135deg, #ee0979 0%, #ff6a00 100%)", color: "#fff" },
+  show:       { name: "공연",   icon: "🎵", bg: "linear-gradient(135deg, #000 0%, #434343 50%, #00d4ff 100%)", color: "#fff" },
+  maintenance:{ name: "점검",   icon: "🔧", bg: "linear-gradient(135deg, #f7971e 0%, #ffd200 100%)", color: "#1a1a1a" },
+  holiday:    { name: "휴무",   icon: "🏖️", bg: "linear-gradient(135deg, #00b4db 0%, #0083b0 100%)", color: "#fff" },
+  open:       { name: "오픈",   icon: "✨", bg: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)", color: "#fff" }
+};
+let currentTheme = "general";
+
+function renderThemePicker() {
+  const wrap = document.getElementById("banner-themes");
+  wrap.innerHTML = Object.entries(BANNER_THEMES).map(([key, t]) => `
+    <button type="button" data-theme="${key}" style="background:${t.bg}; color:${t.color}; border:2px solid transparent; border-radius:8px; padding:10px 6px; font-size:11px; font-weight:600; cursor:pointer;">
+      ${t.icon} ${t.name}
+    </button>
+  `).join("");
+  wrap.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentTheme = btn.dataset.theme;
+      wrap.querySelectorAll("button").forEach(b => b.style.border = "2px solid transparent");
+      btn.style.border = "2px solid #fff";
+      renderBannerPreview();
+    });
+  });
+}
+
+function renderBannerPreview() {
+  const text = document.getElementById("banner-text").value || "공지 내용을 입력하세요";
+  const t = BANNER_THEMES[currentTheme];
+  const prev = document.getElementById("banner-preview");
+  prev.style.background = t.bg;
+  prev.style.color = t.color;
+  prev.innerHTML = `<span style="font-size:18px;">${t.icon}</span><span>${escapeHtml(text)}</span>`;
+}
+
 async function loadBanner() {
   try {
     const r = await api("getBanner");
-    document.getElementById("banner-text").value = r.text || "";
+    let msg = r.text || "", style = "general";
+    try {
+      const parsed = JSON.parse(r.text);
+      if (parsed && parsed.msg) { msg = parsed.msg; style = parsed.style || "general"; }
+    } catch (e) {}
+    document.getElementById("banner-text").value = msg;
     document.getElementById("banner-enabled").checked = !!r.enabled;
+    currentTheme = style;
+    document.querySelectorAll("#banner-themes button").forEach(b => {
+      b.style.border = b.dataset.theme === currentTheme ? "2px solid #fff" : "2px solid transparent";
+    });
+    renderBannerPreview();
   } catch(e) {}
 }
 
 function bindBannerControls() {
+  renderThemePicker();
+  document.getElementById("banner-text").addEventListener("input", renderBannerPreview);
   document.getElementById("banner-save").addEventListener("click", async () => {
-    const text = document.getElementById("banner-text").value;
+    const msg = document.getElementById("banner-text").value;
     const enabled = document.getElementById("banner-enabled").checked;
-    await apiPost("setBanner", { text, enabled });
+    const payload = JSON.stringify({ msg, style: currentTheme });
+    await apiPost("setBanner", { text: payload, enabled });
     toast("배너 저장 완료");
   });
+  renderBannerPreview();
 }
 
 document.getElementById("refresh-inq").addEventListener("click", () => { loadInquiries(); loadInquiryCount(); });
