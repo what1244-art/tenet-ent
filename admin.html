@@ -4,6 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0b0b0f" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="https://what1244-art.github.io/tenet-ent/images/logo.png" />
 <title>TENET Admin</title>
 <style>
   :root {
@@ -16,6 +19,7 @@
     --accent: #ffffff;
     --danger: #ff4757;
     --ok: #2ed573;
+    --warn: #ffa502;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
@@ -24,193 +28,95 @@
     background: var(--bg);
     color: var(--text);
     -webkit-font-smoothing: antialiased;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 24px;
   }
+  body.gate-mode { display:flex; align-items:center; justify-content:center; min-height:100vh; padding:24px; }
 
   /* ---------- Login gate ---------- */
-  #gate {
-    width: 100%;
-    max-width: 360px;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 36px 28px;
-    text-align: center;
-  }
-  #gate h1 {
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    margin-bottom: 6px;
-  }
-  #gate p {
-    color: var(--muted);
-    font-size: 13px;
-    margin-bottom: 24px;
-  }
-  .pin-row {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
-  .pin-row input {
-    width: 40px;
-    height: 50px;
-    text-align: center;
-    font-size: 22px;
-    font-weight: 600;
-    background: var(--panel-2);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    color: var(--text);
-    outline: none;
-    transition: border-color .15s;
-  }
-  .pin-row input:focus { border-color: var(--accent); }
-  #gate button {
-    width: 100%;
-    background: var(--accent);
-    color: #000;
-    border: none;
-    border-radius: 12px;
-    padding: 14px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: opacity .15s;
-  }
-  #gate button:hover { opacity: 0.85; }
-  #gate-error {
-    color: var(--danger);
-    font-size: 12px;
-    margin-top: 12px;
-    min-height: 16px;
-  }
+  #gate { width:100%; max-width:360px; background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:36px 28px; text-align:center; }
+  #gate h1 { font-size:18px; font-weight:600; margin-bottom:6px; }
+  #gate p { color:var(--muted); font-size:13px; margin-bottom:24px; }
+  .pin-row { display:flex; gap:8px; justify-content:center; margin-bottom:16px; }
+  .pin-row input { width:40px; height:50px; text-align:center; font-size:22px; font-weight:600; background:var(--panel-2); border:1px solid var(--line); border-radius:10px; color:var(--text); outline:none; }
+  .pin-row input:focus { border-color:var(--accent); }
+  #gate button { width:100%; background:var(--accent); color:#000; border:none; border-radius:12px; padding:14px; font-size:14px; font-weight:600; cursor:pointer; }
+  #gate-error { color:var(--danger); font-size:12px; margin-top:12px; min-height:16px; }
 
   /* ---------- Dashboard ---------- */
-  #dashboard {
-    display: none;
-    width: 100%;
-    max-width: 960px;
-  }
-  .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 28px;
-  }
-  .topbar h1 {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-  .topbar .meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    color: var(--muted);
-    font-size: 13px;
-  }
-  .logout-btn {
-    background: transparent;
-    color: var(--muted);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 12px;
-    cursor: pointer;
-  }
-  .logout-btn:hover { color: var(--text); border-color: var(--text); }
+  #dashboard { display:none; max-width:1100px; margin:0 auto; padding:24px; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
+  .topbar h1 { font-size:22px; font-weight:700; }
+  .topbar .meta { display:flex; align-items:center; gap:12px; color:var(--muted); font-size:13px; }
+  .health { display:flex; align-items:center; gap:6px; font-size:12px; }
+  .health .dot { width:8px; height:8px; border-radius:50%; background:var(--muted); }
+  .health.ok .dot { background:var(--ok); }
+  .health.bad .dot { background:var(--danger); }
+  .logout-btn { background:transparent; color:var(--muted); border:1px solid var(--line); border-radius:8px; padding:6px 12px; font-size:12px; cursor:pointer; }
+  .logout-btn:hover { color:var(--text); border-color:var(--text); }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
-  }
-  .card {
-    position: relative;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 22px;
-    text-decoration: none;
-    color: var(--text);
-    cursor: pointer;
-    transition: transform .15s, border-color .15s, background .15s;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    min-height: 140px;
-  }
-  .card:hover {
-    transform: translateY(-2px);
-    border-color: #444;
-    background: var(--panel-2);
-  }
-  .card .icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: var(--panel-2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-  }
-  .card .title {
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .card .desc {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-top: -6px;
-  }
-  .badge {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    min-width: 22px;
-    height: 22px;
-    padding: 0 7px;
-    background: var(--danger);
-    color: #fff;
-    border-radius: 11px;
-    font-size: 11px;
-    font-weight: 700;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 0 3px var(--panel);
-  }
-  .badge.show { display: flex; }
+  .section-title { color:var(--muted); font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; margin:28px 0 12px; display:flex; align-items:center; gap:8px; }
+  .section-title button { background:transparent; color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:3px 8px; font-size:10px; cursor:pointer; }
 
-  .section-title {
-    color: var(--muted);
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 28px 0 12px;
-  }
+  /* Stats grid */
+  .stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; }
+  .stat { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px; }
+  .stat .label { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:0.06em; }
+  .stat .value { font-size:26px; font-weight:700; margin-top:8px; }
+  .stat .sub { color:var(--muted); font-size:11px; margin-top:4px; }
 
-  @media (max-width: 600px) {
-    .topbar h1 { font-size: 18px; }
-    .card { min-height: 120px; padding: 18px; }
-  }
+  /* Quick cards */
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:14px; }
+  .card { position:relative; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px; cursor:pointer; transition:transform .15s, border-color .15s; display:flex; flex-direction:column; gap:10px; min-height:110px; text-decoration:none; color:var(--text); }
+  .card:hover { transform:translateY(-2px); border-color:#444; }
+  .card .icon { width:34px; height:34px; border-radius:9px; background:var(--panel-2); display:flex; align-items:center; justify-content:center; font-size:17px; }
+  .card .title { font-size:14px; font-weight:600; }
+  .card .desc { font-size:11px; color:var(--muted); line-height:1.5; }
+  .badge { position:absolute; top:14px; right:14px; min-width:22px; height:22px; padding:0 7px; background:var(--danger); color:#fff; border-radius:11px; font-size:11px; font-weight:700; display:none; align-items:center; justify-content:center; box-shadow:0 0 0 3px var(--panel); }
+  .badge.show { display:flex; }
+
+  /* Inquiry list */
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:8px; }
+  .inq-item { display:grid; grid-template-columns:1fr auto; gap:12px; padding:14px; border-bottom:1px solid var(--line); }
+  .inq-item:last-child { border-bottom:none; }
+  .inq-meta { font-size:11px; color:var(--muted); margin-bottom:4px; }
+  .inq-name { font-size:14px; font-weight:600; }
+  .inq-msg { font-size:12px; color:var(--muted); margin-top:4px; line-height:1.5; }
+  .inq-status { font-size:10px; padding:3px 8px; border-radius:10px; align-self:start; white-space:nowrap; }
+  .inq-status.unread { background:var(--danger); color:#fff; cursor:pointer; }
+  .inq-status.read { background:var(--panel-2); color:var(--muted); }
+  .empty { padding:24px; text-align:center; color:var(--muted); font-size:13px; }
+
+  /* Forms */
+  .form { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px; }
+  .form .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+  .form input, .form textarea, .form select { background:var(--panel-2); border:1px solid var(--line); border-radius:8px; padding:10px; color:var(--text); font-size:13px; font-family:inherit; outline:none; width:100%; }
+  .form input:focus, .form textarea:focus, .form select:focus { border-color:var(--accent); }
+  .form textarea { min-height:60px; resize:vertical; }
+  .form .full { grid-column:1 / -1; }
+  .form button { background:var(--accent); color:#000; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:600; cursor:pointer; margin-top:6px; }
+  .form button.ghost { background:transparent; color:var(--text); border:1px solid var(--line); }
+
+  /* Project rows */
+  .proj-row { display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center; padding:12px 14px; border-bottom:1px solid var(--line); }
+  .proj-row:last-child { border-bottom:none; }
+  .proj-name { font-size:13px; font-weight:600; }
+  .proj-meta { font-size:11px; color:var(--muted); margin-top:2px; }
+  .status-select { background:var(--panel-2); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:5px 8px; font-size:11px; }
+
+  /* Banner editor */
+  .banner-edit { display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center; }
+  .switch { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); cursor:pointer; }
+
+  /* Two-column layout */
+  .two-col { display:grid; grid-template-columns:1.2fr 1fr; gap:16px; }
+  @media (max-width: 900px) { .two-col { grid-template-columns:1fr; } .form .row { grid-template-columns:1fr; } }
+
+  .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--panel-2); border:1px solid var(--line); color:var(--text); padding:12px 18px; border-radius:10px; font-size:13px; opacity:0; pointer-events:none; transition:opacity .2s; z-index:1000; }
+  .toast.show { opacity:1; }
 </style>
 </head>
-<body>
+<body class="gate-mode">
 
-<!-- =========================
-     비밀번호 게이트
-     ========================= -->
+<!-- ========== 비밀번호 게이트 ========== -->
 <div id="gate">
   <h1>TENET Admin</h1>
   <p>관리자 PIN 6자리를 입력하세요</p>
@@ -226,73 +132,138 @@
   <div id="gate-error"></div>
 </div>
 
-<!-- =========================
-     관리자 대시보드
-     ========================= -->
+<!-- ========== 관리자 대시보드 ========== -->
 <div id="dashboard">
   <div class="topbar">
     <h1>TENET 관리자 페이지</h1>
     <div class="meta">
+      <span class="health" id="health"><span class="dot"></span><span class="txt">상태 확인 중</span></span>
       <span id="now"></span>
       <button class="logout-btn" id="logout">로그아웃</button>
     </div>
   </div>
 
-  <div class="section-title">문의 · 결제 관리</div>
+  <!-- 매출 + 방문자 통계 -->
+  <div class="section-title">실시간 통계</div>
+  <div class="stats">
+    <div class="stat"><div class="label">오늘 매출</div><div class="value" id="rev-today">₩0</div><div class="sub" id="rev-today-sub">결제 0건</div></div>
+    <div class="stat"><div class="label">이번 주 매출</div><div class="value" id="rev-week">₩0</div></div>
+    <div class="stat"><div class="label">이번 달 매출</div><div class="value" id="rev-month">₩0</div></div>
+    <div class="stat"><div class="label">메인 방문자</div><div class="value" id="vis-main">0</div><div class="sub" id="vis-main-sub">오늘 0</div></div>
+    <div class="stat"><div class="label">밴드클럽 방문자</div><div class="value" id="vis-band">0</div><div class="sub" id="vis-band-sub">오늘 0</div></div>
+  </div>
+
+  <!-- 빠른 액세스 카드 -->
+  <div class="section-title">빠른 이동</div>
   <div class="grid">
     <a class="card" id="card-inquiry" target="_blank" rel="noopener">
       <div class="icon">📩</div>
-      <div class="title">문의 내역</div>
-      <div class="desc">홈페이지에서 들어온 문의를 한곳에서 확인합니다.</div>
+      <div class="title">문의 시트</div>
+      <div class="desc">전체 문의 내역을 시트에서 확인합니다.</div>
       <div class="badge" id="inquiry-badge">0</div>
     </a>
     <a class="card" id="card-payment" target="_blank" rel="noopener">
       <div class="icon">💳</div>
-      <div class="title">밴드클럽 결제내역</div>
-      <div class="desc">결제 기록과 입금 현황을 시트로 확인합니다.</div>
+      <div class="title">결제내역 시트</div>
+      <div class="desc">결제 기록과 입금 현황 확인.</div>
     </a>
     <a class="card" id="card-projects" target="_blank" rel="noopener">
       <div class="icon">🎵</div>
-      <div class="title">밴드클럽 프로젝트 / 금액</div>
-      <div class="desc">프로젝트 등록 · 가격 · 오픈 상태를 관리합니다.</div>
+      <div class="title">프로젝트/금액 시트</div>
+      <div class="desc">밴드클럽 프로젝트와 금액 관리.</div>
     </a>
-  </div>
-
-  <div class="section-title">홈페이지 바로가기</div>
-  <div class="grid">
     <a class="card" href="https://what1244-art.github.io/tenet-ent/" target="_blank" rel="noopener">
       <div class="icon">🌐</div>
-      <div class="title">TENET 메인</div>
-      <div class="desc">테넷 엔터테인먼트 메인 홈페이지를 새 탭에서 엽니다.</div>
+      <div class="title">메인 사이트</div>
+      <div class="desc">테넷 메인 홈페이지 열기.</div>
     </a>
     <a class="card" href="https://what1244-art.github.io/tenet-ent/bandclub.html" target="_blank" rel="noopener">
       <div class="icon">🎤</div>
-      <div class="title">밴드클럽</div>
-      <div class="desc">밴드클럽 홈페이지를 새 탭에서 엽니다.</div>
+      <div class="title">밴드클럽 사이트</div>
+      <div class="desc">밴드클럽 홈페이지 열기.</div>
     </a>
   </div>
+
+  <!-- 미확인 문의 미리보기 + 공지 배너 -->
+  <div class="two-col" style="margin-top:8px;">
+    <div>
+      <div class="section-title">최근 문의 <button id="refresh-inq">새로고침</button></div>
+      <div class="panel" id="inq-list"><div class="empty">불러오는 중…</div></div>
+    </div>
+    <div>
+      <div class="section-title">공지 배너 (홈페이지 상단)</div>
+      <div class="form">
+        <div class="banner-edit">
+          <input id="banner-text" placeholder="예) 4월 정기 점검 안내" />
+          <label class="switch"><input type="checkbox" id="banner-enabled" /> 표시</label>
+          <button id="banner-save">저장</button>
+        </div>
+        <div class="sub" style="font-size:11px; color:var(--muted); margin-top:8px;">메인·밴드클럽 홈페이지 상단에 즉시 반영됩니다.</div>
+      </div>
+
+      <div class="section-title" style="margin-top:20px;">알림 설정</div>
+      <div class="form">
+        <label class="switch"><input type="checkbox" id="notif-enabled" /> 새 문의 들어오면 브라우저 알림 받기</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- 프로젝트 인라인 관리 -->
+  <div class="section-title" style="margin-top:24px;">밴드클럽 프로젝트 관리</div>
+  <div class="two-col">
+    <div class="panel" id="proj-list"><div class="empty">불러오는 중…</div></div>
+    <div class="form">
+      <div style="font-size:13px; font-weight:600; margin-bottom:10px;">새 프로젝트 등록</div>
+      <div class="row">
+        <input id="np-name" placeholder="프로젝트명" />
+        <input id="np-price" placeholder="금액 (숫자)" type="number" />
+      </div>
+      <div class="row">
+        <input id="np-start" placeholder="시작일 (YYYY-MM-DD)" type="date" />
+        <select id="np-status"><option>오픈예정</option><option>오픈</option><option>마감</option></select>
+      </div>
+      <textarea id="np-desc" class="full" placeholder="설명" style="margin-bottom:10px;"></textarea>
+      <textarea id="np-ot" class="full" placeholder="OT 안내문" style="margin-bottom:10px;"></textarea>
+      <button id="np-save">등록</button>
+    </div>
+  </div>
+
+  <!-- 결제 확인 + 알림톡 재발송 -->
+  <div class="section-title" style="margin-top:24px;">최근 결제 (입금확인 / 알림톡 재발송)</div>
+  <div class="panel" id="pay-list"><div class="empty">불러오는 중…</div></div>
+
+  <!-- 포트폴리오 추가 -->
+  <div class="section-title" style="margin-top:24px;">포트폴리오 빠른 추가</div>
+  <div class="form">
+    <div class="row">
+      <input id="pf-title" placeholder="제목" />
+      <input id="pf-category" placeholder="카테고리 (예: Concert)" />
+    </div>
+    <div class="row">
+      <input id="pf-date" placeholder="날짜" type="date" />
+      <input id="pf-image" placeholder="이미지 URL" />
+    </div>
+    <textarea id="pf-desc" class="full" placeholder="설명" style="margin-bottom:10px;"></textarea>
+    <button id="pf-save">포트폴리오 추가</button>
+  </div>
+
+  <div style="height:60px;"></div>
 </div>
 
-<script>
-/* =========================================================
-   설정값 — 이 부분만 수정해서 사용하세요.
-   ========================================================= */
-// 관리자 PIN (6자리). 변경하려면 이 숫자를 바꾸세요.
-const ADMIN_PIN = "731573";
+<div class="toast" id="toast"></div>
 
-// 구글 시트 ID & Apps Script 엔드포인트
+<script>
+/* ===== 설정 ===== */
+const ADMIN_PIN = "731573";
 const SHEET_ID = "1QQzXMWJhZJoHph8GQfRFYSC0yXboJnNjXjnBJaodEkQ";
 const SHEET_BASE = "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/edit";
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxfFj58_INgDLNWg3QXkeMvQlDwrudnhUXZ5rIweSZOkS2Oc3MK8_3HTWy5N9sij5Aj/exec";
 
-/* ========================================================= */
+document.getElementById("card-inquiry").href = SHEET_BASE;
+document.getElementById("card-payment").href = SHEET_BASE;
+document.getElementById("card-projects").href = SHEET_BASE;
 
-// 시트 카드 링크 연결
-document.getElementById("card-inquiry").href = SHEET_BASE; // 시트 열고 "문의내역" 탭 클릭
-document.getElementById("card-payment").href = SHEET_BASE; // "결제내역" 탭
-document.getElementById("card-projects").href = SHEET_BASE; // "프로젝트" 탭
-
-// PIN 입력 UX
+/* ===== PIN 게이트 ===== */
 const inputs = document.querySelectorAll("#pin-form input");
 inputs.forEach((input, idx) => {
   input.addEventListener("input", () => {
@@ -305,25 +276,12 @@ inputs.forEach((input, idx) => {
   });
 });
 inputs[0].focus();
-
-document.getElementById("enter-btn").addEventListener("click", (e) => {
-  e.preventDefault();
-  tryEnter();
-});
+document.getElementById("enter-btn").addEventListener("click", e => { e.preventDefault(); tryEnter(); });
 
 function tryEnter() {
   const pin = Array.from(inputs).map(i => i.value).join("");
   const errEl = document.getElementById("gate-error");
-  if (pin.length !== 6) {
-    errEl.textContent = "6자리를 모두 입력해 주세요";
-    return;
-  }
-  if (pin !== ADMIN_PIN) {
-    errEl.textContent = "PIN이 올바르지 않습니다";
-    inputs.forEach(i => i.value = "");
-    inputs[0].focus();
-    return;
-  }
+  if (pin !== ADMIN_PIN) { errEl.textContent = "PIN이 올바르지 않습니다"; inputs.forEach(i => i.value=""); inputs[0].focus(); return; }
   errEl.textContent = "";
   sessionStorage.setItem("tenet_admin", "1");
   showDashboard();
@@ -335,42 +293,260 @@ document.getElementById("logout").addEventListener("click", () => {
 });
 
 function showDashboard() {
+  document.body.classList.remove("gate-mode");
   document.getElementById("gate").style.display = "none";
   document.getElementById("dashboard").style.display = "block";
-  updateClock();
-  setInterval(updateClock, 1000 * 30);
-  loadInquiryCount();
-  setInterval(loadInquiryCount, 1000 * 60); // 1분마다 새로고침
+  updateClock(); setInterval(updateClock, 1000 * 30);
+  refreshAll();
+  setInterval(refreshAll, 1000 * 60);
+  registerServiceWorker();
+  bindBannerControls();
+  bindNotifControls();
 }
 
 function updateClock() {
-  const d = new Date();
-  const pad = n => String(n).padStart(2, "0");
-  document.getElementById("now").textContent =
-    `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  const d = new Date(), pad = n => String(n).padStart(2,"0");
+  document.getElementById("now").textContent = `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+/* ===== 데이터 로드 ===== */
+async function api(action, params={}) {
+  const url = APPS_SCRIPT_URL + "?action=" + action + (Object.keys(params).length ? "&" + new URLSearchParams(params) : "");
+  const res = await fetch(url);
+  return res.json();
+}
+
+async function apiPost(action, body) {
+  const res = await fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(Object.assign({ action }, body))
+  });
+  return res.json();
+}
+
+function fmtKRW(n) { return "₩" + Number(n||0).toLocaleString("ko-KR"); }
+
+let lastInquiryCount = null;
+
+async function refreshAll() {
+  loadHealth();
+  loadRevenue();
+  loadVisitors();
+  loadInquiryCount();
+  loadInquiries();
+  loadProjects();
+  loadPayments();
+  loadBanner();
+}
+
+async function loadHealth() {
+  const el = document.getElementById("health");
+  try {
+    const r = await api("healthCheck");
+    if (r.ok) { el.classList.remove("bad"); el.classList.add("ok"); el.querySelector(".txt").textContent = "정상"; }
+  } catch (e) { el.classList.remove("ok"); el.classList.add("bad"); el.querySelector(".txt").textContent = "오류"; }
+}
+
+async function loadRevenue() {
+  try {
+    const r = await api("getRevenueSummary");
+    document.getElementById("rev-today").textContent = fmtKRW(r.today);
+    document.getElementById("rev-week").textContent = fmtKRW(r.week);
+    document.getElementById("rev-month").textContent = fmtKRW(r.month);
+    document.getElementById("rev-today-sub").textContent = `이번 달 결제 ${r.count||0}건`;
+  } catch(e) {}
+}
+
+async function loadVisitors() {
+  try {
+    const r = await api("getVisitorStats");
+    document.getElementById("vis-main").textContent = (r.main_total||0).toLocaleString();
+    document.getElementById("vis-band").textContent = (r.bandclub_total||0).toLocaleString();
+    document.getElementById("vis-main-sub").textContent = `오늘 ${r.main_today||0}`;
+    document.getElementById("vis-band-sub").textContent = `오늘 ${r.bandclub_today||0}`;
+  } catch(e) {}
 }
 
 async function loadInquiryCount() {
   try {
-    const res = await fetch(APPS_SCRIPT_URL + "?action=getUnreadInquiryCount");
-    const data = await res.json();
+    const r = await api("getUnreadInquiryCount");
     const badge = document.getElementById("inquiry-badge");
-    const n = Number(data.count || 0);
-    if (n > 0) {
-      badge.textContent = n > 99 ? "99+" : n;
-      badge.classList.add("show");
-    } else {
-      badge.classList.remove("show");
+    const n = Number(r.count||0);
+    if (n > 0) { badge.textContent = n>99?"99+":n; badge.classList.add("show"); }
+    else badge.classList.remove("show");
+
+    // 새 문의 알림
+    if (lastInquiryCount !== null && n > lastInquiryCount && Notification.permission === "granted") {
+      new Notification("새 문의 도착", { body: `미확인 문의 ${n}건` });
     }
-  } catch (e) {
-    // 조용히 무시 (Apps Script 미배포 시)
+    lastInquiryCount = n;
+  } catch(e) {}
+}
+
+async function loadInquiries() {
+  try {
+    const r = await api("getRecentInquiries", { limit: 5 });
+    const list = document.getElementById("inq-list");
+    if (!r.items || r.items.length === 0) { list.innerHTML = '<div class="empty">아직 문의가 없습니다</div>'; return; }
+    list.innerHTML = r.items.map(it => `
+      <div class="inq-item">
+        <div>
+          <div class="inq-meta">${escapeHtml(it.time)} · ${escapeHtml(it.type||'-')}</div>
+          <div class="inq-name">${escapeHtml(it.name)} <span style="color:var(--muted); font-weight:400; font-size:12px;">${escapeHtml(it.phone)}</span></div>
+          <div class="inq-msg">${escapeHtml(it.message||'').substring(0,140)}</div>
+        </div>
+        <div class="inq-status ${it.status==='미확인'?'unread':'read'}" data-row="${it.row}">${escapeHtml(it.status)}</div>
+      </div>
+    `).join("");
+    list.querySelectorAll(".inq-status.unread").forEach(el => {
+      el.addEventListener("click", async () => {
+        const row = el.dataset.row;
+        await apiPost("markInquiryRead", { row });
+        toast("확인 처리 완료");
+        loadInquiries(); loadInquiryCount();
+      });
+    });
+  } catch(e) {}
+}
+
+async function loadProjects() {
+  try {
+    const r = await api("getAllProjects");
+    const list = document.getElementById("proj-list");
+    if (!r.items || r.items.length === 0) { list.innerHTML = '<div class="empty">등록된 프로젝트가 없습니다</div>'; return; }
+    list.innerHTML = r.items.map(p => `
+      <div class="proj-row">
+        <div>
+          <div class="proj-name">${escapeHtml(p.name)}</div>
+          <div class="proj-meta">${fmtKRW(p.price)} · ${escapeHtml(p.startDate||'-')}</div>
+        </div>
+        <select class="status-select" data-id="${p.id}">
+          <option ${p.status==='오픈예정'?'selected':''}>오픈예정</option>
+          <option ${p.status==='오픈'?'selected':''}>오픈</option>
+          <option ${p.status==='마감'?'selected':''}>마감</option>
+        </select>
+      </div>
+    `).join("");
+    list.querySelectorAll(".status-select").forEach(sel => {
+      sel.addEventListener("change", async () => {
+        await apiPost("updateProjectStatus", { id: sel.dataset.id, status: sel.value });
+        toast("상태 변경 완료");
+      });
+    });
+  } catch(e) {}
+}
+
+async function loadPayments() {
+  try {
+    const r = await api("getPendingPayments");
+    const list = document.getElementById("pay-list");
+    if (!r.items || r.items.length === 0) { list.innerHTML = '<div class="empty">최근 결제가 없습니다</div>'; return; }
+    list.innerHTML = r.items.map(p => `
+      <div class="proj-row" style="grid-template-columns:1fr auto auto auto; gap:8px;">
+        <div>
+          <div class="proj-name">${escapeHtml(p.project)} <span style="color:var(--muted); font-weight:400;">· ${escapeHtml(p.buyer)}</span></div>
+          <div class="proj-meta">${escapeHtml(p.time)} · ${fmtKRW(p.amount)} · ${escapeHtml(p.part||'-')}</div>
+        </div>
+        <span class="proj-meta" style="font-size:10px;">${escapeHtml(p.alimtalkSent||'대기')}</span>
+        <button class="status-select" data-row="${p.row}" data-action="paid">입금확인</button>
+        <button class="status-select" data-merchant="${p.merchant_uid}" data-action="resend">알림톡재발송</button>
+      </div>
+    `).join("");
+    list.querySelectorAll('[data-action="paid"]').forEach(b => {
+      b.addEventListener("click", async () => {
+        await apiPost("markPaymentReceived", { row: b.dataset.row });
+        toast("입금확인 처리"); loadPayments();
+      });
+    });
+    list.querySelectorAll('[data-action="resend"]').forEach(b => {
+      b.addEventListener("click", async () => {
+        await apiPost("resendAlimtalk", { merchant_uid: b.dataset.merchant });
+        toast("알림톡 재발송"); loadPayments();
+      });
+    });
+  } catch(e) {}
+}
+
+async function loadBanner() {
+  try {
+    const r = await api("getBanner");
+    document.getElementById("banner-text").value = r.text || "";
+    document.getElementById("banner-enabled").checked = !!r.enabled;
+  } catch(e) {}
+}
+
+function bindBannerControls() {
+  document.getElementById("banner-save").addEventListener("click", async () => {
+    const text = document.getElementById("banner-text").value;
+    const enabled = document.getElementById("banner-enabled").checked;
+    await apiPost("setBanner", { text, enabled });
+    toast("배너 저장 완료");
+  });
+}
+
+document.getElementById("refresh-inq").addEventListener("click", () => { loadInquiries(); loadInquiryCount(); });
+
+/* 새 프로젝트 등록 */
+document.getElementById("np-save").addEventListener("click", async () => {
+  const body = {
+    name: document.getElementById("np-name").value,
+    price: document.getElementById("np-price").value,
+    startDate: document.getElementById("np-start").value,
+    status: document.getElementById("np-status").value,
+    description: document.getElementById("np-desc").value,
+    ot: document.getElementById("np-ot").value
+  };
+  if (!body.name) { toast("프로젝트명을 입력하세요"); return; }
+  await apiPost("addProject", body);
+  toast("프로젝트 등록 완료");
+  ["np-name","np-price","np-start","np-desc","np-ot"].forEach(id => document.getElementById(id).value = "");
+  loadProjects();
+});
+
+/* 포트폴리오 추가 */
+document.getElementById("pf-save").addEventListener("click", async () => {
+  const body = {
+    title: document.getElementById("pf-title").value,
+    category: document.getElementById("pf-category").value,
+    date: document.getElementById("pf-date").value,
+    imageUrl: document.getElementById("pf-image").value,
+    description: document.getElementById("pf-desc").value
+  };
+  if (!body.title) { toast("제목을 입력하세요"); return; }
+  await apiPost("addPortfolio", body);
+  toast("포트폴리오 추가 완료");
+  ["pf-title","pf-category","pf-date","pf-image","pf-desc"].forEach(id => document.getElementById(id).value = "");
+});
+
+/* 알림 권한 */
+function bindNotifControls() {
+  const cb = document.getElementById("notif-enabled");
+  cb.checked = Notification.permission === "granted";
+  cb.addEventListener("change", async () => {
+    if (cb.checked) {
+      const p = await Notification.requestPermission();
+      cb.checked = p === "granted";
+      if (cb.checked) toast("브라우저 알림 활성화됨");
+    }
+  });
+}
+
+/* PWA */
+function registerServiceWorker() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
   }
 }
 
-// 세션 유지
-if (sessionStorage.getItem("tenet_admin") === "1") {
-  showDashboard();
+/* 유틸 */
+function escapeHtml(s) { return String(s||"").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2000);
 }
+
+if (sessionStorage.getItem("tenet_admin") === "1") showDashboard();
 </script>
 </body>
 </html>
