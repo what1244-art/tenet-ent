@@ -559,6 +559,50 @@ body:has(.nav-logo[href="mimm.html"]) .hero {
   text-align: center;
   padding: 24px 20px;
   min-width: 100px;
+  position: relative;
+  cursor: pointer;
+}
+
+.flow-tooltip {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.92);
+  border: 1px solid rgba(232, 197, 71, 0.3);
+  color: #fff;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  padding: 14px 18px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: translateX(-50%) translateY(6px);
+  z-index: 20;
+}
+
+.flow-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.92);
+}
+
+.flow-step:hover .flow-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.flow-step:hover .flow-num {
+  background: rgba(232, 197, 71, 0.25);
+  border-color: rgba(232, 197, 71, 0.6);
+  transform: scale(1.1);
+  transition: all 0.2s ease;
 }
 
 .flow-num {
