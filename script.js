@@ -151,7 +151,14 @@ async function loadProjects() {
       return;
     }
 
-    const cards = data.projects.map(project => {
+    const visibleProjects = data.projects.filter(p => p.status === '오픈' || p.status === '오픈예정');
+
+    if (visibleProjects.length === 0) {
+      container.innerHTML = '<div class="projects-empty"><p>현재 모집 중인 프로젝트가 없습니다.<br>새로운 프로젝트가 열리면 안내드리겠습니다.</p></div>';
+      return;
+    }
+
+    const cards = visibleProjects.map(project => {
       const isOpen = project.status === '오픈';
       const isUpcoming = project.status === '오픈예정';
       const formattedPrice = Number(project.price).toLocaleString();
@@ -165,7 +172,7 @@ async function loadProjects() {
       if (isOpen) {
         statusClass = 'open';
         statusLabel = '모집중';
-        btnText = '네이버페이 결제';
+        btnText = '결제하기';
         btnDisabled = '';
       } else if (isUpcoming) {
         statusClass = 'upcoming';
