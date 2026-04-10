@@ -1085,16 +1085,23 @@ body:has(.nav-logo[href="mimm.html"]) .hero {
 
 .lightbox-close {
   position: absolute;
-  top: -48px;
-  right: 0;
-  background: none;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.6);
   border: none;
   color: var(--white);
-  font-size: 2rem;
+  font-size: 1.6rem;
   cursor: pointer;
-  opacity: 0.6;
+  opacity: 0.85;
   transition: opacity var(--transition);
   line-height: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
 }
 
 .lightbox-close:hover {
