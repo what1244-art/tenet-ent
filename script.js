@@ -133,8 +133,8 @@ document.head.appendChild(style);
 
 // ===== PAYMENT SYSTEM =====
 const CONFIG = {
-  PORTONE_MERCHANT_ID: 'YOUR_MERCHANT_ID',
-  PORTONE_CHANNEL_KEY: 'YOUR_CHANNEL_KEY',
+  PORTONE_STORE_ID: 'store-e141b16e-b03c-464c-9d58-72250a90a8f6',
+  PORTONE_CHANNEL_KEY: 'channel-key-75a28054-c219-48d5-98e0-dedd78239a10',
   APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxfFj58_INgDLNWg3QXkeMvQlDwrudnhUXZ5rIweSZOkS2Oc3MK8_3HTWy5N9sij5Aj/exec'
 };
 
@@ -205,7 +205,7 @@ async function loadProjects() {
   }
 }
 
-function startPayment(projectId, projectName, amount) {
+async function startPayment(projectId, projectName, amount) {
   const partSelect = document.getElementById(`part-${projectId}`);
   const part = partSelect ? partSelect.value : '';
 
@@ -214,45 +214,46 @@ function startPayment(projectId, projectName, amount) {
     return;
   }
 
-  if (CONFIG.PORTONE_MERCHANT_ID === 'YOUR_MERCHANT_ID') {
-    showToast('결제 시스템 준비 중입니다. 전화(010-3081-3730)로 문의해주세요.');
-    return;
-  }
+  const paymentId = `bandclub_${projectId}_${Date.now()}`;
 
-  const IMP = window.IMP;
-  IMP.init(CONFIG.PORTONE_MERCHANT_ID);
+  try {
+    const response = await PortOne.requestPayment({
+      storeId: CONFIG.PORTONE_STORE_ID,
+      channelKey: CONFIG.PORTONE_CHANNEL_KEY,
+      paymentId: paymentId,
+      orderName: `[밴드클럽] ${projectName}`,
+      totalAmount: amount,
+      currency: 'CURRENCY_KRW',
+      payMethod: 'CARD',
+      redirectUrl: window.location.href,
+    });
 
-  IMP.request_pay({
-    pg: `naverpay.${CONFIG.PORTONE_CHANNEL_KEY}`,
-    pay_method: 'card',
-    merchant_uid: `bandclub_${projectId}_${Date.now()}`,
-    name: `[밴드클럽] ${projectName}`,
-    amount: amount,
-    naverProducts: [{
-      categoryType: 'ETC', categoryId: 'ETC',
-      uid: projectId, name: `밴드클럽 - ${projectName} (${part})`, count: 1,
-    }],
-    m_redirect_url: window.location.href
-  }, async function(rsp) {
-    if (rsp.success) {
-      try {
-        await fetch(CONFIG.APPS_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'verifyPayment', imp_uid: rsp.imp_uid,
-            merchant_uid: rsp.merchant_uid, project_id: projectId,
-            project_name: projectName, amount: amount,
-            buyer_name: rsp.buyer_name || '', buyer_tel: rsp.buyer_tel || '',
-            part: part,
-          })
-        });
-      } catch (e) {}
-      showPaymentResult(true, projectName);
-    } else {
-      showPaymentResult(false, rsp.error_msg || '결제가 취소되었습니다.');
+    if (response.code != null) {
+      showPaymentResult(false, response.message || '결제가 취소되었습니다.');
+      return;
     }
-  });
+
+    try {
+      await fetch(CONFIG.APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'verifyPayment',
+          imp_uid: response.paymentId,
+          merchant_uid: paymentId,
+          project_id: projectId,
+          project_name: projectName,
+          amount: amount,
+          buyer_name: '',
+          buyer_tel: '',
+          part: part,
+        })
+      });
+    } catch (e) {}
+    showPaymentResult(true, projectName);
+  } catch (err) {
+    showPaymentResult(false, '결제 중 오류가 발생했습니다. 다시 시도해주세요.');
+  }
 }
 
 function showPaymentResult(success, message) {
