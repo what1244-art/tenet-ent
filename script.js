@@ -223,9 +223,8 @@ async function startPayment(projectId, projectName, amount) {
       paymentId: paymentId,
       orderName: `[밴드클럽] ${projectName}`,
       totalAmount: amount,
-      currency: 'CURRENCY_KRW',
+      currency: 'KRW',
       payMethod: 'CARD',
-      redirectUrl: window.location.href,
     });
 
     if (response.code != null) {
@@ -252,7 +251,8 @@ async function startPayment(projectId, projectName, amount) {
     } catch (e) {}
     showPaymentResult(true, projectName);
   } catch (err) {
-    showPaymentResult(false, '결제 중 오류가 발생했습니다. 다시 시도해주세요.');
+    console.error('Payment error:', err);
+    showPaymentResult(false, err.message || '결제 중 오류가 발생했습니다. 다시 시도해주세요.');
   }
 }
 
