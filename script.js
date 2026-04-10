@@ -182,7 +182,11 @@ async function loadProjects() {
           ${startDateText ? `<p class="project-date">${startDateText}</p>` : ''}
           <div class="project-price">${formattedPrice}원</div>
           <p class="project-price-note">8주 패키지 / 합주실·코칭·공연 포함</p>
-          ${isOpen ? `<select class="part-select" id="part-${project.id}">
+          ${isOpen ? `
+            <input type="text" class="pay-input" id="name-${project.id}" placeholder="이름" />
+            <input type="tel" class="pay-input" id="phone-${project.id}" placeholder="연락처" />
+            <input type="email" class="pay-input" id="email-${project.id}" placeholder="이메일" />
+            <select class="part-select" id="part-${project.id}">
             <option value="">파트를 선택해주세요</option>
             <option value="보컬">보컬</option>
             <option value="기타">기타</option>
@@ -214,6 +218,18 @@ async function startPayment(projectId, projectName, amount) {
     return;
   }
 
+  const nameInput = document.getElementById(`name-${projectId}`);
+  const phoneInput = document.getElementById(`phone-${projectId}`);
+  const emailInput = document.getElementById(`email-${projectId}`);
+  const buyerName = nameInput ? nameInput.value.trim() : '';
+  const buyerPhone = phoneInput ? phoneInput.value.trim() : '';
+  const buyerEmail = emailInput ? emailInput.value.trim() : '';
+
+  if (!buyerName || !buyerPhone || !buyerEmail) {
+    showToast('이름, 연락처, 이메일을 모두 입력해주세요!');
+    return;
+  }
+
   const paymentId = `bandclub_${projectId}_${Date.now()}`;
 
   try {
@@ -225,6 +241,11 @@ async function startPayment(projectId, projectName, amount) {
       totalAmount: amount,
       currency: 'KRW',
       payMethod: 'CARD',
+      customer: {
+        fullName: buyerName,
+        phoneNumber: buyerPhone,
+        email: buyerEmail,
+      },
     });
 
     if (response.code != null) {
@@ -243,8 +264,8 @@ async function startPayment(projectId, projectName, amount) {
           project_id: projectId,
           project_name: projectName,
           amount: amount,
-          buyer_name: '',
-          buyer_tel: '',
+          buyer_name: buyerName,
+          buyer_tel: buyerPhone,
           part: part,
         })
       });
