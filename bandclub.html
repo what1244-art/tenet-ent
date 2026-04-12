@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </head>
 <body>
 
@@ -33,27 +33,49 @@
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero hero-bandclub" id="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-label">TENET COLLECTIVE</p>
-      <h1 class="hero-title">
-        함께 연주하고,<br>
-        <span class="hero-accent">무대에 서다</span>
+  <!-- Hero — full impact -->
+  <section class="hero hero-bandclub" id="hero" style="background-image:url('images/concert-live.jpg');background-size:cover;background-position:center">
+    <div class="hero-overlay" style="background:linear-gradient(to bottom,rgba(10,10,10,.4),rgba(10,10,10,.85))"></div>
+    <div class="hero-content" style="max-width:700px">
+      <p class="hero-label" style="font-size:0.85rem;letter-spacing:4px">TENET COLLECTIVE</p>
+      <h1 class="hero-title" style="font-size:clamp(2.2rem,6vw,4rem);line-height:1.15">
+        밴드 하고 싶었지?<br>
+        <span class="hero-accent">같이 하자.</span>
       </h1>
-      <p class="hero-sub">
-        밴드 프로젝트 · 정기 합주팀 · 밴드 동호회<br>
-        악기를 잡은 지 얼마 안 된 분도, 오래된 연주자도
+      <p class="hero-sub" style="font-size:1.05rem;opacity:.85;margin-top:16px">
+        혼자 연습만 하다 지친 사람,<br>
+        밴드 한번 해보고 싶었던 사람,<br>
+        다시 무대에 서고 싶은 사람.<br><br>
+        <strong>8주 뒤, 진짜 무대에 섭니다.</strong>
       </p>
-      <div class="hero-actions">
-        <a href="#programs" class="btn btn-primary">프로그램 보기</a>
-        <a href="#contact" class="btn btn-outline">참가 신청</a>
+      <div class="hero-actions" style="margin-top:24px">
+        <a href="#programs" class="btn btn-primary" style="padding:14px 32px;font-size:1rem">프로그램 보기</a>
+        <a href="#contact" class="btn btn-outline" style="padding:14px 32px;font-size:1rem">바로 신청</a>
       </div>
     </div>
     <div class="hero-scroll">
       <span>scroll</span>
       <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Social proof — 숫자로 증명 -->
+  <section class="section section-dark" style="padding:48px 0">
+    <div class="container">
+      <div class="equip-grid" style="text-align:center">
+        <div class="equip-card" style="padding:24px">
+          <h4 style="font-size:2.5rem;font-weight:900;color:var(--accent)">1기</h4>
+          <p>밴드클럽 수료</p>
+        </div>
+        <div class="equip-card" style="padding:24px">
+          <h4 style="font-size:2.5rem;font-weight:900;color:var(--accent)">20+</h4>
+          <p>무대에 선 사람들</p>
+        </div>
+        <div class="equip-card" style="padding:24px">
+          <h4 style="font-size:2.5rem;font-weight:900;color:var(--accent)">20</h4>
+          <p>주변 대학교 밴드부</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -263,8 +285,8 @@
   <section class="section section-dark" id="gallery">
     <div class="container">
       <div class="section-label">GALLERY</div>
-      <h2 class="section-title">무대 기록</h2>
-      <p class="section-subtitle">밴드클럽이 만들어온 순간들</p>
+      <h2 class="section-title">우리가 만든 순간들</h2>
+      <p class="section-subtitle">밴드클럽 1기 — 유퍼라 콘서트. 8주 동안 준비해서, 진짜 무대에 섰다.</p>
       <div class="portfolio-grid" id="portfolioGrid">
         <div class="portfolio-item">
           <div class="portfolio-img"><img src="images/concert-live.jpg" alt="유퍼라 콘서트" loading="lazy"></div>
@@ -371,6 +393,7 @@
         </div>
         <div class="footer-links">
           <a href="index.html">TENET</a>
+          <a href="mimm.html">MIMM 레슨</a>
           <a href="#contact">문의</a>
         </div>
         <div class="footer-copy">
@@ -398,6 +421,5 @@
   </div>
 
   <script src="script.js"></script>
-  <script src="tenet-shared.js" data-site="bandclub"></script>
 </body>
 </html>
