@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TENET &mdash; 합주실 &middot; 녹음실 &middot; 밴드클럽</title>
-  <meta name="description" content="서울 성북구 돌곶이 합주실 24시간 25,000원. 녹음실, 밴드클럽, 공연제작. 전문 강사 앙상블 지도. 창작부터 무대까지.">
-  <meta property="og:title" content="TENET — 합주실 · 녹음실 · 밴드클럽">
-  <meta property="og:description" content="서울 성북구. 전문 강사 앙상블 지도 · 프로급 녹음 · 음원 발매. 다른 데선 못 하는 것.">
+  <title>TENET &mdash; 합주실 &middot; 녹음실 &middot; 유퍼라 밴드클럽</title>
+  <meta name="description" content="서울 성북구 합주실 24시간 25,000원. 유퍼라(Your First Live) — 혼자 치던 당신, 8주 만에 무대에 선다. 전문 강사 앙상블 지도, 프로급 녹음실.">
+  <meta property="og:title" content="TENET — 유퍼라 밴드클럽 · 합주실 · 녹음실">
+  <meta property="og:description" content="집에서 혼자 치던 당신의 첫 번째 라이브. Your First Live.">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
   <link rel="stylesheet" href="style.css">
@@ -18,13 +18,12 @@
     <div class="header-inner">
       <a href="/" class="logo">TENET</a>
       <nav class="gnb" id="gnb">
+        <a href="#ufla">유퍼라</a>
         <a href="#space">공간</a>
-        <a href="#project">밴드클럽</a>
-        <a href="#gear">장비</a>
         <a href="#portfolio">포트폴리오</a>
         <a href="#contact">문의</a>
       </nav>
-      <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home" class="header-btn" target="_blank" rel="noopener">예약하기</a>
+      <a href="#ufla" class="header-btn">밴드 시작하기</a>
       <button class="mobile-menu" id="mobileMenu" aria-label="메뉴">
         <span></span><span></span>
       </button>
@@ -33,60 +32,197 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-bg" style="background-image:url('images-compressed/hero-studio.jpg')"></div>
+    <div class="hero-bg" style="background-image:url('images-compressed/concert-live.jpg')"></div>
     <div class="hero-dim"></div>
     <div class="hero-body">
-      <p class="hero-label">MUSIC INFRASTRUCTURE &middot; SEOUL</p>
-      <h1>전문가에게 배우고,<br>무대에 서고,<br>음원으로 남긴다.</h1>
-      <div class="hero-tags">
-        <span>합주실 24H</span>
-        <span>프로급 녹음실</span>
-        <span>전문 강사 앙상블 지도</span>
-        <span>음원 발매</span>
-      </div>
+      <p class="hero-label">YOUR FIRST LIVE</p>
+      <h1>혼자 치던 당신,<br>무대에 서는 날.</h1>
+      <p class="hero-sub">새로운 사람들과 밴드를 만들고, 합주하고, 무대에 서고, 뒷풀이까지.<br>8주 뒤, 당신은 밴드를 한 사람이 됩니다.</p>
       <div class="hero-cta">
-        <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home" class="btn" target="_blank" rel="noopener">합주실 예약</a>
-        <a href="#project" class="btn btn-line">밴드클럽 알아보기</a>
+        <a href="#ufla" class="btn">유퍼라 알아보기</a>
+        <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home" class="btn btn-line" target="_blank" rel="noopener">합주실 예약</a>
       </div>
     </div>
     <div class="hero-bottom">
       <div class="hero-stat">
+        <strong>8주</strong>
+        <span>밴드 결성 &rarr; 무대</span>
+      </div>
+      <div class="hero-stat">
         <strong>24H</strong>
-        <span>연중무휴</span>
+        <span>자체 합주실</span>
       </div>
       <div class="hero-stat">
-        <strong>25,000</strong>
-        <span>원 / 시간</span>
-      </div>
-      <div class="hero-stat">
-        <strong>8명</strong>
-        <span>전문 강사진</span>
+        <strong>MVP</strong>
+        <span>싱글 제작 지원</span>
       </div>
     </div>
   </section>
 
-  <!-- Why TENET -->
+  <!-- UFLA (Your First Live) -->
+  <section class="sec" id="ufla">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-label">YOUR FIRST LIVE</span>
+        <h2>유퍼라 밴드클럽</h2>
+        <p class="sec-desc">집에서 혼자 치던 당신에게 세상을 열어줍니다.<br>새로운 사람을 만나고, 밴드를 만들고, 무대에 서고, 뒷풀이까지.</p>
+      </div>
+
+      <!-- 유퍼라 패키지 -->
+      <div class="project-grid">
+        <div class="project-card project-featured">
+          <div class="project-thumb">
+            <img src="images-compressed/concert-live.jpg" alt="유퍼라" loading="lazy">
+            <span class="project-status open">2기 모집중</span>
+          </div>
+          <div class="project-body">
+            <span class="project-cat">Your First Live</span>
+            <h3>유퍼라</h3>
+            <p>혼자 연습하던 당신, 같이 할 사람 만나서 밴드 만들고, 전문가에게 배우고, 무대까지. 경연 MVP팀은 싱글 제작 지원.</p>
+            <div class="project-meta">
+              <div><strong>250,000원</strong><span>8주 패키지</span></div>
+              <div><strong>주 1회</strong><span>합주 + 코칭</span></div>
+            </div>
+            <div class="project-includes">
+              <span>팀 매칭</span>
+              <span>전문 강사 앙상블 지도</span>
+              <span>합주 8회</span>
+              <span>유퍼라 콘서트 출연</span>
+              <span>뒷풀이 3회</span>
+              <span>MVP 싱글 제작 지원</span>
+            </div>
+          </div>
+          <a href="#contact" class="project-btn">신청하기</a>
+        </div>
+
+        <!-- 팀 공연 패키지 -->
+        <div class="project-card">
+          <div class="project-thumb">
+            <img src="images-compressed/concert-pose.jpg" alt="팀 공연" loading="lazy">
+            <span class="project-status open">상시모집</span>
+          </div>
+          <div class="project-body">
+            <span class="project-cat">팀 공연 패키지</span>
+            <h3>우리 팀도 무대에</h3>
+            <p>이미 밴드가 있다면. 유퍼라 콘서트 무대에 서세요. 리허설 + 공연 + 뒷풀이. 경연 MVP에 도전.</p>
+            <div class="project-meta">
+              <div><strong>인당 80,000원</strong><span>공연 참가</span></div>
+              <div><strong>리허설</strong><span>사운드체크 포함</span></div>
+            </div>
+            <div class="project-includes">
+              <span>유퍼라 콘서트 출연</span>
+              <span>리허설 &middot; 사운드체크</span>
+              <span>뒷풀이 &middot; 네트워킹</span>
+              <span>MVP 싱글 제작 도전</span>
+            </div>
+          </div>
+          <a href="#contact" class="project-btn">문의하기</a>
+        </div>
+
+        <!-- 정규 합주 -->
+        <div class="project-card">
+          <div class="project-thumb">
+            <img src="images-compressed/concert-group.jpg" alt="정규 합주" loading="lazy">
+            <span class="project-status open">상시모집</span>
+          </div>
+          <div class="project-body">
+            <span class="project-cat">정규 합주실 계약</span>
+            <h3>매주 합주하는 팀</h3>
+            <p>합주실 정기 이용. 매주 정해진 시간에 합주하고, 원하면 유퍼라 콘서트 무대까지.</p>
+            <div class="project-meta">
+              <div><strong>인당 60,000원</strong><span>월 정기 이용</span></div>
+              <div><strong>주 1회</strong><span>요일 선택</span></div>
+            </div>
+            <div class="project-includes">
+              <span>합주실 월 4회</span>
+              <span>정기 팀 운영</span>
+              <span>콘서트 참가 가능 (별도)</span>
+              <span>커뮤니티</span>
+            </div>
+          </div>
+          <a href="#contact" class="project-btn">문의하기</a>
+        </div>
+      </div>
+
+      <!-- MVP -->
+      <div class="recording-option">
+        <div class="recording-inner">
+          <div class="recording-text">
+            <span class="sec-label">MVP REWARD</span>
+            <h3>경연 MVP팀, 싱글 제작 지원</h3>
+            <p>유퍼라 콘서트에서 가장 빛난 팀에게 프로급 녹음실에서 싱글 녹음 + 믹싱 + 마스터링을 지원합니다. 멜론, 스포티파이에 당신의 이름이 올라갑니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8주 여정 -->
+      <div class="journey">
+        <div class="sec-head center">
+          <h3>8주의 여정</h3>
+        </div>
+        <div class="journey-grid">
+          <div class="journey-step">
+            <span class="journey-week">WEEK 1</span>
+            <strong>만남</strong>
+            <p>OT &middot; 팀 편성 &middot; 첫 뒷풀이</p>
+          </div>
+          <div class="journey-step">
+            <span class="journey-week">WEEK 2-3</span>
+            <strong>시작</strong>
+            <p>곡 선정 &middot; 첫 합주 &middot; 강사 지도</p>
+          </div>
+          <div class="journey-step">
+            <span class="journey-week">WEEK 4</span>
+            <strong>성장</strong>
+            <p>중간 합주 &middot; 피드백 &middot; 뒷풀이</p>
+          </div>
+          <div class="journey-step">
+            <span class="journey-week">WEEK 5-6</span>
+            <strong>완성</strong>
+            <p>완곡 합주 &middot; 사운드 다듬기</p>
+          </div>
+          <div class="journey-step">
+            <span class="journey-week">WEEK 7</span>
+            <strong>리허설</strong>
+            <p>무대 &middot; 음향 &middot; 동선 세팅</p>
+          </div>
+          <div class="journey-step journey-highlight">
+            <span class="journey-week">WEEK 8</span>
+            <strong>무대</strong>
+            <p>유퍼라 콘서트 &middot; 경연 &middot; 파티</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why -->
   <section class="sec sec-dark">
     <div class="wrap">
       <div class="sec-head center">
         <span class="sec-label">WHY TENET</span>
-        <h2>다른 데선 못 하는 것</h2>
+        <h2>다른 데선 없는 것</h2>
       </div>
       <div class="why-grid">
         <div class="why-card">
           <div class="why-num">01</div>
-          <h3>자체 합주실</h3>
-          <p>24시간 운영. 원할 때 바로 합주. 외부 대관 필요 없음.</p>
+          <h3>자체 합주실 24시간</h3>
+          <p>외부 대관 아닙니다. 우리 합주실에서 원할 때 합주. 서울 동쪽, 4호선 돌곶이역 도보 3분.</p>
         </div>
         <div class="why-card">
           <div class="why-num">02</div>
           <h3>전문가 앙상블 지도</h3>
-          <p>MIMM 소속 전문 강사 8명이 파트별 밸런스, 사운드메이킹을 직접 코칭.</p>
+          <p>MIMM 소속 전문 강사가 파트별 밸런스, 사운드메이킹을 직접 코칭. 유튜브 독학과는 다릅니다.</p>
         </div>
         <div class="why-card">
           <div class="why-num">03</div>
-          <h3>프로급 녹음 &middot; 음원 발매</h3>
-          <p>스트리밍에 내 이름이 올라간다. 공연으로 끝나는 게 아니라 음원으로 남는다.</p>
+          <h3>공연 + 경연 + 녹음</h3>
+          <p>합주만 하고 끝나지 않습니다. 실제 무대, 경연 MVP팀 싱글 제작 지원. 스트리밍에 내 이름이 올라갑니다.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-num">04</div>
+          <h3>뒷풀이 &middot; 커뮤니티</h3>
+          <p>음악만 하는 곳이 아닙니다. 새로운 사람, 새로운 경험, 공연 후 파티까지. 8주가 끝나도 관계는 계속됩니다.</p>
         </div>
       </div>
     </div>
@@ -99,7 +235,6 @@
         <span class="sec-label">SPACE</span>
         <h2>공간</h2>
       </div>
-
       <div class="space-block">
         <div class="space-visual">
           <img src="images-compressed/practice-room.jpg" alt="합주실">
@@ -108,18 +243,16 @@
         <div class="space-info">
           <h3>합주실</h3>
           <p class="space-price"><em>25,000</em>원 / 시간</p>
-          <p class="space-desc">24시간 이용 가능한 풀세트 합주실. 드럼, 기타앰프, 베이스앰프, 마이크, PA 완비. 무인 운영으로 간편하게 예약하고 바로 합주.</p>
+          <p class="space-desc">24시간 이용. 드럼, 기타앰프, 베이스앰프, 마이크, PA 풀세트. 무인 운영, 간편 예약.</p>
           <div class="tag-row">
             <span class="tag">24시간</span>
             <span class="tag">풀세트</span>
             <span class="tag">방음완비</span>
             <span class="tag">무인운영</span>
-            <span class="tag">단체환영</span>
           </div>
           <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home" class="btn" target="_blank" rel="noopener">네이버 예약</a>
         </div>
       </div>
-
       <div class="space-block reverse">
         <div class="space-visual">
           <img src="images-compressed/studio-screen.jpg" alt="녹음실">
@@ -128,7 +261,7 @@
         <div class="space-info">
           <h3>녹음실</h3>
           <p class="space-price"><em>별도 문의</em></p>
-          <p class="space-desc">프로급 레코딩 환경. 보컬부터 밴드 풀세션까지. 믹싱, 마스터링, 음원 발매 대행까지 원스톱.</p>
+          <p class="space-desc">프로급 레코딩. 보컬부터 밴드 풀세션, 믹싱, 마스터링, 음원 발매까지.</p>
           <div class="tag-row">
             <span class="tag">레코딩</span>
             <span class="tag">믹싱</span>
@@ -141,170 +274,8 @@
     </div>
   </section>
 
-  <!-- Band Club -->
-  <section class="sec sec-dark" id="project">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="sec-label">BAND CLUB</span>
-        <h2>밴드클럽</h2>
-        <p class="sec-desc">전문가에게 배우고, 무대에 서고, 음원으로 남긴다. 다른 데선 합주하고 공연하면 끝. 테넷은 다르다.</p>
-      </div>
-
-      <div class="project-grid" id="projectsContainer">
-        <!-- BAND PROJECT -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images-compressed/concert-live.jpg" alt="밴드 프로젝트" loading="lazy">
-            <span class="project-status open">모집중</span>
-          </div>
-          <div class="project-body">
-            <span class="project-cat">8주 프로젝트</span>
-            <h3>BAND PROJECT</h3>
-            <p>밴드 결성 &rarr; MIMM 전문 강사 앙상블 지도 &rarr; 합주 &rarr; 라이브 공연. 녹음 &middot; 음원 발매 옵션.</p>
-            <div class="project-meta">
-              <div><strong>250,000원</strong><span>8주 패키지</span></div>
-              <div><strong>주 1회</strong><span>합주 + 코칭</span></div>
-            </div>
-            <div class="project-includes">
-              <span>자체 합주실 8회</span>
-              <span>전문 강사 앙상블 지도</span>
-              <span>라이브 공연</span>
-              <span>녹음 옵션</span>
-              <span>음원 발매 옵션</span>
-            </div>
-          </div>
-          <a href="bandclub.html" class="project-btn">자세히 보기</a>
-        </div>
-
-        <!-- JAM -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images-compressed/concert-pose.jpg" alt="정기합주" loading="lazy">
-            <span class="project-status open">모집중</span>
-          </div>
-          <div class="project-body">
-            <span class="project-cat">정기 합주</span>
-            <h3>TENET JAM</h3>
-            <p>이미 밴드가 있다면. 매주 정해진 시간에 합주. 공연 기회 &middot; 커뮤니티.</p>
-            <div class="project-meta">
-              <div><strong>70,000원</strong><span>월 4회</span></div>
-              <div><strong>주 1회</strong><span>요일 선택</span></div>
-            </div>
-            <div class="project-includes">
-              <span>합주실 월 4회</span>
-              <span>공연 참가 우선권</span>
-              <span>커뮤니티</span>
-            </div>
-          </div>
-          <a href="#contact" class="project-btn">문의하기</a>
-        </div>
-
-        <!-- 대학 단체 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images-compressed/concert-group.jpg" alt="대학 단체" loading="lazy">
-            <span class="project-status open">상시모집</span>
-          </div>
-          <div class="project-body">
-            <span class="project-cat">대학 밴드부 &middot; 동아리</span>
-            <h3>대학 단체 패키지</h3>
-            <p>대학 밴드부, 동아리, 동호회 전용. 저렴한 단체 가격 + 정기 이용 + 공연 지원.</p>
-            <div class="project-meta">
-              <div><strong>단체 할인</strong><span>별도 협의</span></div>
-              <div><strong>유연한 일정</strong><span>맞춤 설계</span></div>
-            </div>
-            <div class="project-includes">
-              <span>단체 할인가</span>
-              <span>정기 이용</span>
-              <span>공연 기획 지원</span>
-              <span>앙상블 지도 옵션</span>
-            </div>
-          </div>
-          <a href="#contact" class="project-btn">문의하기</a>
-        </div>
-      </div>
-
-      <!-- 녹음 옵션 -->
-      <div class="recording-option">
-        <div class="recording-inner">
-          <div class="recording-text">
-            <span class="sec-label">RECORDING OPTION</span>
-            <h3>녹음 &middot; 음원 발매</h3>
-            <p>공연 후 녹음 &rarr; 믹싱 &rarr; 마스터링 &rarr; 스트리밍 발매. 멜론, 스포티파이에 내 이름이 올라간다. 밴드클럽 참여팀 별도 신청.</p>
-          </div>
-          <a href="#contact" class="btn btn-line">녹음 패키지 문의</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gear -->
-  <section class="sec" id="gear">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="sec-label">GEAR</span>
-        <h2>장비</h2>
-        <p class="sec-desc">합주실과 녹음실에 갖춰진 프로페셔널 장비</p>
-      </div>
-      <div class="gear-row">
-        <div class="gear-card">
-          <div class="gear-img"><img src="images-compressed/marshall-amps.jpg" alt="Mesa Boogie" loading="lazy"></div>
-          <strong>Mesa/Boogie Mark V</strong>
-          <span>Guitar Amp</span>
-        </div>
-        <div class="gear-card">
-          <div class="gear-img"><img src="images-compressed/marshall-amps.jpg" alt="Marshall" loading="lazy"></div>
-          <strong>Marshall</strong>
-          <span>Guitar Amp</span>
-        </div>
-        <div class="gear-card">
-          <div class="gear-img"><img src="images-compressed/markbass.jpg" alt="Markbass" loading="lazy"></div>
-          <strong>Markbass</strong>
-          <span>Bass Amp</span>
-        </div>
-        <div class="gear-card">
-          <div class="gear-img"><img src="images-compressed/drums.jpg" alt="Drums" loading="lazy"></div>
-          <strong>드럼 풀세트</strong>
-          <span>Drums</span>
-        </div>
-        <div class="gear-card">
-          <div class="gear-img"><img src="images-compressed/studio-screen.jpg" alt="Recording Gear" loading="lazy"></div>
-          <strong>프로급 레코딩 장비</strong>
-          <span>Recording</span>
-        </div>
-        <div class="gear-card">
-          <div class="gear-img"><img src="images-compressed/studio-screen.jpg" alt="Monitor" loading="lazy"></div>
-          <strong>모니터 스피커</strong>
-          <span>Monitor</span>
-        </div>
-      </div>
-      <p class="gear-note">* 전체 장비 리스트는 문의 시 안내드립니다</p>
-    </div>
-  </section>
-
-  <!-- Flow -->
-  <section class="sec sec-dark">
-    <div class="wrap">
-      <div class="sec-head center">
-        <h2>TENET 생태계</h2>
-        <p class="sec-desc">하나의 공간에서, 모든 과정을</p>
-      </div>
-      <div class="flow">
-        <div class="flow-step"><span>01</span><strong>창작</strong></div>
-        <div class="flow-arrow"></div>
-        <div class="flow-step"><span>02</span><strong>연습</strong></div>
-        <div class="flow-arrow"></div>
-        <div class="flow-step"><span>03</span><strong>녹음</strong></div>
-        <div class="flow-arrow"></div>
-        <div class="flow-step"><span>04</span><strong>공연</strong></div>
-        <div class="flow-arrow"></div>
-        <div class="flow-step"><span>05</span><strong>발매</strong></div>
-      </div>
-    </div>
-  </section>
-
   <!-- Portfolio -->
-  <section class="sec" id="portfolio">
+  <section class="sec sec-dark" id="portfolio">
     <div class="wrap">
       <div class="sec-head">
         <span class="sec-label">PORTFOLIO</span>
@@ -312,19 +283,19 @@
       </div>
       <div class="port-grid" id="portfolioGrid">
         <div class="port-card portfolio-item">
+          <div class="port-img portfolio-img"><img src="images-compressed/concert-live.jpg" alt="유퍼라 콘서트" loading="lazy"></div>
+          <div class="port-info portfolio-info">
+            <span class="portfolio-tag">Your First Live</span>
+            <h3>유퍼라 콘서트 1회</h3>
+            <p>밴드클럽 4팀 라이브 &middot; 2026.02</p>
+          </div>
+        </div>
+        <div class="port-card portfolio-item">
           <div class="port-img portfolio-img"><img src="images-compressed/palette-poster.jpg" alt="팔레트 온 스테이지" loading="lazy"></div>
           <div class="port-info portfolio-info">
             <span class="portfolio-tag">Concert</span>
             <h3>팔레트 온 스테이지</h3>
-            <p>관객 110명 &middot; 라이브 세션 콘서트 &middot; 2026.02</p>
-          </div>
-        </div>
-        <div class="port-card portfolio-item">
-          <div class="port-img portfolio-img"><img src="images-compressed/concert-live.jpg" alt="유퍼라 콘서트" loading="lazy"></div>
-          <div class="port-info portfolio-info">
-            <span class="portfolio-tag">Band Club</span>
-            <h3>유퍼라 콘서트 1회</h3>
-            <p>밴드클럽 4팀 라이브 &middot; 2026.02</p>
+            <p>관객 110명 &middot; 세션 콘서트 &middot; 2026.02</p>
           </div>
         </div>
         <div class="port-card portfolio-item">
@@ -332,15 +303,15 @@
           <div class="port-info portfolio-info">
             <span class="portfolio-tag">Band Club</span>
             <h3>밴드클럽 1기</h3>
-            <p>8주 프로젝트 &middot; 20명 참여 &middot; 2025.12</p>
+            <p>20명 참여 &middot; 8주 프로젝트 &middot; 2025.12</p>
           </div>
         </div>
         <div class="port-card portfolio-item">
-          <div class="port-img portfolio-img"><img src="images-compressed/concert-group.jpg" alt="단체 공연" loading="lazy"></div>
+          <div class="port-img portfolio-img"><img src="images-compressed/concert-group.jpg" alt="아빠들의 소꿉놀이" loading="lazy"></div>
           <div class="port-info portfolio-info">
             <span class="portfolio-tag">Theater</span>
             <h3>아빠들의 소꿉놀이</h3>
-            <p>관객 200명 &middot; 연극 공연 &middot; 2026.03</p>
+            <p>관객 200명 &middot; 연극 &middot; 2026.03</p>
           </div>
         </div>
       </div>
@@ -348,11 +319,11 @@
   </section>
 
   <!-- Contact -->
-  <section class="sec sec-dark" id="contact">
+  <section class="sec" id="contact">
     <div class="wrap">
       <div class="sec-head">
         <span class="sec-label">CONTACT</span>
-        <h2>예약 &middot; 문의</h2>
+        <h2>신청 &middot; 문의</h2>
       </div>
       <div class="contact-wrap">
         <div class="contact-left">
@@ -370,12 +341,11 @@
           </div>
           <select name="type" required>
             <option value="">문의 유형</option>
-            <option value="rehearsal">합주실 예약</option>
+            <option value="ufla">유퍼라 밴드클럽 신청</option>
+            <option value="team-concert">팀 공연 패키지</option>
+            <option value="regular">정규 합주실 계약</option>
+            <option value="rehearsal">합주실 예약 (일반)</option>
             <option value="recording">녹음실 문의</option>
-            <option value="bandclub">밴드클럽 BAND PROJECT</option>
-            <option value="jam">정기합주 TENET JAM</option>
-            <option value="university">대학 단체 패키지</option>
-            <option value="production">공연 제작</option>
             <option value="other">기타</option>
           </select>
           <textarea name="message" rows="4" placeholder="메시지"></textarea>
@@ -397,12 +367,11 @@
       <div class="ft-top">
         <div class="ft-brand">
           <span class="logo">TENET</span>
-          <p>공연 제작 &middot; 음악 인프라</p>
+          <p>유퍼라 밴드클럽 &middot; 합주실 &middot; 녹음실</p>
         </div>
         <nav class="ft-nav">
+          <a href="#ufla">유퍼라</a>
           <a href="#space">공간</a>
-          <a href="#project">밴드클럽</a>
-          <a href="#gear">장비</a>
           <a href="#portfolio">포트폴리오</a>
           <a href="#contact">문의</a>
         </nav>
