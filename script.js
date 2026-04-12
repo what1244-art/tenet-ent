@@ -1,23 +1,40 @@
-// Nav scroll effect
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 50);
-});
+// Header scroll effect
+var header = document.getElementById('header');
+if (header) {
+  window.addEventListener('scroll', function() {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+}
 
 // Mobile menu toggle
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
+var mobileMenu = document.getElementById('mobileMenu');
+var gnb = document.getElementById('gnb');
 
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
-
-// Close mobile menu on link click
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
+if (mobileMenu && gnb) {
+  mobileMenu.addEventListener('click', function() {
+    gnb.classList.toggle('open');
   });
-});
+
+  gnb.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      gnb.classList.remove('open');
+    });
+  });
+}
+
+// Legacy compat
+var nav = document.getElementById('nav');
+if (nav) {
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+}
+var navToggle = document.getElementById('navToggle');
+var navLinks = document.getElementById('navLinks');
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', function() { navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { navLinks.classList.remove('open'); }); });
+}
 
 // Scroll animations
 const observerOptions = {
@@ -107,8 +124,8 @@ function showToast(msg) {
     bottom: 32px;
     left: 50%;
     transform: translateX(-50%);
-    background: #e8c547;
-    color: #0a0a0a;
+    background: #e85720;
+    color: #fff;
     padding: 16px 32px;
     border-radius: 100px;
     font-size: 0.9rem;
@@ -133,9 +150,9 @@ document.head.appendChild(style);
 
 // ===== PAYMENT SYSTEM =====
 const CONFIG = {
-  PORTONE_STORE_ID: 'store-e141b16e-b03c-464c-9d58-72250a90a8f6',
-  PORTONE_CHANNEL_KEY: 'channel-key-75a28054-c219-48d5-98e0-dedd78239a10',
-  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxfFj58_INgDLNWg3QXkeMvQlDwrudnhUXZ5rIweSZOkS2Oc3MK8_3HTWy5N9sij5Aj/exec'
+  PORTONE_MERCHANT_ID: 'YOUR_MERCHANT_ID',
+  PORTONE_CHANNEL_KEY: 'YOUR_CHANNEL_KEY',
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzexiGY-zXCXcOgWH2S3g0bGVBh5kLvsAqn3C2Wp97_6iKf0mdlPbeKVE8kzxSRlbJs/exec'
 };
 
 async function loadProjects() {
@@ -151,61 +168,19 @@ async function loadProjects() {
       return;
     }
 
-    const visibleProjects = data.projects.filter(p => p.status === '오픈' || p.status === '오픈예정');
-
-    if (visibleProjects.length === 0) {
-      container.innerHTML = '<div class="projects-empty"><p>현재 모집 중인 프로젝트가 없습니다.<br>새로운 프로젝트가 열리면 안내드리겠습니다.</p></div>';
-      return;
-    }
-
-    const cards = visibleProjects.map(project => {
+    const cards = data.projects.map(project => {
       const isOpen = project.status === '오픈';
-      const isUpcoming = project.status === '오픈예정';
       const formattedPrice = Number(project.price).toLocaleString();
-      const startDateText = project.startDate ? `시작일: ${project.startDate}` : '';
-
-      let statusClass = 'closed';
-      let statusLabel = '마감';
-      let btnText = '마감된 프로젝트입니다';
-      let btnDisabled = 'disabled';
-
-      if (isOpen) {
-        statusClass = 'open';
-        statusLabel = '모집중';
-        btnText = '결제하기';
-        btnDisabled = '';
-      } else if (isUpcoming) {
-        statusClass = 'upcoming';
-        statusLabel = '오픈예정';
-        btnText = '오픈 준비중입니다';
-        btnDisabled = 'disabled';
-      }
-
       return `
         <div class="project-card">
-          <span class="project-status ${statusClass}">${statusLabel}</span>
+          <span class="project-status ${isOpen ? 'open' : 'closed'}">${isOpen ? '모집중' : '마감'}</span>
           <h3>${escapeHtml(project.name)}</h3>
           <p class="project-desc">${escapeHtml(project.description || '')}</p>
-          ${startDateText ? `<p class="project-date">${startDateText}</p>` : ''}
           <div class="project-price">${formattedPrice}원</div>
           <p class="project-price-note">8주 패키지 / 합주실·코칭·공연 포함</p>
-          ${isOpen ? `
-            <input type="text" class="pay-input" id="name-${project.id}" placeholder="이름" />
-            <input type="tel" class="pay-input" id="phone-${project.id}" placeholder="연락처" />
-            <input type="email" class="pay-input" id="email-${project.id}" placeholder="이메일" />
-            <select class="part-select" id="part-${project.id}">
-            <option value="">파트를 선택해주세요</option>
-            <option value="보컬">보컬</option>
-            <option value="기타">기타</option>
-            <option value="세컨기타">세컨기타</option>
-            <option value="베이스">베이스</option>
-            <option value="드럼">드럼</option>
-            <option value="건반">건반</option>
-            <option value="세컨건반">세컨건반</option>
-          </select>` : ''}
-          <button class="btn-pay" ${btnDisabled}
+          <button class="btn-pay" ${isOpen ? '' : 'disabled'}
             onclick="startPayment('${escapeHtml(project.id)}', '${escapeHtml(project.name)}', ${project.price})">
-            ${btnText}
+            ${isOpen ? '네이버페이 결제' : '마감된 프로젝트입니다'}
           </button>
         </div>`;
     }).join('');
@@ -216,72 +191,45 @@ async function loadProjects() {
   }
 }
 
-async function startPayment(projectId, projectName, amount) {
-  const partSelect = document.getElementById(`part-${projectId}`);
-  const part = partSelect ? partSelect.value : '';
-
-  if (!part) {
-    showToast('파트를 선택해주세요!');
+function startPayment(projectId, projectName, amount) {
+  if (CONFIG.PORTONE_MERCHANT_ID === 'YOUR_MERCHANT_ID') {
+    showToast('결제 시스템 준비 중입니다. 전화(010-3081-3730)로 문의해주세요.');
     return;
   }
 
-  const nameInput = document.getElementById(`name-${projectId}`);
-  const phoneInput = document.getElementById(`phone-${projectId}`);
-  const emailInput = document.getElementById(`email-${projectId}`);
-  const buyerName = nameInput ? nameInput.value.trim() : '';
-  const buyerPhone = phoneInput ? phoneInput.value.trim() : '';
-  const buyerEmail = emailInput ? emailInput.value.trim() : '';
+  const IMP = window.IMP;
+  IMP.init(CONFIG.PORTONE_MERCHANT_ID);
 
-  if (!buyerName || !buyerPhone || !buyerEmail) {
-    showToast('이름, 연락처, 이메일을 모두 입력해주세요!');
-    return;
-  }
-
-  const paymentId = `bandclub_${projectId}_${Date.now()}`;
-
-  try {
-    const response = await PortOne.requestPayment({
-      storeId: CONFIG.PORTONE_STORE_ID,
-      channelKey: CONFIG.PORTONE_CHANNEL_KEY,
-      paymentId: paymentId,
-      orderName: `[밴드클럽] ${projectName}`,
-      totalAmount: amount,
-      currency: 'KRW',
-      payMethod: 'CARD',
-      customer: {
-        fullName: buyerName,
-        phoneNumber: buyerPhone,
-        email: buyerEmail,
-      },
-    });
-
-    if (response.code != null) {
-      showPaymentResult(false, response.message || '결제가 취소되었습니다.');
-      return;
+  IMP.request_pay({
+    pg: `naverpay.${CONFIG.PORTONE_CHANNEL_KEY}`,
+    pay_method: 'card',
+    merchant_uid: `bandclub_${projectId}_${Date.now()}`,
+    name: `[밴드클럽] ${projectName}`,
+    amount: amount,
+    naverProducts: [{
+      categoryType: 'ETC', categoryId: 'ETC',
+      uid: projectId, name: `밴드클럽 - ${projectName}`, count: 1,
+    }],
+    m_redirect_url: window.location.href
+  }, async function(rsp) {
+    if (rsp.success) {
+      try {
+        await fetch(CONFIG.APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'verifyPayment', imp_uid: rsp.imp_uid,
+            merchant_uid: rsp.merchant_uid, project_id: projectId,
+            project_name: projectName, amount: amount,
+            buyer_name: rsp.buyer_name || '', buyer_tel: rsp.buyer_tel || '',
+          })
+        });
+      } catch (e) {}
+      showPaymentResult(true, projectName);
+    } else {
+      showPaymentResult(false, rsp.error_msg || '결제가 취소되었습니다.');
     }
-
-    try {
-      await fetch(CONFIG.APPS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'verifyPayment',
-          imp_uid: response.paymentId,
-          merchant_uid: paymentId,
-          project_id: projectId,
-          project_name: projectName,
-          amount: amount,
-          buyer_name: buyerName,
-          buyer_tel: buyerPhone,
-          part: part,
-        })
-      });
-    } catch (e) {}
-    showPaymentResult(true, projectName);
-  } catch (err) {
-    console.error('Payment error:', err);
-    showPaymentResult(false, err.message || '결제 중 오류가 발생했습니다. 다시 시도해주세요.');
-  }
+  });
 }
 
 function showPaymentResult(success, message) {
