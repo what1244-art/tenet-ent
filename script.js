@@ -1,389 +1,250 @@
-// Header scroll effect
-var header = document.getElementById('header');
-if (header) {
-  window.addEventListener('scroll', function() {
-    header.classList.toggle('scrolled', window.scrollY > 50);
-  });
-}
+/* ============================================================
+   TENET — script.js
+   Raw Prestige Design System
+   ============================================================ */
 
-// Mobile menu toggle
-var mobileMenu = document.getElementById('mobileMenu');
-var gnb = document.getElementById('gnb');
+(function () {
+  'use strict';
 
-if (mobileMenu && gnb) {
-  mobileMenu.addEventListener('click', function() {
-    gnb.classList.toggle('open');
-  });
-
-  gnb.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', function() {
-      gnb.classList.remove('open');
+  /* ── AOS Init ─────────────────────────────────────────────── */
+  function initAOS() {
+    if (typeof AOS === 'undefined') return;
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-quad',
+      once: true,
+      offset: 60,
     });
-  });
-}
-
-// Legacy compat
-var nav = document.getElementById('nav');
-if (nav) {
-  window.addEventListener('scroll', function() {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  });
-}
-var navToggle = document.getElementById('navToggle');
-var navLinks = document.getElementById('navLinks');
-if (navToggle && navLinks) {
-  navToggle.addEventListener('click', function() { navLinks.classList.toggle('open'); });
-  navLinks.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { navLinks.classList.remove('open'); }); });
-}
-
-// Scroll animations
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, observerOptions);
-
-// Add fade-up class to animatable elements
-document.querySelectorAll(
-  '.section-title, .section-subtitle, .section-desc, ' +
-  '.feature-list li, .studio-card, .equip-card, .lesson-track, ' +
-  '.flow-step, .contact-item, .price-badge, .visual-card, ' +
-  '.faq-item, .policy-block, .business-item'
-).forEach(el => {
-  el.classList.add('fade-up');
-  observer.observe(el);
-});
-
-// Contact form
-const contactForm = document.getElementById('contactForm');
-const typeLabels = {
-  bandclub: '밴드클럽 신청',
-  rehearsal: '합주실 예약',
-  recording: '녹음실 예약',
-  lesson: '레슨 문의',
-  oneday: '무료 원데이 클래스',
-  other: '기타'
-};
-
-contactForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const submitBtn = contactForm.querySelector('button[type="submit"]');
-  const originalText = submitBtn.textContent;
-  submitBtn.textContent = '전송 중...';
-  submitBtn.disabled = true;
-
-  const formData = new FormData(contactForm);
-  const data = Object.fromEntries(formData);
-
-  try {
-    var params = new URLSearchParams({
-      action: 'submitInquiry',
-      name: data.name,
-      phone: data.phone,
-      type: typeLabels[data.type] || data.type,
-      message: data.message || ''
-    });
-    await fetch(CONFIG.APPS_SCRIPT_URL + '?' + params.toString(), { method: 'GET' });
-    showToast('문의가 접수되었습니다! 빠르게 연락드리겠습니다.');
-    contactForm.reset();
-  } catch (err) {
-    var message =
-      '[TENET 문의]\n이름: ' + data.name + '\n연락처: ' + data.phone +
-      '\n유형: ' + (typeLabels[data.type] || data.type) + '\n메시지: ' + (data.message || '(없음)');
-    if (navigator.clipboard) {
-      await navigator.clipboard.writeText(message);
-      showToast('문의 내용이 복사되었습니다. 카카오톡 또는 전화로 보내주세요!');
-    } else {
-      showToast('전화(010-3081-3730)로 문의해주세요!');
-    }
-    contactForm.reset();
   }
 
-  submitBtn.textContent = originalText;
-  submitBtn.disabled = false;
-});
+  /* ── NAV: scroll class + mobile toggle ───────────────────── */
+  function initNav() {
+    var nav = document.getElementById('nav');
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
 
-// Toast notification
-function showToast(msg) {
-  const existing = document.querySelector('.toast');
-  if (existing) existing.remove();
+    if (!nav) return;
 
-  const toast = document.createElement('div');
-  toast.className = 'toast';
-  toast.textContent = msg;
-  toast.style.cssText = `
-    position: fixed;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #e85720;
-    color: #fff;
-    padding: 16px 32px;
-    border-radius: 100px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    z-index: 9999;
-    animation: toastIn 0.3s ease;
-  `;
-
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 4000);
-}
-
-// Toast animation
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes toastIn {
-    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-    to { opacity: 1; transform: translateX(-50%) translateY(0); }
-  }
-`;
-document.head.appendChild(style);
-
-// ===== PAYMENT SYSTEM =====
-const CONFIG = {
-  PORTONE_MERCHANT_ID: 'YOUR_MERCHANT_ID',
-  PORTONE_CHANNEL_KEY: 'YOUR_CHANNEL_KEY',
-  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzexiGY-zXCXcOgWH2S3g0bGVBh5kLvsAqn3C2Wp97_6iKf0mdlPbeKVE8kzxSRlbJs/exec'
-};
-
-async function loadProjects() {
-  const container = document.getElementById('projectsContainer');
-  if (!container) return;
-
-  try {
-    const res = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=getProjects`);
-    const data = await res.json();
-
-    if (!data.projects || data.projects.length === 0) {
-      container.innerHTML = '<div class="projects-empty"><p>현재 모집 중인 프로젝트가 없습니다.<br>새로운 프로젝트가 열리면 안내드리겠습니다.</p></div>';
-      return;
+    // Scroll state
+    function onScroll() {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
     }
 
-    const cards = data.projects.map(project => {
-      const isOpen = project.status === '오픈';
-      const formattedPrice = Number(project.price).toLocaleString();
-      return `
-        <div class="project-card">
-          <span class="project-status ${isOpen ? 'open' : 'closed'}">${isOpen ? '모집중' : '마감'}</span>
-          <h3>${escapeHtml(project.name)}</h3>
-          <p class="project-desc">${escapeHtml(project.description || '')}</p>
-          <div class="project-price">${formattedPrice}원</div>
-          <p class="project-price-note">8주 패키지 / 합주실·코칭·공연 포함</p>
-          <button class="btn-pay" ${isOpen ? '' : 'disabled'}
-            onclick="startPayment('${escapeHtml(project.id)}', '${escapeHtml(project.name)}', ${project.price})">
-            ${isOpen ? '네이버페이 결제' : '마감된 프로젝트입니다'}
-          </button>
-        </div>`;
-    }).join('');
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-    container.innerHTML = `<div class="projects-grid">${cards}</div>`;
-  } catch (err) {
-    container.innerHTML = '<div class="projects-empty"><p>현재 모집 중인 프로젝트가 없습니다.<br>새로운 프로젝트가 열리면 안내드리겠습니다.</p></div>';
-  }
-}
+    // Mobile toggle
+    if (toggle && links) {
+      toggle.addEventListener('click', function () {
+        var isOpen = links.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        toggle.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
 
-function startPayment(projectId, projectName, amount) {
-  if (CONFIG.PORTONE_MERCHANT_ID === 'YOUR_MERCHANT_ID') {
-    showToast('결제 시스템 준비 중입니다. 전화(010-3081-3730)로 문의해주세요.');
-    return;
-  }
-
-  const IMP = window.IMP;
-  IMP.init(CONFIG.PORTONE_MERCHANT_ID);
-
-  IMP.request_pay({
-    pg: `naverpay.${CONFIG.PORTONE_CHANNEL_KEY}`,
-    pay_method: 'card',
-    merchant_uid: `bandclub_${projectId}_${Date.now()}`,
-    name: `[밴드클럽] ${projectName}`,
-    amount: amount,
-    naverProducts: [{
-      categoryType: 'ETC', categoryId: 'ETC',
-      uid: projectId, name: `밴드클럽 - ${projectName}`, count: 1,
-    }],
-    m_redirect_url: window.location.href
-  }, async function(rsp) {
-    if (rsp.success) {
-      try {
-        await fetch(CONFIG.APPS_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'verifyPayment', imp_uid: rsp.imp_uid,
-            merchant_uid: rsp.merchant_uid, project_id: projectId,
-            project_name: projectName, amount: amount,
-            buyer_name: rsp.buyer_name || '', buyer_tel: rsp.buyer_tel || '',
-          })
+      // Close on link click
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          links.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-label', '메뉴 열기');
+          document.body.style.overflow = '';
         });
-      } catch (e) {}
-      showPaymentResult(true, projectName);
-    } else {
-      showPaymentResult(false, rsp.error_msg || '결제가 취소되었습니다.');
+      });
+
+      // Close on outside click
+      document.addEventListener('click', function (e) {
+        if (!nav.contains(e.target) && links.classList.contains('open')) {
+          links.classList.remove('open');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-label', '메뉴 열기');
+          document.body.style.overflow = '';
+        }
+      });
     }
-  });
-}
-
-function showPaymentResult(success, message) {
-  const modal = document.getElementById('paymentModal');
-  const content = document.getElementById('modalContent');
-  if (success) {
-    content.innerHTML = `
-      <div class="modal-icon success">&#10003;</div>
-      <h2>결제가 완료되었습니다</h2>
-      <p>${escapeHtml(message)} 프로젝트에 등록되었습니다.<br>OT 일정 및 상세 안내는 카카오톡으로 발송됩니다.</p>
-      <button class="modal-close" onclick="closeModal()">확인</button>`;
-  } else {
-    content.innerHTML = `
-      <div class="modal-icon fail">&#10007;</div>
-      <h2>결제 실패</h2>
-      <p>${escapeHtml(message)}</p>
-      <button class="modal-close" onclick="closeModal()">닫기</button>`;
   }
-  modal.classList.add('active');
-}
 
-function closeModal() {
-  document.getElementById('paymentModal').classList.remove('active');
-}
+  /* ── COUNTER animation ───────────────────────────────────── */
+  function animateCounter(el) {
+    var target = parseInt(el.dataset.target, 10);
+    if (isNaN(target)) return;
 
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
+    var duration = 1800;
+    var start = null;
+    var startVal = 0;
 
-// FAQ toggle
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.parentElement;
-    const isActive = item.classList.contains('active');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-    if (!isActive) item.classList.add('active');
-  });
-});
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
 
-// Refund policy toggle
-const refundToggle = document.getElementById('refundToggle');
-const refundPanel = document.getElementById('refundPanel');
-if (refundToggle && refundPanel) {
-  refundToggle.addEventListener('click', () => {
-    refundToggle.classList.toggle('active');
-    refundPanel.classList.toggle('open');
-    const label = refundToggle.querySelector('span:first-child');
-    label.textContent = refundPanel.classList.contains('open') ? '환불 규정 닫기' : '환불 규정 보기';
-  });
-}
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var elapsed = timestamp - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var current = Math.round(startVal + easeOutQuart(progress) * (target - startVal));
+      el.textContent = current.toLocaleString('ko-KR');
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target.toLocaleString('ko-KR');
+      }
+    }
 
-// Load portfolio from Sheets
-async function loadPortfolio() {
-  const grid = document.getElementById('portfolioGrid');
-  if (!grid) return;
-
-  try {
-    const res = await fetch(`${CONFIG.APPS_SCRIPT_URL}?action=getPortfolio`);
-    const data = await res.json();
-
-    if (!data.items || data.items.length === 0) return; // 기본 카드 유지
-
-    grid.innerHTML = data.items.map(function(item) { return `
-      <div class="portfolio-item">
-        <div class="portfolio-img">
-          <img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.title)}" loading="lazy"
-               onerror="this.style.display='none'">
-        </div>
-        <div class="portfolio-info">
-          <span class="portfolio-tag">${escapeHtml(item.category)}</span>
-          <h3>${escapeHtml(item.title)}</h3>
-          <p>${escapeHtml(item.description)}${item.date ? ' | ' + escapeHtml(item.date) : ''}</p>
-        </div>
-      </div>
-    `; }).join('');
-    attachPortfolioClicks();
-  } catch (err) {
-    // Sheets 미연동 시 기본 카드 유지
+    requestAnimationFrame(step);
   }
-}
 
-// Load projects and portfolio on page load
-loadProjects();
-loadPortfolio();
+  function initCounters() {
+    var counters = document.querySelectorAll('.proof-num[data-target]');
+    if (!counters.length) return;
 
-// Portfolio Lightbox
-var lightbox = document.getElementById('lightbox');
-var lightboxImg = document.getElementById('lightboxImg');
-var lightboxTag = document.getElementById('lightboxTag');
-var lightboxTitle = document.getElementById('lightboxTitle');
-var lightboxDesc = document.getElementById('lightboxDesc');
-var lightboxClose = document.getElementById('lightboxClose');
+    var observed = new Set();
 
-if (!lightbox) {
-  // lightbox 요소가 없는 페이지에서는 빈 함수로 대체
-  var attachPortfolioClicks = function() {};
-}
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !observed.has(entry.target)) {
+          observed.add(entry.target);
+          animateCounter(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
 
-function openLightbox(imgSrc, tag, title, desc) {
-  if (!lightbox) return;
-  lightboxImg.src = imgSrc;
-  lightboxImg.alt = title;
-  lightboxTag.textContent = tag;
-  lightboxTitle.textContent = title;
-  lightboxDesc.textContent = desc;
-  lightbox.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
+    counters.forEach(function (el) {
+      observer.observe(el);
+    });
+  }
 
-function closeLightbox() {
-  if (!lightbox) return;
-  lightbox.classList.remove('active');
-  document.body.style.overflow = '';
-}
+  /* ── FAQ accordion ───────────────────────────────────────── */
+  function initFAQ() {
+    var faqList = document.getElementById('faqList');
+    if (!faqList) return;
 
-if (lightboxClose) lightboxClose.addEventListener('click', function(e) {
-  e.stopPropagation();
-  closeLightbox();
-});
+    faqList.addEventListener('click', function (e) {
+      var btn = e.target.closest('.faq-q');
+      if (!btn) return;
 
-if (lightbox) lightbox.addEventListener('click', function(e) {
-  if (e.target === lightbox) closeLightbox();
-});
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
 
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeLightbox();
-});
+      // Close all
+      faqList.querySelectorAll('.faq-item').forEach(function (fi) {
+        fi.classList.remove('open');
+        fi.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
 
-// Attach click to portfolio items
-function attachPortfolioClicks() {
-  document.querySelectorAll('.portfolio-item').forEach(function(item) {
-    item.addEventListener('click', function() {
-      var img = item.querySelector('.portfolio-img img');
-      var tag = item.querySelector('.portfolio-tag');
-      var title = item.querySelector('.portfolio-info h3');
-      var desc = item.querySelector('.portfolio-info p');
-      if (img) {
-        openLightbox(img.src, tag ? tag.textContent : '', title ? title.textContent : '', desc ? desc.textContent : '');
+      // Open clicked (toggle)
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
       }
     });
-  });
-}
+  }
 
-attachPortfolioClicks();
+  /* ── Smooth scroll for anchor links ─────────────────────── */
+  function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        var navH = parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue('--nav-h') || '64',
+          10
+        );
+        var top = target.getBoundingClientRect().top + window.scrollY - navH;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  }
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => {
-    e.preventDefault();
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  /* ── Lazy image fade-in ──────────────────────────────────── */
+  function initImageFadeIn() {
+    var imgs = document.querySelectorAll('img[loading="lazy"]');
+    if (!imgs.length) return;
+
+    imgs.forEach(function (img) {
+      img.style.opacity = '0';
+      img.style.transition = 'opacity 0.5s ease';
+
+      if (img.complete) {
+        img.style.opacity = '1';
+      } else {
+        img.addEventListener('load', function () {
+          img.style.opacity = '1';
+        });
+        img.addEventListener('error', function () {
+          img.style.opacity = '0.3';
+        });
+      }
+    });
+  }
+
+  /* ── Active nav link on scroll ───────────────────────────── */
+  function initActiveNav() {
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    if (!sections.length || !navLinks.length) return;
+
+    var navH = 80;
+
+    function updateActive() {
+      var scrollY = window.scrollY + navH + 10;
+      var current = '';
+
+      sections.forEach(function (sec) {
+        if (sec.offsetTop <= scrollY) {
+          current = sec.id;
+        }
+      });
+
+      navLinks.forEach(function (a) {
+        a.classList.toggle(
+          'active',
+          a.getAttribute('href') === '#' + current
+        );
+      });
     }
-  });
-});
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+  }
+
+  /* ── Hero parallax (subtle) ──────────────────────────────── */
+  function initParallax() {
+    var heroImg = document.querySelector('.hero-img');
+    if (!heroImg || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var ticking = false;
+
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var scrollY = window.scrollY;
+        if (scrollY < window.innerHeight) {
+          heroImg.style.transform = 'translateY(' + scrollY * 0.25 + 'px)';
+        }
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  /* ── Init all ────────────────────────────────────────────── */
+  function init() {
+    initAOS();
+    initNav();
+    initCounters();
+    initFAQ();
+    initSmoothScroll();
+    initImageFadeIn();
+    initActiveNav();
+    initParallax();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();

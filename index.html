@@ -3,399 +3,609 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TENET &mdash; 합주실 &middot; 녹음실 &middot; 유퍼라 밴드클럽</title>
-  <meta name="description" content="서울 성북구 합주실 24시간 25,000원. 유퍼라(Your First Live) — 혼자 치던 당신, 8주 만에 무대에 선다. 전문 강사 앙상블 지도, 프로급 녹음실.">
-  <meta property="og:title" content="TENET — 유퍼라 밴드클럽 · 합주실 · 녹음실">
-  <meta property="og:description" content="집에서 혼자 치던 당신의 첫 번째 라이브. Your First Live.">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <title>TENET — 당신의 소리가 실제가 되는 곳</title>
+  <meta name="description" content="서울 성북구 합주실·녹음실·밴드클럽. 24시간 25,000원 합주실. 밴드클럽으로 8주 만에 무대에 선다. 이미 결심한 당신, 더 크게 울리게 해줄게.">
+  <meta name="keywords" content="합주실, 녹음실, 밴드클럽, 성북구, 돌곶이, 서울, 밴드, 공연, 연습실, TENET">
+  <meta property="og:title" content="TENET — 당신의 소리가 실제가 되는 곳">
+  <meta property="og:description" content="이미 결심한 당신, 더 크게 울리게 해줄게. 합주실 · 녹음실 · 밴드클럽">
+  <meta property="og:image" content="images/concert-live.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="header" id="header">
-    <div class="header-inner">
-      <a href="/" class="logo">TENET</a>
-      <nav class="gnb" id="gnb">
-        <a href="#ufla">유퍼라</a>
-        <a href="#space">공간</a>
-        <a href="#portfolio">포트폴리오</a>
-        <a href="#contact">문의</a>
-      </nav>
-      <a href="#ufla" class="header-btn">밴드 시작하기</a>
-      <button class="mobile-menu" id="mobileMenu" aria-label="메뉴">
-        <span></span><span></span>
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">TENET</a>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
       </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#spaces">공간</a></li>
+        <li><a href="#bandclub">밴드클럽</a></li>
+        <li><a href="#pricing">요금</a></li>
+        <li><a href="#voices">후기</a></li>
+        <li><a href="#findus">찾아오기</a></li>
+        <li>
+          <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home"
+             target="_blank" rel="noopener" class="nav-cta">예약하기</a>
+        </li>
+      </ul>
     </div>
-  </header>
+  </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-bg" style="background-image:url('images-compressed/concert-live.jpg')"></div>
-    <div class="hero-dim"></div>
-    <div class="hero-body">
-      <p class="hero-label">YOUR FIRST LIVE</p>
-      <h1>혼자 치던 당신,<br>무대에 서는 날.</h1>
-      <p class="hero-sub">새로운 사람들과 밴드를 만들고, 합주하고, 무대에 서고, 뒷풀이까지.<br>8주 뒤, 당신은 밴드를 한 사람이 됩니다.</p>
-      <div class="hero-cta">
-        <a href="#ufla" class="btn">유퍼라 알아보기</a>
-        <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home" class="btn btn-line" target="_blank" rel="noopener">합주실 예약</a>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="images-compressed/concert-live.jpg" alt="TENET 공연" class="hero-img" loading="eager">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-label">SEOUL · SEONGBUK — SINCE 2022</p>
+      <h1 class="hero-title">
+        STOP PRACTICING.<br>
+        <span class="hero-accent">START PERFORMING.</span>
+      </h1>
+      <p class="hero-sub">당신의 소리가 실제가 되는 곳</p>
+      <div class="hero-actions">
+        <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home"
+           target="_blank" rel="noopener" class="btn btn-primary">합주실 예약</a>
+        <a href="#bandclub" class="btn btn-ghost">밴드클럽 보기</a>
       </div>
     </div>
-    <div class="hero-bottom">
-      <div class="hero-stat">
-        <strong>8주</strong>
-        <span>밴드 결성 &rarr; 무대</span>
-      </div>
-      <div class="hero-stat">
-        <strong>24H</strong>
-        <span>자체 합주실</span>
-      </div>
-      <div class="hero-stat">
-        <strong>MVP</strong>
-        <span>싱글 제작 지원</span>
+    <a href="#proof" class="hero-scroll" aria-label="아래로">
+      <span class="hero-scroll-line"></span>
+    </a>
+  </section>
+
+  <!-- PROOF -->
+  <section class="proof" id="proof">
+    <div class="container">
+      <div class="proof-grid">
+        <div class="proof-item" data-aos="fade-up" data-aos-delay="0">
+          <div class="proof-num-wrap">
+            <span class="proof-num" data-target="4800">0</span>
+            <span class="proof-unit">+</span>
+          </div>
+          <p class="proof-label">누적 예약</p>
+        </div>
+        <div class="proof-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="proof-num-wrap">
+            <span class="proof-num" data-target="320">0</span>
+            <span class="proof-unit">+</span>
+          </div>
+          <p class="proof-label">밴드 팀</p>
+        </div>
+        <div class="proof-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="proof-num-wrap">
+            <span class="proof-num" data-target="40">0</span>
+            <span class="proof-unit">+</span>
+          </div>
+          <p class="proof-label">공연 기획</p>
+        </div>
+        <div class="proof-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="proof-num-wrap">
+            <span class="proof-num" data-target="24">0</span>
+            <span class="proof-unit">H</span>
+          </div>
+          <p class="proof-label">연중무휴 운영</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- UFLA (Your First Live) -->
-  <section class="sec" id="ufla">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="sec-label">YOUR FIRST LIVE</span>
-        <h2>유퍼라 밴드클럽</h2>
-        <p class="sec-desc">집에서 혼자 치던 당신에게 세상을 열어줍니다.<br>새로운 사람을 만나고, 밴드를 만들고, 무대에 서고, 뒷풀이까지.</p>
+  <!-- SPACES -->
+  <section class="spaces" id="spaces">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-tag">SPACES</p>
+        <h2 class="section-title">프로가 쓰는 장비,<br>당신의 연습실</h2>
       </div>
 
-      <!-- 유퍼라 패키지 -->
-      <div class="project-grid">
-        <div class="project-card project-featured">
-          <div class="project-thumb">
-            <img src="images-compressed/concert-live.jpg" alt="유퍼라" loading="lazy">
-            <span class="project-status open">2기 모집중</span>
-          </div>
-          <div class="project-body">
-            <span class="project-cat">Your First Live</span>
-            <h3>유퍼라</h3>
-            <p>혼자 연습하던 당신, 같이 할 사람 만나서 밴드 만들고, 전문가에게 배우고, 무대까지. 경연 MVP팀은 싱글 제작 지원.</p>
-            <div class="project-meta">
-              <div><strong>250,000원</strong><span>8주 패키지</span></div>
-              <div><strong>주 1회</strong><span>합주 + 코칭</span></div>
-            </div>
-            <div class="project-includes">
-              <span>팀 매칭</span>
-              <span>전문 강사 앙상블 지도</span>
-              <span>합주 8회</span>
-              <span>유퍼라 콘서트 출연</span>
-              <span>뒷풀이 3회</span>
-              <span>MVP 싱글 제작 지원</span>
+      <div class="spaces-grid">
+        <div class="space-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="space-card-img">
+            <img src="images-compressed/marshall-amps.jpg" alt="합주실" loading="lazy">
+            <div class="space-card-overlay">
+              <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home"
+                 target="_blank" rel="noopener" class="space-card-cta">예약하기 →</a>
             </div>
           </div>
-          <a href="#contact" class="project-btn">신청하기</a>
+          <div class="space-card-body">
+            <p class="space-card-tag">REHEARSAL ROOM</p>
+            <h3 class="space-card-title">합주실</h3>
+            <p class="space-card-desc">
+              Marshall · Fender · Roland 풀셋업. 방음 최적화 스튜디오에서
+              시간 눈치 없이, 소리 크게. 24시간 예약 가능.
+            </p>
+            <ul class="space-card-specs">
+              <li>Marshall JCM · Fender Blues Junior</li>
+              <li>Roland TD-17 전자드럼</li>
+              <li>Markbass 베이스앰프</li>
+              <li>PA 시스템 · 마이크</li>
+            </ul>
+            <p class="space-card-price">25,000<span>원 / 시간</span></p>
+          </div>
         </div>
 
-        <!-- 팀 공연 패키지 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images-compressed/concert-pose.jpg" alt="팀 공연" loading="lazy">
-            <span class="project-status open">상시모집</span>
-          </div>
-          <div class="project-body">
-            <span class="project-cat">팀 공연 패키지</span>
-            <h3>우리 팀도 무대에</h3>
-            <p>이미 밴드가 있다면. 유퍼라 콘서트 무대에 서세요. 리허설 + 공연 + 뒷풀이. 경연 MVP에 도전.</p>
-            <div class="project-meta">
-              <div><strong>인당 80,000원</strong><span>공연 참가</span></div>
-              <div><strong>리허설</strong><span>사운드체크 포함</span></div>
-            </div>
-            <div class="project-includes">
-              <span>유퍼라 콘서트 출연</span>
-              <span>리허설 &middot; 사운드체크</span>
-              <span>뒷풀이 &middot; 네트워킹</span>
-              <span>MVP 싱글 제작 도전</span>
+        <div class="space-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="space-card-img">
+            <img src="images-compressed/studio-screen.jpg" alt="녹음실" loading="lazy">
+            <div class="space-card-overlay">
+              <a href="https://pf.kakao.com/_xoTxnxb"
+                 target="_blank" rel="noopener" class="space-card-cta">문의하기 →</a>
             </div>
           </div>
-          <a href="#contact" class="project-btn">문의하기</a>
-        </div>
-
-        <!-- 정규 합주 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="images-compressed/concert-group.jpg" alt="정규 합주" loading="lazy">
-            <span class="project-status open">상시모집</span>
-          </div>
-          <div class="project-body">
-            <span class="project-cat">정규 합주실 계약</span>
-            <h3>매주 합주하는 팀</h3>
-            <p>합주실 정기 이용. 매주 정해진 시간에 합주하고, 원하면 유퍼라 콘서트 무대까지.</p>
-            <div class="project-meta">
-              <div><strong>인당 60,000원</strong><span>월 정기 이용</span></div>
-              <div><strong>주 1회</strong><span>요일 선택</span></div>
-            </div>
-            <div class="project-includes">
-              <span>합주실 월 4회</span>
-              <span>정기 팀 운영</span>
-              <span>콘서트 참가 가능 (별도)</span>
-              <span>커뮤니티</span>
-            </div>
-          </div>
-          <a href="#contact" class="project-btn">문의하기</a>
-        </div>
-      </div>
-
-      <!-- MVP -->
-      <div class="recording-option">
-        <div class="recording-inner">
-          <div class="recording-text">
-            <span class="sec-label">MVP REWARD</span>
-            <h3>경연 MVP팀, 싱글 제작 지원</h3>
-            <p>유퍼라 콘서트에서 가장 빛난 팀에게 프로급 녹음실에서 싱글 녹음 + 믹싱 + 마스터링을 지원합니다. 멜론, 스포티파이에 당신의 이름이 올라갑니다.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 8주 여정 -->
-      <div class="journey">
-        <div class="sec-head center">
-          <h3>8주의 여정</h3>
-        </div>
-        <div class="journey-grid">
-          <div class="journey-step">
-            <span class="journey-week">WEEK 1</span>
-            <strong>만남</strong>
-            <p>OT &middot; 팀 편성 &middot; 첫 뒷풀이</p>
-          </div>
-          <div class="journey-step">
-            <span class="journey-week">WEEK 2-3</span>
-            <strong>시작</strong>
-            <p>곡 선정 &middot; 첫 합주 &middot; 강사 지도</p>
-          </div>
-          <div class="journey-step">
-            <span class="journey-week">WEEK 4</span>
-            <strong>성장</strong>
-            <p>중간 합주 &middot; 피드백 &middot; 뒷풀이</p>
-          </div>
-          <div class="journey-step">
-            <span class="journey-week">WEEK 5-6</span>
-            <strong>완성</strong>
-            <p>완곡 합주 &middot; 사운드 다듬기</p>
-          </div>
-          <div class="journey-step">
-            <span class="journey-week">WEEK 7</span>
-            <strong>리허설</strong>
-            <p>무대 &middot; 음향 &middot; 동선 세팅</p>
-          </div>
-          <div class="journey-step journey-highlight">
-            <span class="journey-week">WEEK 8</span>
-            <strong>무대</strong>
-            <p>유퍼라 콘서트 &middot; 경연 &middot; 파티</p>
+          <div class="space-card-body">
+            <p class="space-card-tag">RECORDING STUDIO</p>
+            <h3 class="space-card-title">녹음실</h3>
+            <p class="space-card-desc">
+              데모부터 음반까지. 엔지니어 협업 가능,
+              밴드 전체 레코딩 세션 기획도 OK.
+            </p>
+            <ul class="space-card-specs">
+              <li>Pro Tools · Logic Pro X</li>
+              <li>Neumann · AKG 컨덴서 마이크</li>
+              <li>Focusrite Clarett 인터페이스</li>
+              <li>믹싱 · 마스터링 옵션</li>
+            </ul>
+            <p class="space-card-price">별도 문의<span></span></p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Why -->
-  <section class="sec sec-dark">
-    <div class="wrap">
-      <div class="sec-head center">
-        <span class="sec-label">WHY TENET</span>
-        <h2>다른 데선 없는 것</h2>
-      </div>
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-num">01</div>
-          <h3>자체 합주실 24시간</h3>
-          <p>외부 대관 아닙니다. 우리 합주실에서 원할 때 합주. 서울 동쪽, 4호선 돌곶이역 도보 3분.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-num">02</div>
-          <h3>전문가 앙상블 지도</h3>
-          <p>MIMM 소속 전문 강사가 파트별 밸런스, 사운드메이킹을 직접 코칭. 유튜브 독학과는 다릅니다.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-num">03</div>
-          <h3>공연 + 경연 + 녹음</h3>
-          <p>합주만 하고 끝나지 않습니다. 실제 무대, 경연 MVP팀 싱글 제작 지원. 스트리밍에 내 이름이 올라갑니다.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-num">04</div>
-          <h3>뒷풀이 &middot; 커뮤니티</h3>
-          <p>음악만 하는 곳이 아닙니다. 새로운 사람, 새로운 경험, 공연 후 파티까지. 8주가 끝나도 관계는 계속됩니다.</p>
-        </div>
+  <!-- BANDCLUB BANNER -->
+  <section class="bandclub-banner" id="bandclub">
+    <div class="bandclub-bg">
+      <img src="images-compressed/concert-group.jpg" alt="밴드클럽 공연" loading="lazy">
+      <div class="bandclub-overlay"></div>
+    </div>
+    <div class="container">
+      <div class="bandclub-content" data-aos="fade-up">
+        <p class="section-tag" style="color:#E8D5B7">BAND CLUB</p>
+        <h2 class="bandclub-title">
+          이미 결심한 당신,<br>
+          <span class="hero-accent">더 크게 울리게 해줄게.</span>
+        </h2>
+        <p class="bandclub-desc">
+          팀 매칭 → 8주 합주 → 실제 무대.<br>
+          혼자 치던 당신이 밴드가 됩니다.
+        </p>
+        <a href="bandclub.html" class="btn btn-primary">밴드클럽 자세히 보기</a>
       </div>
     </div>
   </section>
 
-  <!-- Space -->
-  <section class="sec" id="space">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="sec-label">SPACE</span>
-        <h2>공간</h2>
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-tag">HOW IT WORKS</p>
+        <h2 class="section-title">3단계로 충분합니다</h2>
       </div>
-      <div class="space-block">
-        <div class="space-visual">
-          <img src="images-compressed/practice-room.jpg" alt="합주실">
-          <span class="space-floor">B1F</span>
-        </div>
-        <div class="space-info">
-          <h3>합주실</h3>
-          <p class="space-price"><em>25,000</em>원 / 시간</p>
-          <p class="space-desc">24시간 이용. 드럼, 기타앰프, 베이스앰프, 마이크, PA 풀세트. 무인 운영, 간편 예약.</p>
-          <div class="tag-row">
-            <span class="tag">24시간</span>
-            <span class="tag">풀세트</span>
-            <span class="tag">방음완비</span>
-            <span class="tag">무인운영</span>
-          </div>
-          <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home" class="btn" target="_blank" rel="noopener">네이버 예약</a>
-        </div>
-      </div>
-      <div class="space-block reverse">
-        <div class="space-visual">
-          <img src="images-compressed/studio-screen.jpg" alt="녹음실">
-          <span class="space-floor">2F</span>
-        </div>
-        <div class="space-info">
-          <h3>녹음실</h3>
-          <p class="space-price"><em>별도 문의</em></p>
-          <p class="space-desc">프로급 레코딩. 보컬부터 밴드 풀세션, 믹싱, 마스터링, 음원 발매까지.</p>
-          <div class="tag-row">
-            <span class="tag">레코딩</span>
-            <span class="tag">믹싱</span>
-            <span class="tag">마스터링</span>
-            <span class="tag">음원발매</span>
-          </div>
-          <a href="#contact" class="btn btn-line">문의하기</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Portfolio -->
-  <section class="sec sec-dark" id="portfolio">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="sec-label">PORTFOLIO</span>
-        <h2>무대</h2>
-      </div>
-      <div class="port-grid" id="portfolioGrid">
-        <div class="port-card portfolio-item">
-          <div class="port-img portfolio-img"><img src="images-compressed/concert-live.jpg" alt="유퍼라 콘서트" loading="lazy"></div>
-          <div class="port-info portfolio-info">
-            <span class="portfolio-tag">Your First Live</span>
-            <h3>유퍼라 콘서트 1회</h3>
-            <p>밴드클럽 4팀 라이브 &middot; 2026.02</p>
+      <div class="how-steps">
+        <div class="how-step" data-aos="fade-up" data-aos-delay="0">
+          <div class="how-step-num">01</div>
+          <div class="how-step-body">
+            <h3>예약 · 입장</h3>
+            <p>네이버 예약 또는 카카오로 시간을 잡습니다. 코드 받고 혼자 입장 가능, 24시간 운영.</p>
           </div>
         </div>
-        <div class="port-card portfolio-item">
-          <div class="port-img portfolio-img"><img src="images-compressed/palette-poster.jpg" alt="팔레트 온 스테이지" loading="lazy"></div>
-          <div class="port-info portfolio-info">
-            <span class="portfolio-tag">Concert</span>
-            <h3>팔레트 온 스테이지</h3>
-            <p>관객 110명 &middot; 세션 콘서트 &middot; 2026.02</p>
+        <div class="how-step-divider" aria-hidden="true"></div>
+        <div class="how-step" data-aos="fade-up" data-aos-delay="100">
+          <div class="how-step-num">02</div>
+          <div class="how-step-body">
+            <h3>연주 · 녹음</h3>
+            <p>장비는 다 세팅되어 있습니다. 그냥 치면 됩니다. 녹음이 필요하면 스튜디오로.</p>
           </div>
         </div>
-        <div class="port-card portfolio-item">
-          <div class="port-img portfolio-img"><img src="images-compressed/concert-pose.jpg" alt="밴드클럽 1기" loading="lazy"></div>
-          <div class="port-info portfolio-info">
-            <span class="portfolio-tag">Band Club</span>
-            <h3>밴드클럽 1기</h3>
-            <p>20명 참여 &middot; 8주 프로젝트 &middot; 2025.12</p>
-          </div>
-        </div>
-        <div class="port-card portfolio-item">
-          <div class="port-img portfolio-img"><img src="images-compressed/concert-group.jpg" alt="아빠들의 소꿉놀이" loading="lazy"></div>
-          <div class="port-info portfolio-info">
-            <span class="portfolio-tag">Theater</span>
-            <h3>아빠들의 소꿉놀이</h3>
-            <p>관객 200명 &middot; 연극 &middot; 2026.03</p>
+        <div class="how-step-divider" aria-hidden="true"></div>
+        <div class="how-step" data-aos="fade-up" data-aos-delay="200">
+          <div class="how-step-num">03</div>
+          <div class="how-step-body">
+            <h3>무대 · 기록</h3>
+            <p>밴드클럽 합류하면 공연 무대까지. TENET이 기획하고, 당신이 섭니다.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section class="sec" id="contact">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="sec-label">CONTACT</span>
-        <h2>신청 &middot; 문의</h2>
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-tag">PRICING</p>
+        <h2 class="section-title">명확한 요금</h2>
       </div>
-      <div class="contact-wrap">
-        <div class="contact-left">
-          <dl class="contact-dl">
-            <div><dt>전화</dt><dd><a href="tel:01030813730">010-3081-3730</a></dd></div>
-            <div><dt>주소</dt><dd>서울 성북구 돌곶이로 9길 14</dd></div>
-            <div><dt>운영</dt><dd>합주실 24시간 &middot; 녹음실 예약제</dd></div>
-            <div><dt>이메일</dt><dd><a href="mailto:tlswngh1244@naver.com">tlswngh1244@naver.com</a></dd></div>
-          </dl>
-        </div>
-        <form class="contact-form" id="contactForm">
-          <div class="form-2col">
-            <input type="text" name="name" placeholder="이름" required>
-            <input type="tel" name="phone" placeholder="연락처" required>
+
+      <div class="pricing-grid">
+        <div class="pricing-card" data-aos="fade-up" data-aos-delay="0">
+          <p class="pricing-card-tag">합주실</p>
+          <div class="pricing-amount">
+            <span class="pricing-num">25,000</span>
+            <span class="pricing-unit">원 / 시간</span>
           </div>
-          <select name="type" required>
-            <option value="">문의 유형</option>
-            <option value="ufla">유퍼라 밴드클럽 신청</option>
-            <option value="team-concert">팀 공연 패키지</option>
-            <option value="regular">정규 합주실 계약</option>
-            <option value="rehearsal">합주실 예약 (일반)</option>
-            <option value="recording">녹음실 문의</option>
-            <option value="other">기타</option>
-          </select>
-          <textarea name="message" rows="4" placeholder="메시지"></textarea>
-          <button type="submit" class="btn btn-full">문의하기</button>
-        </form>
+          <ul class="pricing-features">
+            <li>장비 풀셋업 포함</li>
+            <li>24시간 예약·입장</li>
+            <li>방음 최적화 룸</li>
+            <li>PA · 마이크 포함</li>
+            <li>인원 제한 없음</li>
+          </ul>
+          <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home"
+             target="_blank" rel="noopener" class="btn btn-primary btn-full">예약하기</a>
+        </div>
+
+        <div class="pricing-card pricing-card-featured" data-aos="fade-up" data-aos-delay="100">
+          <div class="pricing-badge">MOST POPULAR</div>
+          <p class="pricing-card-tag">밴드클럽</p>
+          <div class="pricing-amount">
+            <span class="pricing-num">60,000</span>
+            <span class="pricing-unit">원 ~</span>
+          </div>
+          <p class="pricing-range">기본 60,000원 / 풀패키지 250,000원</p>
+          <ul class="pricing-features">
+            <li>팀 매칭 서비스</li>
+            <li>8주 정기 합주 세션</li>
+            <li>공연 기획 · 무대</li>
+            <li>SNS 기록 촬영</li>
+            <li>밴드클럽 커뮤니티</li>
+          </ul>
+          <a href="bandclub.html" class="btn btn-primary btn-full">자세히 보기</a>
+        </div>
+
+        <div class="pricing-card" data-aos="fade-up" data-aos-delay="200">
+          <p class="pricing-card-tag">녹음실</p>
+          <div class="pricing-amount">
+            <span class="pricing-num">별도</span>
+            <span class="pricing-unit">문의</span>
+          </div>
+          <ul class="pricing-features">
+            <li>데모 / 음반 레코딩</li>
+            <li>엔지니어 협업 가능</li>
+            <li>Pro Tools · Logic</li>
+            <li>믹싱 · 마스터링</li>
+            <li>밴드 세션 기획</li>
+          </ul>
+          <a href="https://pf.kakao.com/_xoTxnxb" target="_blank" rel="noopener" class="btn btn-ghost btn-full">카카오 문의</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Map -->
-  <div class="map">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.5!2d127.025!3d37.605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z7ISc7Jq4IOyEseu2geq1rCDrj4zqs7bsnbTroZwgOeq4uCAxNA!5e0!3m2!1sko!2skr!4v1"
-      width="100%" height="320" style="border:0" allowfullscreen loading="lazy" title="TENET 위치"></iframe>
-  </div>
+  <!-- VOICES -->
+  <section class="voices" id="voices">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-tag">VOICES</p>
+        <h2 class="section-title">진짜 연주자들의 말</h2>
+      </div>
 
-  <!-- Footer -->
-  <footer class="ft">
-    <div class="wrap">
-      <div class="ft-top">
-        <div class="ft-brand">
-          <span class="logo">TENET</span>
-          <p>유퍼라 밴드클럽 &middot; 합주실 &middot; 녹음실</p>
+      <div class="voices-grid">
+        <div class="voice-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="voice-stars">★★★★★</div>
+          <p class="voice-text">
+            "합주실인데 이 정도 장비면 진짜 충격. 마샬 스택 있는 합주실이 서울에 여기밖에 없어요.
+            주말마다 오고 있는데 소리가 매번 짜릿합니다."
+          </p>
+          <div class="voice-author">
+            <span class="voice-name">김 * 우</span>
+            <span class="voice-role">기타리스트 · 합주실 이용</span>
+          </div>
         </div>
-        <nav class="ft-nav">
-          <a href="#ufla">유퍼라</a>
-          <a href="#space">공간</a>
-          <a href="#portfolio">포트폴리오</a>
-          <a href="#contact">문의</a>
-        </nav>
+
+        <div class="voice-card voice-card-accent" data-aos="fade-up" data-aos-delay="100">
+          <div class="voice-stars">★★★★★</div>
+          <p class="voice-text">
+            "밴드클럽 신청했는데 8주 만에 진짜 무대에 섰어요.
+            처음엔 반신반의했는데 공연 끝나고 울었습니다. 진심으로 추천합니다."
+          </p>
+          <div class="voice-author">
+            <span class="voice-name">박 * 연</span>
+            <span class="voice-role">보컬 · 밴드클럽 5기</span>
+          </div>
+        </div>
+
+        <div class="voice-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="voice-stars">★★★★★</div>
+          <p class="voice-text">
+            "24시간 운영이 진짜 게임체인저. 퇴근하고 밤 11시에도 올 수 있어서
+            드럼 실력이 두 달 만에 완전히 달라졌어요."
+          </p>
+          <div class="voice-author">
+            <span class="voice-name">이 * 준</span>
+            <span class="voice-role">드러머 · 합주실 정기 이용</span>
+          </div>
+        </div>
       </div>
-      <div class="ft-biz">
-        테넷 엔터테인먼트 &middot; 대표 신주호 &middot; 709-59-00653 &middot; 서울 성북구 돌곶이로 9길 14
+    </div>
+  </section>
+
+  <!-- FIND US -->
+  <section class="findus" id="findus">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-tag">FIND US</p>
+        <h2 class="section-title">찾아오세요</h2>
       </div>
-      <p class="ft-copy">&copy; 2026 TENET Entertainment</p>
+
+      <div class="findus-grid">
+        <div class="findus-map-wrap" data-aos="fade-right">
+          <div class="findus-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.2!2d127.0583!3d37.5933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357cba4f1c3f0001%3A0x0!2z7ISc7Jq47Yq567OE7IucIOyeheyCrOuPhCDrj5nrsojroZzrk5w!5e0!3m2!1sko!2skr!4v1710000000000"
+              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+              title="TENET 위치" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <div class="findus-info">
+            <div class="findus-info-item">
+              <span class="findus-icon">📍</span>
+              <div>
+                <p class="findus-info-label">주소</p>
+                <p class="findus-info-value">서울 성북구 돌곶이로 (6호선 돌곶이역 3번 출구 도보 3분)</p>
+              </div>
+            </div>
+            <div class="findus-info-item">
+              <span class="findus-icon">⏰</span>
+              <div>
+                <p class="findus-info-label">운영시간</p>
+                <p class="findus-info-value">24시간 · 연중무휴</p>
+              </div>
+            </div>
+            <div class="findus-info-item">
+              <span class="findus-icon">💬</span>
+              <div>
+                <p class="findus-info-label">문의</p>
+                <p class="findus-info-value">카카오채널 @테넷합주실</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq" data-aos="fade-left">
+          <h3 class="faq-title">자주 묻는 질문</h3>
+          <div class="faq-list" id="faqList">
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                예약은 어떻게 하나요?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                네이버 예약 또는 카카오 채널을 통해 예약하실 수 있습니다.
+                예약 확정 후 입장 코드가 발송됩니다.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                인원 제한이 있나요?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                합주실은 밴드 구성에 따라 인원 제한이 없습니다.
+                편안하게 팀 전체가 이용 가능합니다.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                장비를 직접 가져와도 되나요?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                물론입니다. 자신의 기타나 이펙터, 드럼스틱 등 가져오셔도 됩니다.
+                앰프와 드럼, PA는 비치되어 있습니다.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                당일 예약도 가능한가요?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                가능합니다. 네이버 예약에서 실시간으로 빈 시간대를 확인하고
+                당일 예약할 수 있습니다.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                주차 가능한가요?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                건물 내 주차 공간이 있으며, 인근 공영주차장도 이용 가능합니다.
+                대중교통은 돌곶이역 3번 출구 도보 3분 거리입니다.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                취소·환불 정책은?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                이용 시작 24시간 전까지는 100% 환불 가능합니다.
+                그 이후는 취소 수수료가 발생할 수 있습니다.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                밴드클럽은 초보자도 신청 가능한가요?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                네. 레벨별 팀 매칭을 하므로 초보자도 걱정 없습니다.
+                중요한 건 악기를 다루는 것이지 실력이 아닙니다.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                녹음실 이용 시 별도 문의가 필요한가요?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                녹음실은 세션 방식과 소요 시간에 따라 요금이 달라져
+                카카오 채널로 사전 문의 후 예약합니다.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                공연 기획은 어떻게 신청하나요?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                밴드클럽 참여 시 공연 기회가 자동으로 포함됩니다.
+                독립 밴드의 자체 공연 기획도 카카오 채널로 문의해 주세요.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                합주 중 음료·음식 반입이 되나요?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                음료는 밀폐 용기에 한해 반입 가능합니다.
+                음식은 장비 보호를 위해 합주실 내 취식을 제한합니다.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MUSIC -->
+  <section class="music-section" id="music">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-tag">MUSIC</p>
+        <h2 class="section-title">음악듣는 고양이 TENET</h2>
+        <p class="section-desc" style="max-width:520px;margin:0 auto">매일 새로운 감성 음악. 카페 재즈부터 수면 음악까지, AI가 만들고 사람이 다듬습니다.</p>
+      </div>
+      <div class="music-grid" data-aos="fade-up" data-aos-delay="100">
+        <div class="music-player-wrap">
+          <div class="music-player-placeholder" id="ytEmbed">
+            <div class="music-anim">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <p>채널 준비 중</p>
+          </div>
+        </div>
+        <div class="music-meta">
+          <div class="music-stats">
+            <div class="music-stat"><strong>매일</strong><span>새로운 곡</span></div>
+            <div class="music-stat"><strong>7가지</strong><span>장르 순환</span></div>
+            <div class="music-stat"><strong>24/7</strong><span>스트리밍</span></div>
+          </div>
+          <div class="music-tags">
+            <span>☕ 카페 재즈</span>
+            <span>📖 공부 음악</span>
+            <span>🌙 수면 음악</span>
+            <span>🌧️ 비 오는 날</span>
+            <span>🌆 도시 감성</span>
+            <span>🎹 피아노</span>
+          </div>
+          <a href="#" class="btn btn-ghost" id="ytLink" target="_blank" rel="noopener">YouTube에서 듣기 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <section class="cta-strip">
+    <div class="container">
+      <div class="cta-strip-inner" data-aos="fade-up">
+        <h2 class="cta-strip-title">지금 바로 시작하세요.</h2>
+        <p class="cta-strip-sub">이미 결심했다면, 나머지는 TENET이 합니다.</p>
+        <div class="cta-strip-actions">
+          <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home"
+             target="_blank" rel="noopener" class="btn btn-primary btn-lg">합주실 예약</a>
+          <a href="bandclub.html" class="btn btn-ghost btn-lg">밴드클럽 신청</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo">TENET</a>
+          <p class="footer-tagline">당신의 소리가 실제가 되는 곳</p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/tenet_bandclub" target="_blank" rel="noopener" aria-label="인스타그램">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="https://pf.kakao.com/_xoTxnxb" target="_blank" rel="noopener" aria-label="카카오채널">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.76 1.68 5.19 4.2 6.66L5.1 21l4.08-2.1c.9.24 1.83.36 2.82.36 5.52 0 10-3.48 10-7.8C22 6.48 17.52 3 12 3z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h4>공간</h4>
+          <ul>
+            <li><a href="#spaces">합주실</a></li>
+            <li><a href="#spaces">녹음실</a></li>
+            <li><a href="#bandclub">밴드클럽</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h4>정보</h4>
+          <ul>
+            <li><a href="#pricing">요금표</a></li>
+            <li><a href="#findus">찾아오기</a></li>
+            <li><a href="#findus">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>예약 · 문의</h4>
+          <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home"
+             target="_blank" rel="noopener" class="footer-reserve-btn">네이버 예약</a>
+          <a href="https://pf.kakao.com/_xoTxnxb" target="_blank" rel="noopener" class="footer-kakao-btn">카카오 문의</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 TENET Entertainment. All rights reserved.</p>
+        <p class="footer-addr">서울 성북구 돌곶이로 · 사업자번호 000-00-00000</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <div class="lightbox-inner">
-      <button class="lightbox-close" id="lightboxClose">&times;</button>
-      <img class="lightbox-img" id="lightboxImg" src="" alt="">
-      <div class="lightbox-caption">
-        <span class="portfolio-tag" id="lightboxTag"></span>
-        <h3 id="lightboxTitle"></h3>
-        <p id="lightboxDesc"></p>
-      </div>
-    </div>
-  </div>
-
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
