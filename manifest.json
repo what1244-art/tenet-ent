@@ -1,0 +1,13 @@
+{
+  "name": "TENET Admin",
+  "short_name": "TENET",
+  "start_url": "/tenet-ent/admin.html",
+  "scope": "/tenet-ent/",
+  "display": "standalone",
+  "background_color": "#0b0b0f",
+  "theme_color": "#0b0b0f",
+  "icons": [
+    { "src": "https://what1244-art.github.io/tenet-ent/images/logo.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "https://what1244-art.github.io/tenet-ent/images/logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
