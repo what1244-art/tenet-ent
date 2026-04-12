@@ -108,13 +108,13 @@ body.mimm-theme {
 
 /* Carousel */
 .carousel-section {
-  padding: 0;
+  padding: 0 0 80px;
   background: #fff;
 }
 
 .carousel-wrapper {
   position: relative;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -132,10 +132,10 @@ body.mimm-theme {
 
 .carousel-slide img {
   width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 21/9;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -153,8 +153,8 @@ body.mimm-theme {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: #fff;
   border: 1px solid rgba(0,0,0,0.1);
@@ -182,8 +182,7 @@ body.mimm-theme {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 24px;
 }
 
 .carousel-dot {
