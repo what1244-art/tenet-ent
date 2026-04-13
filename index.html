@@ -168,8 +168,35 @@
       50% { transform: rotate(45deg) translateY(8px); opacity: 1; }
     }
 
+    /* ── FULL VISUAL BANNER (Glue Hotel style) ── */
+    .visual {
+      position: relative; height: 70vh; min-height: 400px;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+      text-align: center; color: #fff;
+    }
+    .visual img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .visual-dim {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.35);
+    }
+    .visual-body {
+      position: relative; z-index: 1; padding: 0 32px;
+    }
+    .visual-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      font-weight: 700; letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .visual-sub {
+      font-size: 0.88rem; color: rgba(255,255,255,0.7);
+    }
+
     /* ── SECTIONS ── */
-    .sec { padding: 120px 0; }
+    .sec { padding: 140px 0; }
     .sec-gray { background: var(--bg2); }
     .sec-dark { background: var(--dark); color: #fff; }
     .sec-dark .sec-text { color: rgba(255,255,255,0.6); }
@@ -218,7 +245,7 @@
       background: var(--accent);
     }
     .about-img {
-      width: 100%; aspect-ratio: 4/5; object-fit: cover;
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
       border-radius: 12px;
     }
 
@@ -262,8 +289,8 @@
     .studio-photos {
       display: grid; gap: 8px; border-radius: 12px; overflow: hidden;
     }
-    .studio-photos img:first-child { width: 100%; height: 320px; object-fit: cover; }
-    .studio-photos img:last-child { width: 100%; height: 200px; object-fit: cover; }
+    .studio-photos img:first-child { width: 100%; height: 400px; object-fit: cover; }
+    .studio-photos img:last-child { width: 100%; height: 240px; object-fit: cover; }
     .studio-specs {
       margin-top: 24px; display: flex; flex-direction: column; gap: 14px;
     }
@@ -420,6 +447,7 @@
       .nav-contact { margin: 8px 32px 0; display: block; text-align: center; color: var(--dark); border-color: var(--dark); }
 
       .sec { padding: 80px 0; }
+      .visual { height: 50vh; min-height: 300px; }
       .about-grid, .studio-grid, .rehearsal-grid, .bc-grid, .contact-grid {
         grid-template-columns: 1fr; gap: 32px;
       }
@@ -530,6 +558,16 @@
     </div>
   </section>
 
+  <!-- VISUAL BREAK -->
+  <section class="visual">
+    <img src="images-ufla/web/ufla-concert-03.jpg" alt="TENET 공연" loading="lazy">
+    <div class="visual-dim"></div>
+    <div class="visual-body">
+      <p class="visual-title en">SOUND MEETS STAGE</p>
+      <p class="visual-sub">연습에서 무대로, 아이디어에서 음원으로</p>
+    </div>
+  </section>
+
   <!-- RECORDING STUDIO -->
   <section class="sec sec-dark" id="studio">
     <div class="container">
@@ -574,6 +612,16 @@
           <img src="images-compressed/practice-room.jpg" alt="합주실" class="rehearsal-img" loading="lazy">
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- VISUAL BREAK -->
+  <section class="visual">
+    <img src="images-ufla/web/ufla-group-01.jpg" alt="밴드클럽 단체" loading="lazy">
+    <div class="visual-dim"></div>
+    <div class="visual-body">
+      <p class="visual-title en">YOUR FIRST LIVE</p>
+      <p class="visual-sub">혼자 치던 당신이 밴드가 됩니다</p>
     </div>
   </section>
 
