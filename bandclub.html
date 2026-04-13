@@ -3,710 +3,748 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TENET 밴드클럽 — 밴드 하고 싶었지? 같이 하자.</title>
-  <meta name="description" content="8주 밴드 프로젝트 250,000원. 팀 매칭 → 합주 → 공연. TENET JAM 정기 합주팀 월 70,000원. 대학 밴드부 단체 패키지. 서울 성북구 돌곶이.">
-  <meta name="keywords" content="밴드클럽, 밴드프로젝트, TENET JAM, 밴드 합주, 합주 모임, 성북구 밴드, 돌곶이, 대학 밴드부, 공연, 무대">
-  <meta property="og:title" content="TENET 밴드클럽 — 8주, 진짜 무대에 섭니다">
-  <meta property="og:description" content="혼자 연습만 하다 지친 사람. 밴드 한번 해보고 싶었던 사람. 8주 뒤 진짜 무대에 서는 프로그램.">
-  <meta property="og:image" content="images/concert-live.jpg">
+  <title>유퍼라 UFLA — 혼자 치던 당신, 무대에 서는 날</title>
+  <meta name="description" content="8주 밴드 프로젝트 250,000원. 팀 매칭 → 합주 → 홍대 라이브바 공연. 혼자 치던 당신, 유퍼라에서 무대에 서세요.">
+  <meta name="keywords" content="유퍼라, UFLA, 밴드클럽, 밴드프로젝트, 밴드합주, 합주모임, 성북구밴드, 홍대공연, 밴드동아리">
+  <meta property="og:title" content="유퍼라 UFLA — 혼자 치던 당신, 무대에 서는 날">
+  <meta property="og:description" content="8주 뒤, 홍대 라이브바 무대에 섭니다. 음악이 아니라 모임입니다.">
+  <meta property="og:image" content="images-ufla/web/ufla-concert-02.jpg">
+  <link rel="canonical" href="https://tenetent.com/bandclub.html">
 
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="images-compressed/concert-live.jpg">
-<link rel="stylesheet" href="style.css">
+  <link rel="preload" as="image" href="images-ufla/web/ufla-concert-02.jpg">
 
   <!-- PortOne SDK -->
   <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
   <style>
-    /* ===== BANDCLUB VARIABLES ===== */
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
-      --bc-cream: #E8D5B7;
-      --bc-cream2: #F5F0E8;
-      --bc-dark: #0A0A0A;
-      --bc-dark2: #111111;
-      --bc-dark3: #1A1A1A;
-      --bc-border: #242424;
-      --bc-accent: #e85720;
-      --bc-accent2: #ff7a4a;
+      --bg: #050505;
+      --bg2: #0a0a0a;
+      --bg3: #111111;
+      --bg4: #1a1a1a;
+      --border: #222222;
+      --accent: #e85720;
+      --accent-hover: #ff6b35;
+      --cream: #E8D5B7;
+      --cream2: #F5F0E8;
+      --text: #f0ebe0;
+      --text-dim: rgba(255,255,255,0.55);
+      --text-faint: rgba(255,255,255,0.35);
+      --radius: 8px;
+      --transition: 0.3s ease;
     }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
     body {
       font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      background: var(--bc-dark);
-      color: #f0ebe0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    .bc-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--bc-accent);
-      display: block;
-      margin-bottom: 12px;
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; }
+    ul { list-style: none; }
+
+    .en { font-family: 'Barlow Condensed', sans-serif; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    @media (min-width: 768px) { .wrap { padding: 0 40px; } }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* ===== NAV ===== */
-    .bc-nav {
+    .nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 200;
-      height: 72px;
-      transition: background 0.3s, border-color 0.3s;
+      height: 64px;
+      transition: background var(--transition), border-color var(--transition);
     }
 
-    .bc-nav.scrolled {
-      background: rgba(10,10,10,0.94);
+    .nav.scrolled {
+      background: rgba(5,5,5,0.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--bc-border);
+      border-bottom: 1px solid var(--border);
     }
 
-    .bc-nav-inner {
-      max-width: 1280px;
+    .nav-inner {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 40px;
+      padding: 0 24px;
       height: 100%;
       display: flex;
       align-items: center;
     }
 
-    .bc-logo {
+    @media (min-width: 768px) { .nav-inner { padding: 0 40px; } }
+
+    .nav-logo {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 20px;
       font-weight: 900;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.15em;
       color: #fff;
-      text-decoration: none;
     }
 
-    .bc-logo span { color: var(--bc-accent); }
+    .nav-logo span { color: var(--accent); }
 
-    .bc-gnb {
-      margin-left: 48px;
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .bc-gnb a {
-      font-size: 14px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.55);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .bc-gnb a:hover { color: #fff; }
-
-    .bc-nav-cta {
+    .nav-cta {
       margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .bc-nav-back {
-      font-size: 13px;
-      color: rgba(255,255,255,0.4);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .bc-nav-back:hover { color: rgba(255,255,255,0.7); }
-
-    .bc-nav-btn {
-      padding: 9px 22px;
-      background: var(--bc-accent);
+      padding: 8px 20px;
+      background: var(--accent);
       color: #fff;
       font-size: 13px;
       font-weight: 700;
       border-radius: 4px;
-      text-decoration: none;
-      transition: background 0.2s;
+      transition: background var(--transition);
     }
 
-    .bc-nav-btn:hover { background: var(--bc-accent2); }
-
-    .bc-mobile-btn {
-      display: none;
-      margin-left: auto;
-      padding: 8px;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    .bc-mobile-btn span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: #fff;
-    }
-
-    .bc-mobile-btn span + span { margin-top: 6px; }
+    .nav-cta:hover { background: var(--accent-hover); }
 
     /* ===== HERO ===== */
-    .bc-hero {
+    .hero {
       position: relative;
-      height: 100vh;
-      min-height: 640px;
+      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
+      justify-content: flex-end;
       overflow: hidden;
     }
 
-    .bc-hero-bg {
+    .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('images-compressed/concert-live.jpg');
-      background-size: cover;
-      background-position: center 30%;
-      background-attachment: fixed;
+      background: url('images-ufla/web/ufla-concert-02.jpg') center 30% / cover no-repeat;
     }
 
-    .bc-hero-dim {
+    .hero-dim {
       position: absolute;
       inset: 0;
       background: linear-gradient(
-        160deg,
-        rgba(10,10,10,0.7) 0%,
-        rgba(10,10,10,0.4) 40%,
-        rgba(10,10,10,0.75) 75%,
-        rgba(10,10,10,1) 100%
+        to bottom,
+        rgba(5,5,5,0.3) 0%,
+        rgba(5,5,5,0.5) 50%,
+        rgba(5,5,5,0.95) 100%
       );
     }
 
-    .bc-hero-body {
+    .hero-body {
       position: relative;
       z-index: 2;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      max-width: 1280px;
+      padding: 0 24px 48px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 40px;
       width: 100%;
     }
 
-    .bc-hero-eyebrow {
+    @media (min-width: 768px) { .hero-body { padding: 0 40px 72px; } }
+
+    .hero-eyebrow {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--bc-cream);
-      opacity: 0.7;
-      margin-bottom: 20px;
+      color: var(--accent);
+      margin-bottom: 16px;
     }
 
-    .bc-hero-h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(52px, 8vw, 96px);
+    .hero-h1 {
+      font-size: clamp(36px, 9vw, 72px);
       font-weight: 900;
-      line-height: 1.0;
-      letter-spacing: -0.01em;
-      text-transform: uppercase;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
       color: #fff;
-      max-width: 780px;
+      margin-bottom: 16px;
     }
 
-    .bc-hero-h1 em {
+    .hero-h1 em {
       font-style: normal;
-      color: var(--bc-cream);
+      display: block;
+      background: linear-gradient(135deg, var(--cream), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .bc-hero-sub {
-      margin-top: 24px;
-      font-size: 16px;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.7;
-      max-width: 480px;
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.8;
+      max-width: 400px;
+      margin-bottom: 32px;
     }
 
-    .bc-hero-sub strong { color: rgba(255,255,255,0.9); }
+    .hero-sub strong { color: #fff; }
 
-    .bc-hero-actions {
+    .hero-actions {
       display: flex;
       gap: 12px;
-      margin-top: 36px;
+      flex-wrap: wrap;
     }
 
-    .bc-btn {
+    /* ===== BUTTONS ===== */
+    .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 14px 32px;
+      padding: 14px 28px;
       font-size: 15px;
       font-weight: 700;
       border-radius: 4px;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
+      transition: all var(--transition);
       border: none;
       font-family: inherit;
+      cursor: pointer;
     }
 
-    .bc-btn-primary { background: var(--bc-accent); color: #fff; }
-    .bc-btn-primary:hover { background: var(--bc-accent2); }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
-    .bc-btn-outline {
-      background: transparent;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
+    .btn-cream { background: var(--cream); color: var(--bg); }
+    .btn-cream:hover { background: var(--cream2); }
 
-    .bc-btn-outline:hover {
-      border-color: rgba(255,255,255,0.7);
-      background: rgba(255,255,255,0.05);
-    }
+    .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.04); }
 
-    .bc-btn-cream { background: var(--bc-cream); color: var(--bc-dark); }
-    .bc-btn-cream:hover { background: var(--bc-cream2); }
-    .bc-btn-full { width: 100%; justify-content: center; }
+    .btn-full { width: 100%; }
+    .btn-lg { padding: 16px 36px; font-size: 16px; }
 
     /* ===== STATS BAR ===== */
-    .bc-stats {
-      position: relative;
-      z-index: 2;
+    .stats-bar {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--bc-border);
-      border-top: 1px solid var(--bc-border);
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
     }
 
-    .bc-stat {
-      padding: 24px 40px;
-      background: var(--bc-dark);
-      display: flex;
-      align-items: center;
-      gap: 16px;
+    .stat {
+      padding: 20px 24px;
+      text-align: center;
+      border-right: 1px solid var(--border);
     }
 
-    .bc-stat-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 36px;
-      font-weight: 900;
-      line-height: 1;
-      color: var(--bc-cream);
-    }
+    .stat:last-child { border-right: none; }
 
-    .bc-stat-text {
-      font-size: 13px;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.4;
-    }
-
-    /* ===== SECTIONS ===== */
-    .bc-sec { padding: 100px 0; }
-    .bc-sec-dark { background: var(--bc-dark2); }
-    .bc-sec-darker { background: var(--bc-dark); }
-
-    .bc-wrap {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    .bc-sec-head { margin-bottom: 56px; }
-    .bc-sec-head.center { text-align: center; }
-
-    .bc-sec-head h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 900;
-      line-height: 1.15;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-    }
-
-    .bc-sec-head p {
-      margin-top: 12px;
-      font-size: 16px;
-      color: rgba(255,255,255,0.5);
-      max-width: 520px;
-    }
-
-    .bc-sec-head.center p { margin-left: auto; margin-right: auto; }
-
-    /* ===== PROGRAMS ===== */
-    .bc-programs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .bc-prog-card {
-      background: var(--bc-dark3);
-      border: 1px solid var(--bc-border);
-      border-radius: 8px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .bc-prog-card:hover {
-      border-color: rgba(232,213,183,0.3);
-      transform: translateY(-4px);
-    }
-
-    .bc-prog-card.featured { border-color: var(--bc-cream); }
-
-    .bc-prog-img {
-      position: relative;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-    }
-
-    .bc-prog-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s;
-    }
-
-    .bc-prog-card:hover .bc-prog-img img { transform: scale(1.05); }
-
-    .bc-prog-badge {
-      position: absolute;
-      top: 12px; left: 12px;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-family: 'Barlow Condensed', sans-serif;
-    }
-
-    .bc-prog-badge.hot { background: var(--bc-accent); color: #fff; }
-    .bc-prog-badge.new { background: var(--bc-cream); color: var(--bc-dark); }
-    .bc-prog-badge.uni { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8); }
-
-    .bc-prog-body {
-      padding: 28px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .bc-prog-type {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--bc-accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .bc-prog-card.featured .bc-prog-type { color: var(--bc-cream); }
-
-    .bc-prog-body h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 26px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      margin-bottom: 8px;
-    }
-
-    .bc-prog-tagline {
-      font-size: 13px;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 20px;
-    }
-
-    .bc-prog-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 24px;
-      flex: 1;
-    }
-
-    .bc-prog-features li {
-      font-size: 14px;
-      color: rgba(255,255,255,0.7);
-      padding-left: 16px;
-      position: relative;
-    }
-
-    .bc-prog-features li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 9px;
-      width: 5px;
-      height: 1px;
-      background: var(--bc-accent);
-    }
-
-    .bc-prog-price-box {
-      padding: 16px 0;
-      border-top: 1px solid var(--bc-border);
-      margin-bottom: 16px;
-    }
-
-    .bc-prog-price {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 32px;
-      font-weight: 900;
-      color: var(--bc-cream);
-    }
-
-    .bc-prog-price sub {
-      font-size: 16px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.45);
-    }
-
-    .bc-prog-note {
-      font-size: 12px;
-      color: rgba(255,255,255,0.35);
-      margin-top: 4px;
-    }
-
-    /* ===== TIERS ===== */
-    .bc-tiers {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 48px;
-    }
-
-    .bc-tier {
-      background: var(--bc-dark3);
-      border: 1px solid var(--bc-border);
-      border-radius: 6px;
-      padding: 24px 20px;
-    }
-
-    .bc-tier.highlight {
-      border-color: var(--bc-cream);
-      background: rgba(232,213,183,0.04);
-    }
-
-    .bc-tier-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .bc-tier.highlight .bc-tier-name { color: var(--bc-cream); }
-
-    .bc-tier-desc {
-      font-size: 12px;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 16px;
-    }
-
-    .bc-tier-price {
+    .stat-num {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 28px;
       font-weight: 900;
-      color: var(--bc-cream);
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-top: 4px;
+    }
+
+    @media (min-width: 768px) {
+      .stat { padding: 28px 40px; }
+      .stat-num { font-size: 36px; }
+      .stat-label { font-size: 12px; }
+    }
+
+    /* ===== SECTION BASE ===== */
+    .section { padding: 80px 0; }
+    .section-dark { background: var(--bg3); }
+    .section-darker { background: var(--bg); }
+
+    @media (min-width: 768px) { .section { padding: 120px 0; } }
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
       margin-bottom: 12px;
     }
 
-    .bc-tier-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    .section-title {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
     }
 
-    .bc-tier-features li {
-      font-size: 13px;
-      color: rgba(255,255,255,0.55);
-      padding-left: 14px;
-      position: relative;
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 520px;
     }
 
-    .bc-tier-features li::before {
-      content: '·';
-      position: absolute;
-      left: 0;
-      color: var(--bc-accent);
-    }
+    .section-head { margin-bottom: 48px; }
+    .section-head.center { text-align: center; }
+    .section-head.center .section-desc { margin: 0 auto; }
 
-    /* ===== CURRICULUM ===== */
-    .bc-curriculum {
+    /* ===== MANIFESTO ===== */
+    .manifesto-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .manifesto-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        align-items: center;
+      }
+    }
+
+    .manifesto-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .manifesto-photos img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    .manifesto-photos img:first-child {
+      grid-row: 1 / 3;
+      aspect-ratio: auto;
+      height: 100%;
+    }
+
+    .manifesto-text h2 {
+      font-size: clamp(24px, 4vw, 40px);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    .manifesto-text h2 span { color: var(--accent); }
+
+    .manifesto-text p {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.85;
+      margin-bottom: 12px;
+    }
+
+    .manifesto-text p strong { color: var(--text); }
+
+    .manifesto-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .manifesto-keywords span {
+      padding: 6px 14px;
+      background: rgba(232,87,32,0.1);
+      border: 1px solid rgba(232,87,32,0.25);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* ===== JOURNEY ===== */
+    .journey-track {
+      position: relative;
+      display: grid;
       gap: 12px;
     }
 
-    .bc-week {
-      background: var(--bc-dark3);
-      border: 1px solid var(--bc-border);
-      border-radius: 6px;
-      padding: 20px 18px;
-      transition: border-color 0.2s;
+    @media (min-width: 768px) {
+      .journey-track { grid-template-columns: repeat(4, 1fr); }
     }
 
-    .bc-week:hover { border-color: rgba(232,213,183,0.3); }
-
-    .bc-week.climax {
-      background: rgba(232,213,183,0.06);
-      border-color: rgba(232,213,183,0.4);
+    .journey-week {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color var(--transition);
     }
 
-    .bc-week-num {
+    .journey-week:hover { border-color: rgba(232,213,183,0.3); }
+    .journey-week.climax {
+      background: rgba(232,87,32,0.08);
+      border-color: var(--accent);
+    }
+
+    .journey-num {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.15em;
-      color: var(--bc-accent);
-      margin-bottom: 8px;
+      color: var(--accent);
       text-transform: uppercase;
+      margin-bottom: 8px;
     }
 
-    .bc-week.climax .bc-week-num { color: var(--bc-cream); }
+    .journey-week.climax .journey-num { color: var(--cream); }
 
-    .bc-week h4 {
+    .journey-week h4 {
       font-size: 15px;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
-    .bc-week p {
+    .journey-week p {
       font-size: 13px;
-      color: rgba(255,255,255,0.45);
+      color: var(--text-faint);
       line-height: 1.5;
     }
 
-    /* ===== GALLERY ===== */
-    .bc-gallery {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 8px;
-      height: 560px;
+    .journey-week .social {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
     }
 
-    .bc-gal-item {
+    /* ===== PRICE FRAMING ===== */
+    .price-compare {
+      display: grid;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .price-compare { grid-template-columns: 1fr 80px 1fr; align-items: center; }
+    }
+
+    .price-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+    }
+
+    .price-card.dim { opacity: 0.6; }
+
+    .price-card.hero-card {
+      border-color: var(--accent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card.hero-card::before {
+      content: 'BEST';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      padding: 6px;
+      background: var(--accent);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .price-card.hero-card .price-card-inner { padding-top: 16px; }
+
+    .price-card-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-faint);
+      margin-bottom: 12px;
+    }
+
+    .price-card-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .price-card-items {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .price-card-amount {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .price-card.dim .price-card-amount {
+      font-size: 36px;
+      color: var(--text-faint);
+      text-decoration: line-through;
+    }
+
+    .price-card.hero-card .price-card-amount {
+      font-size: 48px;
+      color: var(--accent);
+    }
+
+    .price-card-amount sub {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-faint);
+    }
+
+    .price-card-save {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 12px;
+      background: rgba(232,87,32,0.15);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .price-vs {
+      text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--text-faint);
+    }
+
+    .price-includes {
+      margin-top: 48px;
+      padding: 32px;
+      background: rgba(232,213,183,0.04);
+      border: 1px solid rgba(232,213,183,0.15);
+      border-radius: var(--radius);
+    }
+
+    .price-includes h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+
+    .price-includes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .price-includes-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+
+    .price-includes-item {
+      text-align: center;
+      padding: 16px 8px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 6px;
+    }
+
+    .price-includes-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .price-includes-text {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .gallery {
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        height: 480px;
+      }
+      .gallery-item:first-child { grid-row: 1 / 3; }
+    }
+
+    .gallery-item {
       position: relative;
       overflow: hidden;
       border-radius: 6px;
       cursor: pointer;
     }
 
-    .bc-gal-item:first-child { grid-row: 1 / 3; }
-
-    .bc-gal-item img {
+    .gallery-item img {
       width: 100%; height: 100%;
       object-fit: cover;
       transition: transform 0.6s;
     }
 
-    .bc-gal-item:hover img { transform: scale(1.05); }
+    .gallery-item:hover img { transform: scale(1.05); }
 
-    .bc-gal-overlay {
+    .gallery-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(5,5,5,0.7) 0%, transparent 50%);
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity var(--transition);
       display: flex;
       align-items: flex-end;
-      padding: 20px;
+      padding: 16px;
     }
 
-    .bc-gal-item:hover .bc-gal-overlay { opacity: 1; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
 
-    .bc-gal-tag {
+    .gallery-tag {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--bc-cream);
+      color: var(--cream);
     }
 
     /* ===== VOICES ===== */
-    .bc-voices {
+    .voices-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 16px;
     }
 
-    .bc-voice {
-      background: var(--bc-dark3);
-      border: 1px solid var(--bc-border);
-      border-radius: 8px;
+    @media (min-width: 768px) {
+      .voices-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    }
+
+    .voice-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       padding: 28px;
     }
 
-    .bc-voice-stars {
-      color: var(--bc-cream);
+    .voice-stars {
+      color: var(--cream);
       font-size: 14px;
       letter-spacing: 2px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
-    .bc-voice-text {
+    .voice-text {
       font-size: 15px;
       color: rgba(255,255,255,0.8);
-      line-height: 1.7;
+      line-height: 1.75;
       margin-bottom: 20px;
     }
 
-    .bc-voice-person {
+    .voice-person {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .bc-voice-avatar {
-      width: 36px;
-      height: 36px;
+    .voice-avatar {
+      width: 36px; height: 36px;
       border-radius: 50%;
-      background: var(--bc-dark);
-      border: 1px solid var(--bc-border);
+      background: var(--bg);
+      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 15px;
       font-weight: 800;
-      color: var(--bc-cream);
+      color: var(--cream);
     }
 
-    .bc-voice-info strong {
-      display: block;
+    .voice-name {
       font-size: 14px;
       font-weight: 700;
       color: #fff;
     }
 
-    .bc-voice-info span {
+    .voice-desc {
       font-size: 12px;
-      color: rgba(255,255,255,0.35);
+      color: var(--text-faint);
     }
 
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, rgba(232,87,32,0.12) 0%, rgba(5,5,5,1) 60%);
+      text-align: center;
+    }
+
+    @media (min-width: 768px) { .cta-section { padding: 120px 0; } }
+
+    .cta-section h2 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .cta-section h2 span { color: var(--accent); }
+
+    .cta-section > .wrap > p {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+
+    .cta-details {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .cta-detail {
+      font-size: 13px;
+      color: var(--text-faint);
+    }
+
+    .cta-detail strong { color: var(--text); }
+
     /* ===== FAQ ===== */
-    .bc-faq-list {
-      max-width: 720px;
+    .faq-list {
+      max-width: 680px;
       margin: 0 auto;
     }
 
-    .bc-faq-item { border-bottom: 1px solid var(--bc-border); }
-    .bc-faq-item:first-child { border-top: 1px solid var(--bc-border); }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
 
-    .bc-faq-q {
+    .faq-q {
       width: 100%;
       background: none;
       border: none;
@@ -716,7 +754,6 @@
       font-weight: 500;
       padding: 20px 0;
       text-align: left;
-      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -724,1178 +761,686 @@
       transition: color 0.2s;
     }
 
-    .bc-faq-q:hover { color: var(--bc-cream); }
+    .faq-q:hover { color: var(--cream); }
 
-    .bc-faq-icon {
+    .faq-icon {
       font-size: 20px;
       font-weight: 300;
-      color: var(--bc-accent);
-      transition: transform 0.3s;
+      color: var(--accent);
+      transition: transform var(--transition);
       flex-shrink: 0;
-      line-height: 1;
     }
 
-    .bc-faq-item.active .bc-faq-icon { transform: rotate(45deg); }
+    .faq-item.active .faq-icon { transform: rotate(45deg); }
 
-    .bc-faq-a {
+    .faq-a {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.35s ease;
     }
 
-    .bc-faq-item.active .bc-faq-a { max-height: 240px; }
+    .faq-item.active .faq-a { max-height: 300px; }
 
-    .bc-faq-a p {
+    .faq-a p {
       font-size: 14px;
-      color: rgba(255,255,255,0.55);
+      color: var(--text-dim);
       line-height: 1.75;
       padding-bottom: 20px;
     }
 
-    /* ===== PRICING ===== */
-    .bc-pricing {
+    /* ===== PAYMENT ===== */
+    .pay-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
-    .bc-price-card {
-      background: var(--bc-dark3);
-      border: 1px solid var(--bc-border);
-      border-radius: 8px;
-      overflow: hidden;
+    @media (min-width: 768px) {
+      .pay-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    .bc-price-card.hero-card {
-      border-color: var(--bc-cream);
-      position: relative;
-    }
-
-    .bc-price-top-badge {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      padding: 6px 0;
-      background: var(--bc-cream);
-      text-align: center;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--bc-dark);
-    }
-
-    .bc-price-head { padding: 32px 28px 24px; }
-    .bc-price-card.hero-card .bc-price-head { padding-top: 48px; }
-
-    .bc-price-head h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 24px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .bc-price-amount {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 44px;
-      font-weight: 900;
-      color: var(--bc-cream);
-      line-height: 1.1;
-    }
-
-    .bc-price-amount sub {
-      font-size: 18px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .bc-price-note {
-      font-size: 12px;
-      color: rgba(255,255,255,0.35);
-      margin-top: 4px;
-    }
-
-    .bc-price-divider {
-      height: 1px;
-      background: var(--bc-border);
-      margin: 0 28px;
-    }
-
-    .bc-price-features {
-      padding: 20px 28px;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .bc-price-features li {
-      font-size: 14px;
-      color: rgba(255,255,255,0.65);
-      padding-left: 18px;
-      position: relative;
-    }
-
-    .bc-price-features li::before {
-      content: 'V';
-      position: absolute;
-      left: 0;
-      color: var(--bc-accent);
-      font-size: 10px;
-      font-weight: 900;
-      top: 3px;
-    }
-
-    .bc-price-action { padding: 20px 28px; }
-
-    /* ===== JAM SECTION ===== */
-    .bc-jam-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .bc-jam-visual {
-      position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      aspect-ratio: 4/3;
-    }
-
-    .bc-jam-visual img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-
-    .bc-jam-info h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(36px, 4vw, 52px);
-      font-weight: 900;
-      text-transform: uppercase;
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-      margin-bottom: 16px;
-    }
-
-    .bc-jam-info h2 em {
-      font-style: normal;
-      color: var(--bc-cream);
-    }
-
-    .bc-jam-info p {
-      font-size: 15px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.75;
-      margin-bottom: 28px;
-    }
-
-    .bc-jam-flow {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-
-    .bc-jam-step {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .bc-jam-step-num {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1px solid var(--bc-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--bc-cream);
-      flex-shrink: 0;
-    }
-
-    .bc-jam-step-text {
-      font-size: 14px;
-      color: rgba(255,255,255,0.65);
-    }
-
-    .bc-jam-step-text strong { color: rgba(255,255,255,0.9); }
-
-    /* ===== CAMPUS ===== */
-    .bc-campus-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .bc-campus-card {
-      background: var(--bc-dark3);
-      border: 1px solid var(--bc-border);
-      border-radius: 8px;
+    .pay-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       padding: 32px;
+      transition: border-color var(--transition);
     }
 
-    .bc-campus-card h3 {
+    .pay-card:hover { border-color: rgba(232,213,183,0.3); }
+
+    .pay-card.featured {
+      border-color: var(--accent);
+      position: relative;
+    }
+
+    .pay-card.featured::after {
+      content: 'BEST';
+      position: absolute;
+      top: 16px; right: 16px;
+      padding: 3px 8px;
+      background: var(--accent);
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 22px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
       color: #fff;
-      margin-bottom: 8px;
+      border-radius: 3px;
     }
 
-    .bc-campus-price {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 30px;
-      font-weight: 900;
-      color: var(--bc-cream);
+    .pay-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .pay-card-tagline {
+      font-size: 13px;
+      color: var(--text-faint);
       margin-bottom: 16px;
     }
 
-    .bc-campus-price sub {
+    .pay-card-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+
+    .pay-card-price sub {
       font-size: 16px;
       font-weight: 400;
-      color: rgba(255,255,255,0.4);
+      color: var(--text-faint);
     }
 
-    .bc-campus-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .pay-card-features {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
 
-    .bc-campus-card ul li {
+    .pay-card-features li {
       font-size: 14px;
-      color: rgba(255,255,255,0.6);
-      padding-left: 14px;
+      color: var(--text-dim);
+      padding-left: 16px;
       position: relative;
     }
 
-    .bc-campus-card ul li::before {
-      content: '·';
+    .pay-card-features li::before {
+      content: '';
       position: absolute;
-      left: 0;
-      color: var(--bc-accent);
+      left: 0; top: 10px;
+      width: 5px; height: 1px;
+      background: var(--accent);
     }
 
-    .bc-campus-note {
-      margin-top: 32px;
-      padding: 24px 32px;
-      background: rgba(232,213,183,0.05);
-      border: 1px solid rgba(232,213,183,0.2);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .bc-campus-note p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.6;
-    }
-
-    /* ===== CONTACT ===== */
-    .bc-contact-grid {
+    /* ===== CONTACT FORM ===== */
+    .contact-grid {
       display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 56px;
-      align-items: start;
+      gap: 32px;
     }
 
-    .bc-contact-row {
-      padding: 20px 0;
-      border-bottom: 1px solid var(--bc-border);
+    @media (min-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr 1.2fr; gap: 56px; }
     }
 
-    .bc-contact-row:first-child { border-top: 1px solid var(--bc-border); }
+    .contact-info-row {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
 
-    .bc-contact-label {
+    .contact-info-row:first-child { border-top: 1px solid var(--border); }
+
+    .contact-info-label {
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.3);
-      margin-bottom: 4px;
+      color: var(--text-faint);
+      margin-bottom: 2px;
     }
 
-    .bc-contact-val {
+    .contact-info-val {
       font-size: 15px;
       color: rgba(255,255,255,0.85);
-      line-height: 1.6;
     }
 
-    .bc-contact-val a {
-      text-decoration: none;
-      color: inherit;
-      transition: color 0.2s;
-    }
-
-    .bc-contact-val a:hover { color: var(--bc-cream); }
-
-    .bc-form {
+    .form {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .bc-form-2col {
+    .form-2col {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
-    .bc-form input,
-    .bc-form select,
-    .bc-form textarea {
+    .form input,
+    .form select,
+    .form textarea {
       width: 100%;
       padding: 14px 16px;
-      background: var(--bc-dark3);
-      border: 1px solid var(--bc-border);
+      background: var(--bg4);
+      border: 1px solid var(--border);
       border-radius: 4px;
-      color: #f0ebe0;
+      color: var(--text);
       font-size: 14px;
       font-family: inherit;
       outline: none;
       transition: border-color 0.2s;
     }
 
-    .bc-form input:focus,
-    .bc-form select:focus,
-    .bc-form textarea:focus { border-color: var(--bc-cream); }
+    .form input:focus,
+    .form select:focus,
+    .form textarea:focus { border-color: var(--cream); }
 
-    .bc-form input::placeholder,
-    .bc-form textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form input::placeholder,
+    .form textarea::placeholder { color: rgba(255,255,255,0.2); }
 
-    .bc-form select {
+    .form select {
       appearance: none;
-      color: rgba(255,255,255,0.35);
+      color: var(--text-faint);
       background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23555' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 16px center;
     }
 
-    .bc-form select:valid { color: #f0ebe0; }
-    .bc-form textarea { resize: vertical; min-height: 100px; }
+    .form select:valid { color: var(--text); }
+    .form textarea { resize: vertical; min-height: 80px; }
 
-    /* ===== PAYMENT ===== */
-    .bc-payment-box {
-      background: var(--bc-dark3);
-      border: 1px solid var(--bc-border);
-      border-radius: 8px;
-      overflow: hidden;
-      min-height: 80px;
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
     }
 
-    .bc-payment-loading {
-      text-align: center;
-      padding: 60px 40px;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .bc-spinner {
-      width: 36px;
-      height: 36px;
-      border: 2px solid rgba(232,213,183,0.15);
-      border-top-color: var(--bc-cream);
-      border-radius: 50%;
-      animation: bcSpin 0.8s linear infinite;
-      margin: 0 auto 16px;
-    }
-
-    @keyframes bcSpin { to { transform: rotate(360deg); } }
-
-    .bc-project-item {
-      padding: 28px;
-      border-bottom: 1px solid var(--bc-border);
+    .footer-inner {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
       gap: 16px;
-      transition: background 0.2s;
+      align-items: center;
+      text-align: center;
     }
 
-    .bc-project-item:hover { background: rgba(255,255,255,0.02); }
-    .bc-project-item:last-child { border-bottom: none; }
-
-    .bc-project-status {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      margin-bottom: 6px;
-    }
-
-    .bc-project-status.open {
-      background: rgba(232,213,183,0.12);
-      color: var(--bc-cream);
-    }
-
-    .bc-project-status.closed {
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.35);
-    }
-
-    .bc-project-name {
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 2px;
-    }
-
-    .bc-project-desc {
-      font-size: 13px;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .bc-project-right { text-align: right; flex-shrink: 0; }
-
-    .bc-project-price-val {
+    .footer-logo {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 26px;
+      font-size: 18px;
       font-weight: 900;
-      color: var(--bc-cream);
-      margin-bottom: 8px;
+      letter-spacing: 0.15em;
+      color: #fff;
     }
 
-    .bc-btn-pay {
-      padding: 10px 20px;
-      background: var(--bc-accent);
+    .footer-logo span { color: var(--accent); }
+
+    .footer-text {
+      font-size: 12px;
+      color: var(--text-faint);
+      line-height: 1.8;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: none;
+      border: none;
       color: #fff;
-      font-size: 13px;
+      font-size: 32px;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1001;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-box {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px 32px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .modal-icon { font-size: 48px; margin-bottom: 16px; }
+    .modal-box h2 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+    .modal-box p { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; }
+
+    .modal-close {
+      padding: 10px 32px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
       font-weight: 700;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      font-family: inherit;
-      white-space: nowrap;
-      transition: background 0.2s;
     }
 
-    .bc-btn-pay:hover { background: var(--bc-accent2); }
-
-    .bc-btn-pay:disabled {
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.3);
-      cursor: not-allowed;
-    }
-
-    .bc-projects-empty {
-      text-align: center;
-      padding: 60px 40px;
-      color: rgba(255,255,255,0.35);
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    /* Refund toggle */
-    .bc-refund-toggle {
-      width: 100%;
-      background: none;
-      border: 1px solid var(--bc-border);
-      border-radius: 4px;
-      color: rgba(255,255,255,0.45);
-      font-family: inherit;
-      font-size: 14px;
-      padding: 14px 20px;
-      text-align: left;
-      cursor: pointer;
+    /* ===== REFUND ===== */
+    .refund-toggle {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-top: 20px;
-      transition: color 0.2s;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px;
+      background: none;
+      border: none;
+      color: var(--text-faint);
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 12px;
+      width: 100%;
     }
 
-    .bc-refund-toggle:hover { color: rgba(255,255,255,0.7); }
+    .refund-toggle:hover { color: var(--text-dim); }
 
-    .bc-refund-panel {
+    .refund-panel {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s ease;
     }
 
-    .bc-refund-panel.open { max-height: 600px; }
+    .refund-panel.open { max-height: 500px; }
 
-    .bc-refund-inner {
-      padding: 24px 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .bc-policy-block h4 {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--bc-cream);
-      margin-bottom: 8px;
-    }
-
-    .bc-policy-block p,
-    .bc-policy-block li {
-      font-size: 13px;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.7;
-    }
-
-    .bc-policy-block ul { list-style: none; }
-
-    .bc-policy-block li::before {
-      content: '— ';
-      color: rgba(255,255,255,0.25);
-    }
-
-    /* ===== FOOTER ===== */
-    .bc-footer {
-      padding: 48px 0;
-      border-top: 1px solid var(--bc-border);
-      background: var(--bc-dark);
-    }
-
-    .bc-footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 40px;
-    }
-
-    .bc-footer-brand strong {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      color: #fff;
-    }
-
-    .bc-footer-brand p {
-      font-size: 12px;
-      color: rgba(255,255,255,0.3);
-      margin-top: 4px;
-    }
-
-    .bc-footer-biz {
-      font-size: 11px;
-      color: rgba(255,255,255,0.2);
+    .refund-panel-inner {
+      padding: 24px;
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       margin-top: 8px;
     }
 
-    .bc-footer-nav {
-      display: flex;
-      gap: 24px;
-      list-style: none;
-    }
-
-    .bc-footer-nav a {
-      font-size: 13px;
-      color: rgba(255,255,255,0.35);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .bc-footer-nav a:hover { color: rgba(255,255,255,0.7); }
-
-    .bc-footer-copy {
-      font-size: 11px;
-      color: rgba(255,255,255,0.2);
-      text-align: right;
-    }
-
-    /* ===== MODAL ===== */
-    .bc-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-
-    .bc-modal.active { opacity: 1; pointer-events: auto; }
-
-    .bc-modal-box {
-      background: var(--bc-dark3);
-      border: 1px solid var(--bc-border);
-      border-radius: 8px;
-      padding: 48px 40px;
-      max-width: 420px;
-      width: 100%;
-      text-align: center;
-    }
-
-    .bc-modal-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 22px;
-    }
-
-    .bc-modal-icon.success { background: rgba(34,197,94,0.12); color: #22c55e; }
-    .bc-modal-icon.fail { background: rgba(239,68,68,0.12); color: #ef4444; }
-
-    .bc-modal-box h2 {
-      font-size: 20px;
+    .refund-panel-inner h4 {
+      font-size: 14px;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
-    .bc-modal-box p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.6;
-      margin-bottom: 28px;
+    .refund-panel-inner table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
     }
 
-    .bc-modal-close {
-      padding: 12px 32px;
-      background: var(--bc-cream);
-      color: var(--bc-dark);
-      border: none;
-      border-radius: 4px;
-      font-weight: 700;
-      font-family: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background 0.2s;
+    .refund-panel-inner th,
+    .refund-panel-inner td {
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
     }
 
-    .bc-modal-close:hover { background: var(--bc-cream2); }
-
-    /* ===== TOAST ===== */
-    .bc-toast {
-      position: fixed;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%) translateY(16px);
-      background: var(--bc-cream);
-      color: var(--bc-dark);
-      padding: 14px 28px;
-      border-radius: 100px;
-      font-size: 14px;
-      font-weight: 700;
-      z-index: 9999;
-      opacity: 0;
-      transition: opacity 0.25s, transform 0.25s;
-      white-space: nowrap;
-      pointer-events: none;
+    .refund-panel-inner th {
+      color: var(--text-faint);
+      font-weight: 600;
     }
 
-    .bc-toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* ===== LIGHTBOX ===== */
-    .bc-lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.95);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-
-    .bc-lightbox.active { opacity: 1; pointer-events: auto; }
-    .bc-lightbox-inner { position: relative; max-width: 90vw; }
-
-    .bc-lightbox-close {
-      position: absolute;
-      top: -44px; right: 0;
-      font-size: 28px;
-      color: rgba(255,255,255,0.6);
-      background: none;
-      border: none;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .bc-lightbox-close:hover { color: #fff; }
-
-    .bc-lightbox img {
-      max-width: 90vw;
-      max-height: 80vh;
-      border-radius: 4px;
-      object-fit: contain;
-    }
-
-    /* ===== FADE ANIMATION ===== */
-    .bc-fade {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
-    }
-
-    .bc-fade.visible { opacity: 1; transform: none; }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 1024px) {
-      .bc-wrap { padding: 0 24px; }
-      .bc-nav-inner { padding: 0 24px; }
-      .bc-hero-body { padding: 0 24px; }
-      .bc-programs { grid-template-columns: 1fr 1fr; }
-      .bc-programs .bc-prog-card:last-child { grid-column: 1 / -1; max-width: 480px; margin: 0 auto; width: 100%; }
-      .bc-voices { grid-template-columns: 1fr 1fr; }
-      .bc-voices .bc-voice:last-child { grid-column: 1 / -1; }
-      .bc-pricing { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 768px) {
-      .bc-nav { height: 60px; }
-      .bc-nav-inner { padding: 0 20px; }
-      .bc-gnb { display: none; }
-      .bc-nav-cta { display: none; }
-      .bc-mobile-btn { display: block; }
-
-      .bc-gnb.open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 60px; left: 0; right: 0;
-        background: rgba(10,10,10,0.98);
-        backdrop-filter: blur(16px);
-        list-style: none;
-        padding: 8px 20px 24px;
-        gap: 0;
-        border-bottom: 1px solid var(--bc-border);
-        z-index: 199;
-      }
-
-      .bc-gnb.open li { border-bottom: 1px solid var(--bc-border); }
-
-      .bc-gnb.open a {
-        display: block;
-        padding: 16px 0;
-        font-size: 17px;
-      }
-
-      .bc-hero { height: auto; min-height: 100svh; }
-      .bc-hero-bg { background-attachment: scroll; }
-      .bc-hero-body { padding: 0 20px; }
-      .bc-hero-h1 { font-size: clamp(44px, 11vw, 72px); }
-      .bc-hero-actions { flex-direction: column; }
-      .bc-hero-actions .bc-btn { text-align: center; justify-content: center; }
-
-      .bc-stats { grid-template-columns: 1fr; }
-      .bc-stat { padding: 18px 20px; border-bottom: 1px solid var(--bc-border); }
-
-      .bc-sec { padding: 72px 0; }
-      .bc-wrap { padding: 0 20px; }
-
-      .bc-programs { grid-template-columns: 1fr; }
-      .bc-programs .bc-prog-card:last-child { grid-column: auto; max-width: 100%; }
-
-      .bc-tiers { grid-template-columns: 1fr; }
-
-      .bc-curriculum { grid-template-columns: 1fr 1fr; }
-
-      .bc-gallery {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto;
-        height: auto;
-      }
-
-      .bc-gal-item:first-child { grid-row: auto; grid-column: 1 / -1; aspect-ratio: 16/9; }
-
-      .bc-voices { grid-template-columns: 1fr; }
-
-      .bc-pricing { grid-template-columns: 1fr; }
-      .bc-pricing .bc-price-card:last-child { grid-column: auto; }
-
-      .bc-jam-grid { grid-template-columns: 1fr; }
-      .bc-jam-visual { max-height: 300px; }
-
-      .bc-campus-grid { grid-template-columns: 1fr; }
-      .bc-campus-note { flex-direction: column; text-align: center; }
-
-      .bc-contact-grid { grid-template-columns: 1fr; gap: 36px; }
-      .bc-form-2col { grid-template-columns: 1fr; }
-
-      .bc-refund-inner { grid-template-columns: 1fr; }
-
-      .bc-footer-inner { flex-direction: column; gap: 24px; }
-      .bc-footer-copy { text-align: left; }
-      .bc-footer-nav { flex-wrap: wrap; gap: 16px; }
-    }
-
-    @media (max-width: 480px) {
-      .bc-wrap { padding: 0 16px; }
-      .bc-hero-body { padding: 0 16px; }
-      .bc-stat { padding: 16px; }
-      .bc-curriculum { grid-template-columns: 1fr; }
-      .bc-prog-body { padding: 20px; }
-      .bc-price-head { padding: 24px 20px; }
-      .bc-price-features { padding: 16px 20px; }
-      .bc-price-action { padding: 16px 20px; }
-    }
+    .refund-panel-inner td { color: var(--text-dim); }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav class="bc-nav" id="bcNav">
-    <div class="bc-nav-inner">
-      <a href="bandclub.html" class="bc-logo">TENET <span>BAND CLUB</span></a>
-      <ul class="bc-gnb" id="bcGnb">
-        <li><a href="#programs">프로그램</a></li>
-        <li><a href="#curriculum">커리큘럼</a></li>
-        <li><a href="#gallery">갤러리</a></li>
-        <li><a href="#pricing">요금</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="index.html">TENET</a></li>
-      </ul>
-      <div class="bc-nav-cta">
-        <a href="index.html" class="bc-nav-back">← TENET</a>
-        <a href="#contact" class="bc-nav-btn">신청하기</a>
-      </div>
-      <button class="bc-mobile-btn" id="bcMobileBtn" aria-label="메뉴">
-        <span></span><span></span>
-      </button>
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">U<span>F</span>LA</a>
+      <a href="#trial" class="nav-cta">무료 체험 신청</a>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="bc-hero">
-    <div class="bc-hero-bg"></div>
-    <div class="bc-hero-dim"></div>
-    <div class="bc-hero-body">
-      <p class="bc-hero-eyebrow">TENET BAND CLUB &middot; SEOUL SEONGBUK</p>
-      <h1 class="bc-hero-h1">
-        밴드<br>
-        하고 싶었지?<br>
-        <em>같이 하자.</em>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-dim"></div>
+    <div class="hero-body">
+      <p class="hero-eyebrow en">YOUR FIRST LIVE &middot; UFLA</p>
+      <h1 class="hero-h1">
+        혼자 치던 당신,<br>
+        <em>무대에 서는 날.</em>
       </h1>
-      <p class="bc-hero-sub">
+      <p class="hero-sub">
         혼자 연습만 하다 지친 사람,<br>
-        밴드 한번 해보고 싶었던 사람,<br>
-        다시 무대에 서고 싶은 사람.<br><br>
-        <strong>8주 뒤, 진짜 무대에 섭니다.</strong>
+        밴드 한번 해보고 싶었던 사람.<br>
+        <strong>8주 뒤, 홍대 라이브바 무대에 섭니다.</strong>
       </p>
-      <div class="bc-hero-actions">
-        <a href="#programs" class="bc-btn bc-btn-cream">프로그램 보기</a>
-        <a href="#contact" class="bc-btn bc-btn-outline">바로 신청</a>
-      </div>
-    </div>
-    <div class="bc-stats">
-      <div class="bc-stat bc-fade">
-        <span class="bc-stat-num">1기</span>
-        <span class="bc-stat-text">밴드클럽<br>수료</span>
-      </div>
-      <div class="bc-stat bc-fade">
-        <span class="bc-stat-num">20+</span>
-        <span class="bc-stat-text">무대에<br>선 사람들</span>
-      </div>
-      <div class="bc-stat bc-fade">
-        <span class="bc-stat-num">20</span>
-        <span class="bc-stat-text">주변<br>대학교</span>
+      <div class="hero-actions">
+        <a href="#trial" class="btn btn-accent btn-lg">무료 체험 합주 신청</a>
+        <a href="#pricing" class="btn btn-outline">프로그램 보기</a>
       </div>
     </div>
   </section>
 
-  <!-- PROGRAMS -->
-  <section class="bc-sec bc-sec-dark" id="programs">
-    <div class="bc-wrap">
-      <div class="bc-sec-head bc-fade">
-        <span class="bc-label">Programs</span>
-        <h2>세 가지<br>밴드 경험</h2>
-        <p>레벨과 목표에 맞게 선택하세요. 모든 과정은 실제 무대를 향합니다.</p>
-      </div>
+  <!-- STATS BAR -->
+  <div class="stats-bar fade-up">
+    <div class="stat">
+      <div class="stat-num en">1기</div>
+      <div class="stat-label">밴드클럽 수료</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num en">20+</div>
+      <div class="stat-label">무대에 선 사람들</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num en">4팀</div>
+      <div class="stat-label">밴드 결성</div>
+    </div>
+  </div>
 
-      <div class="bc-programs">
-        <!-- BAND PROJECT -->
-        <div class="bc-prog-card featured bc-fade">
-          <div class="bc-prog-img">
-            <img src="images-compressed/concert-live.jpg" alt="BAND PROJECT 공연" loading="lazy">
-            <span class="bc-prog-badge hot">인기</span>
-          </div>
-          <div class="bc-prog-body">
-            <div class="bc-prog-type">8-Week Program</div>
-            <h3>Band Project</h3>
-            <p class="bc-prog-tagline">팀 매칭 &rarr; 8주 합주 &rarr; 라이브 공연</p>
-            <ul class="bc-prog-features">
-              <li>레벨 &middot; 장르 &middot; 스케줄 기반 팀 매칭</li>
-              <li>주 1회 2시간 합주 (총 8회)</li>
-              <li>매주 전문 세션맨 코칭 포함</li>
-              <li>8주차 라이브 공연 + 영상 촬영</li>
-              <li>STARTER / STANDARD / RELEASE 3개 트랙</li>
-              <li>초보자부터 중급자까지 모두 환영</li>
-            </ul>
-            <div class="bc-prog-price-box">
-              <div class="bc-prog-price">250,000원 <sub>~ 380,000원</sub></div>
-              <p class="bc-prog-note">합주실 &middot; 코칭 &middot; 공연 &middot; 촬영 전부 포함</p>
-            </div>
-            <a href="#pricing" class="bc-btn bc-btn-primary bc-btn-full">트랙 선택하기</a>
-          </div>
+  <!-- MANIFESTO -->
+  <section class="section section-dark" id="about">
+    <div class="wrap">
+      <div class="manifesto-grid">
+        <div class="manifesto-photos fade-up">
+          <img src="images-ufla/web/ufla-group-01.jpg" alt="유퍼라 합주실에서 웃고 있는 멤버들">
+          <img src="images-ufla/web/ufla-concert-01.jpg" alt="유퍼라 1기 공연 무대">
+          <img src="images-ufla/web/ufla-practice-01.jpg" alt="유퍼라 합주 연습">
         </div>
-
-        <!-- TENET JAM -->
-        <div class="bc-prog-card bc-fade">
-          <div class="bc-prog-img">
-            <img src="images-compressed/concert-group.jpg" alt="TENET JAM 정기 합주" loading="lazy">
-            <span class="bc-prog-badge new">NEW</span>
+        <div class="manifesto-text fade-up">
+          <p class="section-label en">Why UFLA</p>
+          <h2>이건 음악 수업이<br><span>아닙니다.</span></h2>
+          <p>
+            기타 학원, 드럼 학원, 보컬 학원.<br>
+            혼자 배우고, 혼자 치고, 혼자 끝나는 수업.
+          </p>
+          <p>
+            <strong>유퍼라는 다릅니다.</strong><br>
+            팀이 생기고, 같이 합주하고, 뒷풀이에서 웃고,<br>
+            8주 뒤 홍대 라이브바 무대에 함께 섭니다.
+          </p>
+          <p>
+            진짜 결제 이유는 음악이 아니라<br>
+            <strong>모임의 의미</strong>입니다.
+          </p>
+          <div class="manifesto-keywords">
+            <span>뒷풀이</span>
+            <span>새로운 만남</span>
+            <span>소속감</span>
+            <span>커뮤니티</span>
+            <span>무대 경험</span>
           </div>
-          <div class="bc-prog-body">
-            <div class="bc-prog-type">Monthly Membership</div>
-            <h3>TENET JAM</h3>
-            <p class="bc-prog-tagline">정기 합주팀 &middot; 분기별 공연</p>
-            <ul class="bc-prog-features">
-              <li>팀별 리더가 운영하는 자율 합주</li>
-              <li>월 2~4회 합주 (팀별 협의)</li>
-              <li>기존 밴드 &middot; 동아리 합류 가능</li>
-              <li>분기별 정기 공연 참가 기회</li>
-              <li>합주실 우선 예약권</li>
-              <li>녹음실 데모 녹음 연계</li>
-            </ul>
-            <div class="bc-prog-price-box">
-              <div class="bc-prog-price">70,000원 <sub>/월</sub></div>
-              <p class="bc-prog-note">인당 월 회비 &middot; 합주실 이용 포함</p>
-            </div>
-            <a href="#contact" class="bc-btn bc-btn-outline bc-btn-full">팀 등록 문의</a>
-          </div>
-        </div>
-
-        <!-- CAMPUS PASS -->
-        <div class="bc-prog-card bc-fade">
-          <div class="bc-prog-img">
-            <img src="images-compressed/concert-pose.jpg" alt="대학 밴드부 Campus Pass" loading="lazy">
-            <span class="bc-prog-badge uni">University</span>
-          </div>
-          <div class="bc-prog-body">
-            <div class="bc-prog-type">University Package</div>
-            <h3>Campus Pass</h3>
-            <p class="bc-prog-tagline">주변 20개 대학 밴드부 전용</p>
-            <ul class="bc-prog-features">
-              <li>학기 정기 대관 (단체 할인 적용)</li>
-              <li>밴드부 MT &middot; 합주 캠프 기획</li>
-              <li>학기말 공연 기획 + 무대 지원</li>
-              <li>세션 코칭 선택 추가 가능</li>
-              <li>녹음실 연계 데모 녹음</li>
-            </ul>
-            <div class="bc-prog-price-box">
-              <div class="bc-prog-price">500,000원 <sub>/학기</sub></div>
-              <p class="bc-prog-note">MT 별도 180,000원/팀 &middot; 10인 이상 할인</p>
-            </div>
-            <a href="#contact" class="bc-btn bc-btn-outline bc-btn-full">단체 문의하기</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- BAND PROJECT TIERS -->
-      <div class="bc-tiers">
-        <div class="bc-tier bc-fade">
-          <div class="bc-tier-name">Starter</div>
-          <div class="bc-tier-desc">처음 밴드 &middot; 기초 코드 수준</div>
-          <div class="bc-tier-price">250,000원</div>
-          <ul class="bc-tier-features">
-            <li>기초 합주 코칭 집중</li>
-            <li>친숙한 곡 위주 구성</li>
-            <li>8주 합주 + 공연</li>
-          </ul>
-        </div>
-        <div class="bc-tier highlight bc-fade">
-          <div class="bc-tier-name">Standard</div>
-          <div class="bc-tier-desc">밴드 경험자 &middot; 실력 향상 목표</div>
-          <div class="bc-tier-price">250,000원</div>
-          <ul class="bc-tier-features">
-            <li>다양한 장르 도전</li>
-            <li>퍼포먼스 코칭 포함</li>
-            <li>8주 합주 + 공연</li>
-          </ul>
-        </div>
-        <div class="bc-tier bc-fade">
-          <div class="bc-tier-name">Release</div>
-          <div class="bc-tier-desc">음원 발매까지 목표</div>
-          <div class="bc-tier-price">380,000원</div>
-          <ul class="bc-tier-features">
-            <li>2층 스튜디오 레코딩</li>
-            <li>믹싱 &middot; 마스터링 포함</li>
-            <li>8주 합주 + 공연 + 음원</li>
-          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CURRICULUM -->
-  <section class="bc-sec bc-sec-darker" id="curriculum">
-    <div class="bc-wrap">
-      <div class="bc-sec-head center bc-fade">
-        <span class="bc-label">8-Week Curriculum</span>
-        <h2>8주 커리큘럼</h2>
-        <p>매주 명확한 목표. 마지막 주에 무대에 섭니다.</p>
+  <!-- 8주 JOURNEY -->
+  <section class="section section-darker" id="journey">
+    <div class="wrap">
+      <div class="section-head center fade-up">
+        <p class="section-label en">8-Week Journey</p>
+        <h2 class="section-title">매주 합주, 매주 소셜</h2>
+        <p class="section-desc">"합주만 하고 끝나는 날"은 없습니다. 매주 15분 소셜 미션이 포함되어 있습니다.</p>
+      </div>
+      <div class="journey-track">
+        <div class="journey-week fade-up">
+          <div class="journey-num en">Week 01</div>
+          <h4>OT + 팀 편성</h4>
+          <p>레벨 기반 팀 매칭 + 미니잼</p>
+          <div class="social">아이스브레이킹 파티</div>
+        </div>
+        <div class="journey-week fade-up">
+          <div class="journey-num en">Week 02</div>
+          <h4>곡 선정 + 첫 합주</h4>
+          <p>팀 곡 결정, 파트 분배</p>
+          <div class="social">팀명 · 로고 · 단톡방</div>
+        </div>
+        <div class="journey-week fade-up">
+          <div class="journey-num en">Week 03</div>
+          <h4>강사 코칭 합주</h4>
+          <p>전문 세션맨 피드백</p>
+          <div class="social">팀 프로필 촬영</div>
+        </div>
+        <div class="journey-week fade-up">
+          <div class="journey-num en">Week 04</div>
+          <h4>중간 런스루</h4>
+          <p>처음부터 끝까지 + 체크포인트</p>
+          <div class="social">뒷풀이</div>
+        </div>
+        <div class="journey-week fade-up">
+          <div class="journey-num en">Week 05</div>
+          <h4>크로스 잼</h4>
+          <p>다른 팀과 섞어서 합주</p>
+          <div class="social">다른 팀 교류</div>
+        </div>
+        <div class="journey-week fade-up">
+          <div class="journey-num en">Week 06</div>
+          <h4>자율 합주</h4>
+          <p>강사 없이 팀 자체 합주</p>
+          <div class="social">셀프 녹음</div>
+        </div>
+        <div class="journey-week fade-up">
+          <div class="journey-num en">Week 07</div>
+          <h4>리허설</h4>
+          <p>무대 음향 · 조명 · 동선</p>
+          <div class="social">긴장 + 고조</div>
+        </div>
+        <div class="journey-week climax fade-up">
+          <div class="journey-num en">Week 08 &#8212; LIVE</div>
+          <h4>유퍼라 콘서트</h4>
+          <p>홍대 라이브바. 진짜 무대.</p>
+          <div class="social">에프터파티!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE FRAMING -->
+  <section class="section section-dark" id="pricing">
+    <div class="wrap">
+      <div class="section-head center fade-up">
+        <p class="section-label en">Price</p>
+        <h2 class="section-title">개별로 하면 71만원,<br>유퍼라는 25만원.</h2>
+        <p class="section-desc">기타+드럼+보컬 개인 레슨 8주 vs 유퍼라 패키지. 같은 기간, 다른 경험.</p>
       </div>
 
-      <div class="bc-curriculum">
-        <div class="bc-week bc-fade">
-          <div class="bc-week-num">Week 01</div>
-          <h4>OT + 팀 결성</h4>
-          <p>첫 만남, 레벨 체크, 장르 &middot; 곡 선정, 팀 케미 확인</p>
+      <div class="price-compare fade-up">
+        <div class="price-card dim">
+          <div class="price-card-label">개별 레슨 8주 (주 1회)</div>
+          <div class="price-card-title">기타 + 드럼 + 보컬</div>
+          <div class="price-card-items">
+            기타 레슨 월 15만 × 2개월 = 30만<br>
+            드럼 레슨 월 12만 × 2개월 = 24만<br>
+            보컬 레슨 월 8.5만 × 2개월 = 17만
+          </div>
+          <div class="price-card-amount en">710,000원</div>
+          <p style="font-size:12px;color:var(--text-faint);margin-top:8px;">혼자 연습, 팀 없음, 무대 없음</p>
         </div>
-        <div class="bc-week bc-fade">
-          <div class="bc-week-num">Week 02</div>
-          <h4>기초 합주</h4>
-          <p>각 파트 파악, 기본 리듬 맞추기, 전체 구조 이해</p>
+
+        <div class="price-vs en">VS</div>
+
+        <div class="price-card hero-card">
+          <div class="price-card-inner">
+            <div class="price-card-label">유퍼라 패키지 8주</div>
+            <div class="price-card-title">팀 매칭 + 합주 + 코칭 + 공연</div>
+            <div class="price-card-items">
+              주 1회 2시간 합주 (합주실 포함)<br>
+              매주 전문 세션맨 코칭<br>
+              홍대 라이브바 공연 + 영상 촬영
+            </div>
+            <div class="price-card-amount en">250,000원</div>
+            <div class="price-card-save">65% 절약</div>
+            <p style="font-size:12px;color:var(--text-dim);margin-top:8px;">팀 + 코칭 + 공연 + 뒷풀이 전부 포함</p>
+          </div>
         </div>
-        <div class="bc-week bc-fade">
-          <div class="bc-week-num">Week 03</div>
-          <h4>파트 디테일</h4>
-          <p>개인 파트 집중, 세션맨 1:1 코칭 피드백</p>
+      </div>
+
+      <div class="price-includes fade-up">
+        <h3>25만원에 이 모든 게 포함됩니다</h3>
+        <div class="price-includes-grid">
+          <div class="price-includes-item">
+            <div class="price-includes-icon" role="img" aria-label="기타">&#127928;</div>
+            <div class="price-includes-text">8주 합주<br>(합주실 포함)</div>
+          </div>
+          <div class="price-includes-item">
+            <div class="price-includes-icon" role="img" aria-label="마이크">&#127908;</div>
+            <div class="price-includes-text">전문 세션맨<br>코칭</div>
+          </div>
+          <div class="price-includes-item">
+            <div class="price-includes-icon" role="img" aria-label="영화">&#127916;</div>
+            <div class="price-includes-text">홍대 라이브바<br>공연</div>
+          </div>
+          <div class="price-includes-item">
+            <div class="price-includes-icon" role="img" aria-label="카메라">&#128248;</div>
+            <div class="price-includes-text">팀 프로필<br>+ 영상 촬영</div>
+          </div>
+          <div class="price-includes-item">
+            <div class="price-includes-icon" role="img" aria-label="건배">&#127867;</div>
+            <div class="price-includes-text">뒷풀이<br>+ 에프터파티</div>
+          </div>
         </div>
-        <div class="bc-week bc-fade">
-          <div class="bc-week-num">Week 04</div>
-          <h4>앙상블 훈련</h4>
-          <p>전체 밸런스 조율, 다이나믹 표현, 중간 점검</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SNS 결과물 -->
+  <section class="section section-darker" id="results">
+    <div class="wrap">
+      <div class="section-head center fade-up">
+        <p class="section-label en">What You Get</p>
+        <h2 class="section-title">25만원의 자랑거리</h2>
+        <p class="section-desc">인스타에 올릴 수 있는 결과물이 5가지 나옵니다.</p>
+      </div>
+      <div class="journey-track fade-up" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+        <div class="journey-week">
+          <div class="journey-num en">01</div>
+          <h4>팀 프로필 사진</h4>
+          <p>전문 촬영, 밴드 느낌 제대로</p>
         </div>
-        <div class="bc-week bc-fade">
-          <div class="bc-week-num">Week 05</div>
-          <h4>퍼포먼스</h4>
-          <p>무대 동선, 애티튜드, 관객과 소통하는 법</p>
+        <div class="journey-week">
+          <div class="journey-num en">02</div>
+          <h4>하이라이트 릴스</h4>
+          <p>30초 개인 공연 영상</p>
         </div>
-        <div class="bc-week bc-fade">
-          <div class="bc-week-num">Week 06</div>
-          <h4>완성도 UP</h4>
-          <p>약한 파트 보강, 전체 완주 반복, 녹음 피드백</p>
+        <div class="journey-week">
+          <div class="journey-num en">03</div>
+          <h4>기수 단체 사진</h4>
+          <p>전체 기수 단체 촬영</p>
         </div>
-        <div class="bc-week bc-fade">
-          <div class="bc-week-num">Week 07</div>
-          <h4>드레스 리허설</h4>
-          <p>실제 공연 세팅, 모니터 조절, 최종 리허설</p>
+        <div class="journey-week">
+          <div class="journey-num en">04</div>
+          <h4>디지털 수료증</h4>
+          <p>유퍼라 공식 수료 인증</p>
         </div>
-        <div class="bc-week climax bc-fade">
-          <div class="bc-week-num">Week 08 &mdash; LIVE</div>
-          <h4>라이브 공연</h4>
-          <p>진짜 무대. 영상 &middot; 사진 촬영. 뒷풀이까지.</p>
+        <div class="journey-week">
+          <div class="journey-num en">05</div>
+          <h4>MVP: 스트리밍 음원</h4>
+          <p>경연 1위 팀 싱글 제작 지원</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- GALLERY -->
-  <section class="bc-sec bc-sec-dark" id="gallery">
-    <div class="bc-wrap">
-      <div class="bc-sec-head bc-fade">
-        <span class="bc-label">Gallery</span>
-        <h2>우리가<br>만든 순간들</h2>
-        <p>밴드클럽 1기 &mdash; 유퍼라 콘서트. 8주 동안 준비해서, 진짜 무대에 섰다.</p>
+  <section class="section section-dark" id="gallery">
+    <div class="wrap">
+      <div class="section-head fade-up">
+        <p class="section-label en">Season 1</p>
+        <h2 class="section-title">1기, 이미 무대에 섰습니다.</h2>
       </div>
-
-      <div class="bc-gallery bc-fade">
-        <div class="bc-gal-item"
-             data-img="images/concert-live.jpg"
-             data-title="유퍼라 콘서트 1회"
-             data-desc="밴드클럽 1기 라이브 | 2026.02">
-          <img src="images-compressed/concert-live.jpg" alt="유퍼라 콘서트" loading="lazy">
-          <div class="bc-gal-overlay">
-            <span class="bc-gal-tag">Concert &middot; 2026.02</span>
-          </div>
+      <div class="gallery fade-up">
+        <div class="gallery-item">
+          <img src="images-ufla/web/ufla-concert-02.jpg" alt="유퍼라 1기 공연 — 전체 무대" loading="lazy">
+          <div class="gallery-overlay"><span class="gallery-tag en">Live Concert</span></div>
         </div>
-        <div class="bc-gal-item"
-             data-img="images/concert-pose.jpg"
-             data-title="밴드클럽 1기"
-             data-desc="8주 프로젝트 수료 | 2025.12">
-          <img src="images-compressed/concert-pose.jpg" alt="밴드클럽 1기" loading="lazy">
-          <div class="bc-gal-overlay">
-            <span class="bc-gal-tag">Band Club 1기</span>
-          </div>
+        <div class="gallery-item">
+          <img src="images-ufla/web/ufla-group-01.jpg" alt="유퍼라 합주실 멤버들" loading="lazy">
+          <div class="gallery-overlay"><span class="gallery-tag en">Band Members</span></div>
         </div>
-        <div class="bc-gal-item"
-             data-img="images/concert-group.jpg"
-             data-title="밴드 커뮤니티"
-             data-desc="함께 연주하는 사람들">
-          <img src="images-compressed/concert-group.jpg" alt="밴드 커뮤니티" loading="lazy">
-          <div class="bc-gal-overlay">
-            <span class="bc-gal-tag">Community</span>
-          </div>
+        <div class="gallery-item">
+          <img src="images-ufla/web/ufla-concert-05.jpg" alt="유퍼라 드러머 공연" loading="lazy">
+          <div class="gallery-overlay"><span class="gallery-tag en">On Stage</span></div>
         </div>
-        <div class="bc-gal-item"
-             data-img="images/concert-live.jpg"
-             data-title="공연 현장"
-             data-desc="TENET 공연장">
-          <img src="images-compressed/concert-live.jpg" alt="공연 현장" loading="lazy" style="filter:brightness(0.7) hue-rotate(15deg)">
-          <div class="bc-gal-overlay">
-            <span class="bc-gal-tag">Stage</span>
-          </div>
+        <div class="gallery-item">
+          <img src="images-ufla/web/ufla-practice-04.jpg" alt="유퍼라 합주 연습" loading="lazy">
+          <div class="gallery-overlay"><span class="gallery-tag en">Practice</span></div>
         </div>
-        <div class="bc-gal-item"
-             data-img="images/concert-pose.jpg"
-             data-title="1기 단체 사진"
-             data-desc="수료 후 기념 사진">
-          <img src="images-compressed/concert-pose.jpg" alt="단체 사진" loading="lazy" style="filter:brightness(0.75) saturate(0.8)">
-          <div class="bc-gal-overlay">
-            <span class="bc-gal-tag">Members</span>
-          </div>
+        <div class="gallery-item">
+          <img src="images-ufla/web/ufla-group-03.jpg" alt="유퍼라 보컬 연습" loading="lazy">
+          <div class="gallery-overlay"><span class="gallery-tag en">Vocal Session</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MEMBER VOICES -->
-  <section class="bc-sec bc-sec-darker" id="voices">
-    <div class="bc-wrap">
-      <div class="bc-sec-head center bc-fade">
-        <span class="bc-label">Member Voices</span>
-        <h2>참가자 후기</h2>
-        <p>8주를 함께한 사람들의 이야기</p>
+  <!-- VOICES -->
+  <section class="section section-darker" id="voices">
+    <div class="wrap">
+      <div class="section-head center fade-up">
+        <p class="section-label en">Voices</p>
+        <h2 class="section-title">1기 멤버들의 이야기</h2>
       </div>
-
-      <div class="bc-voices">
-        <div class="bc-voice bc-fade">
-          <div class="bc-voice-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="bc-voice-text">
-            "처음엔 정말 긴장했어요. 밴드 경험이 없었거든요. 근데 코치님이 레벨에 맞게 팀을 짜줘서 처음부터 무리 없이 시작할 수 있었어요. 8주 만에 무대에 서다니, 아직도 믿기지 않아요."
-          </p>
-          <div class="bc-voice-person">
-            <div class="bc-voice-avatar">K</div>
-            <div class="bc-voice-info">
-              <strong>김지수</strong>
-              <span>기타 &middot; STARTER 트랙 &middot; 1기</span>
+      <div class="voices-grid fade-up">
+        <div class="voice-card">
+          <div class="voice-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="voice-text">"혼자 기타 3년 쳤는데 밴드는 처음이었어요. 합주 끝나고 뒷풀이에서 웃으면서 '아 이래서 밴드 하는구나' 느꼈습니다."</div>
+          <div class="voice-person">
+            <div class="voice-avatar en">K</div>
+            <div>
+              <div class="voice-name">김○○</div>
+              <div class="voice-desc">기타 / 1기 수료</div>
             </div>
           </div>
         </div>
-
-        <div class="bc-voice bc-fade">
-          <div class="bc-voice-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="bc-voice-text">
-            "혼자 유튜브 보면서 연습만 하던 제가 실제 공연을 했습니다. 팀원들이랑 맞추는 과정이 진짜 합주였어요. 뒷풀이까지 같이 하면서 친구들도 생겼고. 다음 기수도 또 하고 싶어요."
-          </p>
-          <div class="bc-voice-person">
-            <div class="bc-voice-avatar">P</div>
-            <div class="bc-voice-info">
-              <strong>박민준</strong>
-              <span>베이스 &middot; STANDARD 트랙 &middot; 1기</span>
+        <div class="voice-card">
+          <div class="voice-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="voice-text">"드럼 처음 치는데 8주 만에 무대에 섰다는 게 아직도 안 믿겨요. 공연 끝나고 관객들이 박수 칠 때 소름 돋았어요."</div>
+          <div class="voice-person">
+            <div class="voice-avatar en">P</div>
+            <div>
+              <div class="voice-name">박○○</div>
+              <div class="voice-desc">드럼 / 1기 수료</div>
             </div>
           </div>
         </div>
-
-        <div class="bc-voice bc-fade">
-          <div class="bc-voice-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="bc-voice-text">
-            "대학 밴드부 시절 이후로 10년 만에 다시 무대에 섰어요. 처음엔 몸이 굳었는데 7주차 리허설 때부터 감이 돌아왔고, 8주차 공연은 진짜 최고였어요. 직장인도 충분히 할 수 있습니다."
-          </p>
-          <div class="bc-voice-person">
-            <div class="bc-voice-avatar">L</div>
-            <div class="bc-voice-info">
-              <strong>이승현</strong>
-              <span>드럼 &middot; STANDARD 트랙 &middot; 1기</span>
+        <div class="voice-card">
+          <div class="voice-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="voice-text">"직장인이라 주말밖에 시간이 없었는데, 매주 토요일이 기다려지더라고요. 팀원들이랑 아직도 만나요. 진짜 동아리 같아요."</div>
+          <div class="voice-person">
+            <div class="voice-avatar en">L</div>
+            <div>
+              <div class="voice-name">이○○</div>
+              <div class="voice-desc">베이스 / 1기 수료</div>
             </div>
           </div>
         </div>
@@ -1903,833 +1448,373 @@
     </div>
   </section>
 
-  <!-- TENET JAM -->
-  <section class="bc-sec bc-sec-dark" id="jam">
-    <div class="bc-wrap">
-      <div class="bc-jam-grid">
-        <div class="bc-jam-visual bc-fade">
-          <img src="images-compressed/concert-group.jpg" alt="TENET JAM 정기 합주" loading="lazy">
-        </div>
-        <div class="bc-jam-info bc-fade">
-          <span class="bc-label">TENET JAM</span>
-          <h2>꾸준히<br><em>함께 치는</em><br>정기 합주팀</h2>
-          <p>프로젝트가 끝나도 계속 합주하고 싶다면. 팀별 리더가 자율로 운영하고, 분기마다 정기 공연 무대에 섭니다.</p>
-          <div class="bc-jam-flow">
-            <div class="bc-jam-step">
-              <span class="bc-jam-step-num">1</span>
-              <span class="bc-jam-step-text"><strong>팀 등록</strong> &mdash; 기존 팀 또는 매칭 신청</span>
-            </div>
-            <div class="bc-jam-step">
-              <span class="bc-jam-step-num">2</span>
-              <span class="bc-jam-step-text"><strong>월 합주</strong> &mdash; 월 2~4회, 팀별 자율 일정</span>
-            </div>
-            <div class="bc-jam-step">
-              <span class="bc-jam-step-num">3</span>
-              <span class="bc-jam-step-text"><strong>분기 공연</strong> &mdash; 3개월에 1회 정기 라이브</span>
-            </div>
-            <div class="bc-jam-step">
-              <span class="bc-jam-step-num">4</span>
-              <span class="bc-jam-step-text"><strong>음원 발매</strong> &mdash; 원하면 스튜디오 레코딩까지</span>
-            </div>
-          </div>
-          <a href="#contact" class="bc-btn bc-btn-cream">JAM 팀 등록하기</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CAMPUS -->
-  <section class="bc-sec bc-sec-darker" id="campus">
-    <div class="bc-wrap">
-      <div class="bc-sec-head bc-fade">
-        <span class="bc-label">University Program</span>
-        <h2>대학 밴드부를<br>위한 패키지</h2>
-        <p>돌곶이 반경 20개 대학교 밴드부를 위한 맞춤 프로그램. 단체는 더 혜택이 큽니다.</p>
-      </div>
-
-      <div class="bc-campus-grid">
-        <div class="bc-campus-card bc-fade">
-          <div class="bc-prog-type">Semester Package</div>
-          <h3>Campus Pass</h3>
-          <div class="bc-campus-price">500,000원 <sub>/학기</sub></div>
-          <ul>
-            <li>학기 중 정기 합주실 대관 (할인 적용)</li>
-            <li>학기 초 OT + 합주 기획 컨설팅</li>
-            <li>학기말 공연 무대 기획 &middot; 운영 지원</li>
-            <li>공연 영상 &middot; 사진 촬영 포함</li>
-            <li>10인 이상 단체 추가 할인</li>
-          </ul>
-        </div>
-        <div class="bc-campus-card bc-fade">
-          <div class="bc-prog-type">MT Package</div>
-          <h3>Band MT</h3>
-          <div class="bc-campus-price">180,000원 <sub>/팀</sub></div>
-          <ul>
-            <li>당일 합주 캠프 기획 + 운영</li>
-            <li>합주실 전일 대관</li>
-            <li>세션 코칭 선택 추가 가능</li>
-            <li>녹음실 이용 연계 가능</li>
-            <li>단체 행사 케이터링 연계</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="bc-campus-note bc-fade">
-        <p>서울시립대 &middot; 한예종 &middot; 국민대 &middot; 고려대 &middot; 경희대 등 20개 대학 밴드부와 협력 중입니다.<br>단체 규모에 따라 별도 견적을 드립니다.</p>
-        <a href="#contact" class="bc-btn bc-btn-outline">단체 문의하기</a>
+  <!-- CTA — 체험 합주 -->
+  <section class="cta-section" id="trial">
+    <div class="wrap">
+      <p class="section-label en fade-up">Free Trial</p>
+      <h2 class="fade-up">아직 고민 중이라면,<br><span>무료 체험 합주</span>부터.</h2>
+      <p class="fade-up">
+        매주 토요일 체험 합주를 진행합니다.<br>
+        직접 와서 느끼고, 마음에 들면 등록하세요.<br>
+        <strong>현장 등록 시 5만원 할인.</strong>
+      </p>
+      <a href="#contact" class="btn btn-accent btn-lg fade-up">체험 합주 신청하기</a>
+      <div class="cta-details fade-up">
+        <div class="cta-detail"><strong>예약금</strong> 1만원 (당일 환불)</div>
+        <div class="cta-detail"><strong>시간</strong> 2시간</div>
+        <div class="cta-detail"><strong>장소</strong> 성북구 돌곶이</div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="bc-sec bc-sec-dark" id="faq">
-    <div class="bc-wrap">
-      <div class="bc-sec-head center bc-fade">
-        <span class="bc-label">FAQ</span>
-        <h2>자주 묻는 질문</h2>
+  <section class="section section-darker" id="faq">
+    <div class="wrap">
+      <div class="section-head center fade-up">
+        <p class="section-label en">FAQ</p>
+        <h2 class="section-title">자주 묻는 질문</h2>
       </div>
-
-      <div class="bc-faq-list">
-        <div class="bc-faq-item bc-fade">
-          <button class="bc-faq-q">
-            <span>악기를 잘 못 쳐도 참여할 수 있나요?</span>
-            <span class="bc-faq-icon">+</span>
-          </button>
-          <div class="bc-faq-a">
-            <p>네! 기본 코드 연주가 가능하면 충분합니다. STARTER 트랙은 초보자 전용으로 구성되며, 레벨에 맞는 팀으로 매칭합니다. 전문 세션맨이 매주 코칭해드립니다.</p>
-          </div>
+      <div class="faq-list fade-up">
+        <div class="faq-item">
+          <button class="faq-q">악기를 아예 못 치는데 참여할 수 있나요?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>네, 완전 초보도 환영합니다. 유퍼라의 Starter 트랙은 기초 코드 수준부터 시작합니다. 매주 전문 세션맨이 코칭하고, 팀원들과 함께 성장합니다. 1기에도 악기를 처음 잡는 분들이 8주 만에 무대에 섰습니다.</p></div>
         </div>
-
-        <div class="bc-faq-item bc-fade">
-          <button class="bc-faq-q">
-            <span>밴드 프로젝트와 TENET JAM의 차이는?</span>
-            <span class="bc-faq-icon">+</span>
-          </button>
-          <div class="bc-faq-a">
-            <p>밴드 프로젝트는 8주 단기 프로그램으로 공연까지 완성하는 구조입니다. TENET JAM은 월 정기 회원제로 계속 합주하며 분기별 공연에 참가합니다. 프로젝트 수료 후 JAM으로 전환하는 분이 많습니다.</p>
-          </div>
+        <div class="faq-item">
+          <button class="faq-q">합주실과 악기는 제공되나요?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>합주실은 성북구 돌곶이에 있는 테넷 합주실을 사용합니다. 드럼, 앰프, 마이크 등 합주에 필요한 장비는 구비되어 있습니다. 개인 악기(기타, 베이스)는 지참해주세요.</p></div>
         </div>
-
-        <div class="bc-faq-item bc-fade">
-          <button class="bc-faq-q">
-            <span>STARTER / STANDARD / RELEASE 트랙은 어떻게 다른가요?</span>
-            <span class="bc-faq-icon">+</span>
-          </button>
-          <div class="bc-faq-a">
-            <p>STARTER는 처음 밴드를 경험하는 분들, STANDARD는 어느 정도 경험이 있는 분들을 위한 트랙입니다. RELEASE는 8주 합주 후 실제 음원 발매까지 원하는 분을 위해 레코딩·믹싱·마스터링이 추가됩니다.</p>
-          </div>
+        <div class="faq-item">
+          <button class="faq-q">일정은 어떻게 되나요?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>매주 토요일, 팀별로 2시간 합주입니다. 정확한 시간대는 팀 매칭 후 협의합니다. OT와 최종 공연은 전체 기수가 함께 합니다.</p></div>
         </div>
-
-        <div class="bc-faq-item bc-fade">
-          <button class="bc-faq-q">
-            <span>보컬만으로도 참여 가능한가요?</span>
-            <span class="bc-faq-icon">+</span>
-          </button>
-          <div class="bc-faq-a">
-            <p>물론입니다! 보컬 · 기타 · 베이스 · 드럼 · 키보드 파트별로 모집하며, 보컬 파트도 팀에 매칭됩니다. 신청 시 파트를 선택해주세요.</p>
-          </div>
+        <div class="faq-item">
+          <button class="faq-q">공연은 어디서 하나요?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>홍대 라이브바에서 진행합니다. 진짜 관객 앞에서, 진짜 무대에서 공연합니다. "홍대 라이브바에서 공연했다"는 경험 자체가 유퍼라의 가치입니다.</p></div>
         </div>
-
-        <div class="bc-faq-item bc-fade">
-          <button class="bc-faq-q">
-            <span>합주 시간은 어떻게 정해지나요?</span>
-            <span class="bc-faq-icon">+</span>
-          </button>
-          <div class="bc-faq-a">
-            <p>신청 시 선호 요일·시간대를 입력하시면, 팀원들의 일정을 고려해 최적의 시간대로 배정합니다. 직장인 분들을 위한 저녁·주말 시간대도 운영합니다.</p>
-          </div>
+        <div class="faq-item">
+          <button class="faq-q">혼자 가도 괜찮나요?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>대부분 혼자 옵니다. 레벨과 장르에 맞게 팀을 매칭해드리기 때문에 걱정하지 않으셔도 됩니다. 1주차 아이스브레이킹부터 자연스럽게 친해집니다.</p></div>
         </div>
-
-        <div class="bc-faq-item bc-fade">
-          <button class="bc-faq-q">
-            <span>공연 장소는 어디인가요?</span>
-            <span class="bc-faq-icon">+</span>
-          </button>
-          <div class="bc-faq-a">
-            <p>공연은 TENET 공간 또는 제휴 공연장에서 진행됩니다. 공연 세팅 · PA 장비 · 영상 · 사진 촬영이 모두 포함되어 있습니다.</p>
-          </div>
+        <div class="faq-item">
+          <button class="faq-q">중간에 그만둘 수 있나요?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>프로그램 시작 전까지 전액 환불 가능합니다. 시작 후에는 팀 기반 프로그램 특성상 환불이 제한됩니다. 자세한 환불 규정은 결제 섹션을 참고해주세요.</p></div>
         </div>
-
-        <div class="bc-faq-item bc-fade">
-          <button class="bc-faq-q">
-            <span>음원 발매도 가능한가요?</span>
-            <span class="bc-faq-icon">+</span>
-          </button>
-          <div class="bc-faq-a">
-            <p>네! RELEASE 트랙을 선택하시면 2층 녹음실에서 레코딩 → 믹싱 → 마스터링 → 음원 유통까지 원스톱으로 진행됩니다. 음원 발매 지원사업 연계도 안내해드립니다.</p>
-          </div>
-        </div>
-
-        <div class="bc-faq-item bc-fade">
-          <button class="bc-faq-q">
-            <span>개인 악기가 없으면 어떻게 하나요?</span>
-            <span class="bc-faq-icon">+</span>
-          </button>
-          <div class="bc-faq-a">
-            <p>합주실에 드럼·앰프·PA는 기본 제공됩니다. 기타·베이스는 개인 악기 지참이 원칙이나, 없으신 경우 사전 문의 주시면 대여 방법을 안내해드립니다.</p>
-          </div>
-        </div>
-
-        <div class="bc-faq-item bc-fade">
-          <button class="bc-faq-q">
-            <span>대학 밴드부 단체 할인이 있나요?</span>
-            <span class="bc-faq-icon">+</span>
-          </button>
-          <div class="bc-faq-a">
-            <p>10인 이상 단체는 별도 할인이 적용됩니다. Campus Pass 패키지로 학기 전체 프로그램을 묶어 진행하시면 더욱 합리적입니다. 전화 또는 문의 폼으로 연락 주세요.</p>
-          </div>
-        </div>
-
-        <div class="bc-faq-item bc-fade">
-          <button class="bc-faq-q">
-            <span>결제 후 환불은 가능한가요?</span>
-            <span class="bc-faq-icon">+</span>
-          </button>
-          <div class="bc-faq-a">
-            <p>프로그램 시작 7일 전까지 전액 환불 가능합니다. 시작 후에는 진행 주차에 따라 부분 환불 (1~2주차 70%, 3~4주차 50%)이 적용되며, 5주차 이후는 환불이 불가합니다.</p>
-          </div>
+        <div class="faq-item">
+          <button class="faq-q">체험 합주는 어떤 형태인가요?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>2시간: 합주(30분) → 휴식(15분) → 합주(30분) → 영상촬영(15분) → 유퍼라 안내(15분). 예약금 1만원(당일 환불)으로 노쇼를 방지합니다. 기존 멤버 2명이 배치되어 자연스러운 분위기를 만들어드립니다.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING + PAYMENT -->
-  <section class="bc-sec bc-sec-darker" id="pricing">
-    <div class="bc-wrap">
-      <div class="bc-sec-head center bc-fade">
-        <span class="bc-label">Pricing</span>
-        <h2>요금 안내</h2>
-        <p>모든 과정에 합주실 · 코칭 · 공연이 포함됩니다.</p>
+  <!-- PAYMENT -->
+  <section class="section section-dark" id="payment">
+    <div class="wrap">
+      <div class="section-head center fade-up">
+        <p class="section-label en">Payment</p>
+        <h2 class="section-title">결제</h2>
+        <p class="section-desc">원하는 프로그램을 선택하고 결제하세요.</p>
       </div>
 
-      <div class="bc-pricing">
-        <!-- STARTER -->
-        <div class="bc-price-card bc-fade">
-          <div class="bc-price-head">
-            <div class="bc-prog-type">Band Project</div>
-            <h3>Starter</h3>
-            <div class="bc-price-amount">250,000<sub>원</sub></div>
-            <p class="bc-price-note">8주 / 처음 밴드 경험</p>
-          </div>
-          <div class="bc-price-divider"></div>
-          <ul class="bc-price-features">
-            <li>레벨 맞춤 팀 매칭</li>
-            <li>주 1회 2시간 합주 &times; 8회</li>
-            <li>전문 세션맨 코칭</li>
-            <li>8주차 라이브 공연</li>
-            <li>공연 영상 &middot; 사진 촬영</li>
+      <div class="pay-grid fade-up">
+        <div class="pay-card featured">
+          <h3>유퍼라 패키지</h3>
+          <div class="pay-card-tagline">8주 팀 매칭 + 합주 + 코칭 + 공연</div>
+          <div class="pay-card-price en">250,000원</div>
+          <ul class="pay-card-features">
+            <li>레벨 · 장르 · 스케줄 기반 팀 매칭</li>
+            <li>주 1회 2시간 합주 (합주실 포함)</li>
+            <li>매주 전문 세션맨 코칭</li>
+            <li>8주차 홍대 라이브바 공연</li>
+            <li>영상 촬영 + 팀 프로필 사진</li>
+            <li>뒷풀이 + 에프터파티</li>
           </ul>
-          <div class="bc-price-action">
-            <button class="bc-btn bc-btn-outline bc-btn-full" id="payBtnStarter">결제하기</button>
-          </div>
+          <button class="btn btn-accent btn-full" id="payBtnPackage">결제하기</button>
         </div>
-
-        <!-- STANDARD (featured) -->
-        <div class="bc-price-card hero-card bc-fade">
-          <div class="bc-price-top-badge">가장 인기</div>
-          <div class="bc-price-head">
-            <div class="bc-prog-type" style="color:var(--bc-cream)">Band Project</div>
-            <h3>Standard</h3>
-            <div class="bc-price-amount">250,000<sub>원</sub></div>
-            <p class="bc-price-note">8주 / 경험자 실력 향상</p>
-          </div>
-          <div class="bc-price-divider"></div>
-          <ul class="bc-price-features">
-            <li>레벨 맞춤 팀 매칭</li>
-            <li>주 1회 2시간 합주 &times; 8회</li>
-            <li>전문 세션맨 코칭</li>
-            <li>8주차 라이브 공연</li>
-            <li>공연 영상 &middot; 사진 촬영</li>
-            <li>퍼포먼스 집중 코칭</li>
+        <div class="pay-card">
+          <h3>정규 합주팀 (TENET JAM)</h3>
+          <div class="pay-card-tagline">수료 후 정기 합주 + 분기 공연</div>
+          <div class="pay-card-price en">60,000원 <sub>/월</sub></div>
+          <ul class="pay-card-features">
+            <li>월 2~4회 자율 합주</li>
+            <li>합주실 우선 예약권</li>
+            <li>분기별 정기 공연 참가</li>
+            <li>녹음실 데모 녹음 연계</li>
           </ul>
-          <div class="bc-price-action">
-            <button class="bc-btn bc-btn-cream bc-btn-full" id="payBtnStandard">결제하기</button>
-          </div>
-        </div>
-
-        <!-- RELEASE -->
-        <div class="bc-price-card bc-fade">
-          <div class="bc-price-head">
-            <div class="bc-prog-type">Band Project</div>
-            <h3>Release</h3>
-            <div class="bc-price-amount">380,000<sub>원</sub></div>
-            <p class="bc-price-note">8주 + 음원 발매</p>
-          </div>
-          <div class="bc-price-divider"></div>
-          <ul class="bc-price-features">
-            <li>STANDARD 전부 포함</li>
-            <li>2층 스튜디오 레코딩</li>
-            <li>믹싱 &middot; 마스터링</li>
-            <li>음원 스트리밍 유통</li>
-            <li>음원 발매 지원사업 안내</li>
-          </ul>
-          <div class="bc-price-action">
-            <button class="bc-btn bc-btn-outline bc-btn-full" id="payBtnRelease">결제하기</button>
-          </div>
+          <button class="btn btn-outline btn-full" id="payBtnJam">결제하기</button>
         </div>
       </div>
 
-      <!-- Dynamic open projects -->
-      <div style="margin-top:56px">
-        <div class="bc-sec-head bc-fade">
-          <span class="bc-label">현재 모집 중</span>
-          <h2 style="font-size:clamp(24px,3vw,36px)">오픈 프로젝트</h2>
-        </div>
-        <div class="bc-payment-box bc-fade" id="bcProjectsContainer">
-          <div class="bc-payment-loading">
-            <div class="bc-spinner"></div>
-            <p>프로젝트 목록을 불러오는 중...</p>
-          </div>
-        </div>
-
-        <button class="bc-refund-toggle" id="bcRefundToggle">
-          <span id="bcRefundLabel">환불 규정 보기</span>
-          <span id="bcRefundArrow">&#8595;</span>
-        </button>
-        <div class="bc-refund-panel" id="bcRefundPanel">
-          <div class="bc-refund-inner">
-            <div class="bc-policy-block">
-              <h4>1. 청약 철회 (전자상거래법 제17조)</h4>
-              <p>결제일로부터 7일 이내, 프로그램 시작 전이라면 전액 환불 가능합니다.</p>
-            </div>
-            <div class="bc-policy-block">
-              <h4>2. 프로그램 시작 전</h4>
-              <ul>
-                <li>7일 전까지 전액 환불</li>
-                <li>3~6일 전 90% 환불</li>
-                <li>1~2일 전 80% 환불</li>
-              </ul>
-            </div>
-            <div class="bc-policy-block">
-              <h4>3. 프로그램 시작 후</h4>
-              <ul>
-                <li>1~2주차 70% 환불</li>
-                <li>3~4주차 50% 환불</li>
-                <li>5주차 이후 환불 불가</li>
-              </ul>
-            </div>
-            <div class="bc-policy-block">
-              <h4>4. 환불 절차</h4>
-              <p>전화(010-3081-3730) 또는 카카오톡으로 접수. 영업일 기준 3~5일 내 처리.</p>
-            </div>
-          </div>
+      <button class="refund-toggle" id="refundToggle">
+        <span id="refundLabel">환불 규정 보기</span>
+        <span id="refundArrow">&#8595;</span>
+      </button>
+      <div class="refund-panel" id="refundPanel">
+        <div class="refund-panel-inner">
+          <h4>환불 규정</h4>
+          <table>
+            <tr><th>시점</th><th>환불 비율</th></tr>
+            <tr><td>프로그램 시작 전</td><td>100% 환불</td></tr>
+            <tr><td>1주차 이후</td><td>70% 환불</td></tr>
+            <tr><td>3주차 이후</td><td>50% 환불</td></tr>
+            <tr><td>5주차 이후</td><td>환불 불가</td></tr>
+          </table>
+          <p style="font-size:12px;color:var(--text-faint);margin-top:12px;">팀 기반 프로그램 특성상 중도 이탈 시 팀원에게 영향이 있어 위와 같이 운영합니다.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="bc-sec bc-sec-dark" id="contact">
-    <div class="bc-wrap">
-      <div class="bc-sec-head bc-fade">
-        <span class="bc-label">Contact</span>
-        <h2>참가 신청<br>및 문의</h2>
+  <section class="section section-darker" id="contact">
+    <div class="wrap">
+      <div class="section-head fade-up">
+        <p class="section-label en">Contact</p>
+        <h2 class="section-title">신청 &amp; 문의</h2>
       </div>
-
-      <div class="bc-contact-grid">
-        <div class="bc-fade">
-          <div class="bc-contact-row">
-            <div class="bc-contact-label">전화</div>
-            <div class="bc-contact-val"><a href="tel:01030813730">010-3081-3730</a></div>
+      <div class="contact-grid">
+        <div class="fade-up">
+          <div class="contact-info-row">
+            <div class="contact-info-label">Location</div>
+            <div class="contact-info-val">서울 성북구 돌곶이로 178<br>테넷 합주실</div>
           </div>
-          <div class="bc-contact-row">
-            <div class="bc-contact-label">장소</div>
-            <div class="bc-contact-val">서울 성북구 돌곶이로 9길 14<br>지층 합주실</div>
+          <div class="contact-info-row">
+            <div class="contact-info-label">Phone</div>
+            <div class="contact-info-val"><a href="tel:010-2959-0404">010-2959-0404</a></div>
           </div>
-          <div class="bc-contact-row">
-            <div class="bc-contact-label">프로그램</div>
-            <div class="bc-contact-val">
-              밴드 프로젝트 250,000~380,000원 (8주)<br>
-              TENET JAM 70,000원/월<br>
-              Campus Pass 500,000원/학기
-            </div>
+          <div class="contact-info-row">
+            <div class="contact-info-label">Instagram</div>
+            <div class="contact-info-val"><a href="https://instagram.com/tenetent_official" target="_blank" rel="noopener">@tenetent_official</a></div>
           </div>
-          <div class="bc-contact-row">
-            <div class="bc-contact-label">운영시간</div>
-            <div class="bc-contact-val">매일 24시간 / 합주실 예약제</div>
-          </div>
-          <div class="bc-contact-row">
-            <div class="bc-contact-label">바로가기</div>
-            <div class="bc-contact-val">
-              <a href="index.html">TENET 합주실 &middot; 녹음실 &rarr;</a>
-            </div>
+          <div class="contact-info-row">
+            <div class="contact-info-label">Hours</div>
+            <div class="contact-info-val">월&#8211;토 10:00 &#8211; 22:00<br>일요일 휴무</div>
           </div>
         </div>
-
-        <form class="bc-form bc-fade" id="bcContactForm" novalidate>
-          <div class="bc-form-2col">
-            <input type="text" name="name" placeholder="이름" required autocomplete="name">
-            <input type="tel" name="phone" placeholder="연락처" required autocomplete="tel">
+        <form class="form fade-up" id="contactForm" novalidate>
+          <div class="form-2col">
+            <input type="text" name="name" placeholder="이름" required>
+            <input type="tel" name="phone" placeholder="연락처" required>
           </div>
-          <select name="type" required>
-            <option value="">신청 유형 선택</option>
-            <option value="project-starter">밴드 프로젝트 &mdash; STARTER</option>
-            <option value="project-standard">밴드 프로젝트 &mdash; STANDARD</option>
-            <option value="project-release">밴드 프로젝트 &mdash; RELEASE</option>
-            <option value="jam">TENET JAM 정기 합주팀</option>
-            <option value="campus">Campus Pass (대학 밴드부)</option>
-            <option value="other">기타 문의</option>
+          <select name="interest" required>
+            <option value="" disabled selected>관심 프로그램</option>
+            <option value="체험합주">무료 체험 합주</option>
+            <option value="패키지">유퍼라 패키지 (8주)</option>
+            <option value="정규팀">정규 합주팀 (TENET JAM)</option>
           </select>
-          <select name="part">
-            <option value="">파트 선택 (선택사항)</option>
-            <option value="vocal">보컬</option>
-            <option value="guitar">기타</option>
-            <option value="bass">베이스</option>
-            <option value="drum">드럼</option>
-            <option value="keyboard">키보드</option>
+          <select name="instrument">
+            <option value="" disabled selected>악기 (선택)</option>
+            <option value="기타">기타</option>
+            <option value="베이스">베이스</option>
+            <option value="드럼">드럼</option>
+            <option value="보컬">보컬</option>
+            <option value="키보드">키보드</option>
+            <option value="기타악기">기타 악기</option>
           </select>
-          <textarea name="message" rows="4" placeholder="경험 수준, 선호 장르, 가능 요일·시간대 등 알려주세요"></textarea>
-          <button type="submit" class="bc-btn bc-btn-cream bc-btn-full" id="bcSubmitBtn">신청하기</button>
+          <textarea name="message" placeholder="하고 싶은 말 (선택)" rows="3"></textarea>
+          <button type="submit" class="btn btn-accent btn-full" id="submitBtn">신청하기</button>
         </form>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="bc-footer">
-    <div class="bc-wrap">
-      <div class="bc-footer-inner">
-        <div class="bc-footer-brand">
-          <strong>TENET BAND CLUB</strong>
-          <p>TENET Entertainment &middot; 서울 성북구 돌곶이</p>
-          <p class="bc-footer-biz">상호: 테넷엔터테인먼트 &middot; 대표: 신주호 &middot; 사업자: 709-59-00653</p>
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-logo en">U<span>F</span>LA</div>
+        <div class="footer-text">
+          유퍼라 &#8212; Your First Live<br>
+          테넷 엔터테인먼트 | 서울 성북구 돌곶이로 178<br>
+          사업자등록번호 709-08-02387 | 대표 김영민<br>
+          010-2959-0404 | tenetent@tenet.or.kr
         </div>
-        <ul class="bc-footer-nav">
-          <li><a href="#programs">프로그램</a></li>
-          <li><a href="#curriculum">커리큘럼</a></li>
-          <li><a href="#gallery">갤러리</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#pricing">결제</a></li>
-          <li><a href="index.html">TENET</a></li>
-          <li><a href="#contact">문의</a></li>
-        </ul>
-        <div class="bc-footer-copy">
-          &copy; 2026 TENET Entertainment<br>
-          All rights reserved.
+        <div class="footer-text" style="margin-top: 8px;">
+          &#169; 2026 TENET Entertainment. All rights reserved.
         </div>
       </div>
     </div>
   </footer>
 
   <!-- LIGHTBOX -->
-  <div class="bc-lightbox" id="bcLightbox" role="dialog" aria-modal="true">
-    <div class="bc-lightbox-inner">
-      <button class="bc-lightbox-close" id="bcLightboxClose" aria-label="닫기">&times;</button>
-      <img id="bcLightboxImg" src="" alt="">
-    </div>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="닫기">&#215;</button>
+    <img id="lightboxImg" src="" alt="">
   </div>
 
-  <!-- PAYMENT RESULT MODAL -->
-  <div class="bc-modal" id="bcResultModal" role="dialog" aria-modal="true">
-    <div class="bc-modal-box">
-      <div class="bc-modal-icon" id="bcResultIcon"></div>
-      <h2 id="bcResultTitle"></h2>
-      <p id="bcResultMsg"></p>
-      <button class="bc-modal-close" id="bcResultClose">확인</button>
+  <!-- MODAL -->
+  <div class="modal" id="resultModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-icon" id="resultIcon"></div>
+      <h2 id="resultTitle"></h2>
+      <p id="resultMsg"></p>
+      <button class="modal-close" id="resultClose">확인</button>
     </div>
   </div>
 
   <script>
-  (function() {
-    'use strict';
-
-    // ===== CONFIG =====
-    var BC_CONFIG = {
-      PORTONE_MERCHANT_ID: 'YOUR_MERCHANT_ID',
-      PORTONE_CHANNEL_KEY: 'YOUR_CHANNEL_KEY',
-      APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzexiGY-zXCXcOgWH2S3g0bGVBh5kLvsAqn3C2Wp97_6iKf0mdlPbeKVE8kzxSRlbJs/exec'
-    };
-
-    var TYPE_LABELS = {
-      'project-starter': '밴드 프로젝트 STARTER',
-      'project-standard': '밴드 프로젝트 STANDARD',
-      'project-release': '밴드 프로젝트 RELEASE',
-      'jam': 'TENET JAM 정기 합주팀',
-      'campus': 'Campus Pass (대학 밴드부)',
-      'other': '기타 문의'
-    };
-
-    // ===== NAV =====
-    var nav = document.getElementById('bcNav');
-    var mobileBtn = document.getElementById('bcMobileBtn');
-    var gnb = document.getElementById('bcGnb');
-
+    /* NAV SCROLL */
+    var navEl = document.getElementById('nav');
     window.addEventListener('scroll', function() {
-      if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+      navEl.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    if (mobileBtn && gnb) {
-      mobileBtn.addEventListener('click', function() {
-        gnb.classList.toggle('open');
-      });
-      gnb.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function() { gnb.classList.remove('open'); });
-      });
-    }
-
-    // ===== SMOOTH SCROLL =====
-    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-      a.addEventListener('click', function(e) {
-        var hash = a.getAttribute('href');
-        if (hash === '#') return;
-        var target = document.querySelector(hash);
-        if (target) {
-          e.preventDefault();
-          var offset = nav ? nav.offsetHeight : 72;
-          var top = target.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top: top, behavior: 'smooth' });
+    /* FADE UP OBSERVER */
+    var fadeEls = document.querySelectorAll('.fade-up');
+    var fadeObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          fadeObs.unobserve(e.target);
         }
       });
-    });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    fadeEls.forEach(function(el) { fadeObs.observe(el); });
 
-    // ===== FADE ANIMATION =====
-    if ('IntersectionObserver' in window) {
-      var fadeObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (!entry.isIntersecting) return;
-          var el = entry.target;
-          var parent = el.parentElement;
-          if (parent) {
-            var siblings = Array.from(parent.querySelectorAll('.bc-fade'));
-            var idx = siblings.indexOf(el);
-            if (idx > 0) el.style.transitionDelay = (idx * 0.07) + 's';
-          }
-          el.classList.add('visible');
-          fadeObs.unobserve(el);
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.bc-fade').forEach(function(el) {
-        fadeObs.observe(el);
-      });
-    } else {
-      document.querySelectorAll('.bc-fade').forEach(function(el) {
-        el.classList.add('visible');
-      });
-    }
-
-    // ===== FAQ =====
-    document.querySelectorAll('.bc-faq-item').forEach(function(item) {
-      var btn = item.querySelector('.bc-faq-q');
-      if (!btn) return;
+    /* FAQ */
+    document.querySelectorAll('.faq-q').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        var isOpen = item.classList.contains('active');
-        document.querySelectorAll('.bc-faq-item').forEach(function(i) {
-          i.classList.remove('active');
-        });
-        if (!isOpen) item.classList.add('active');
+        var item = btn.parentElement;
+        var wasActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item.active').forEach(function(i) { i.classList.remove('active'); });
+        if (!wasActive) item.classList.add('active');
       });
     });
 
-    // ===== REFUND TOGGLE =====
-    var refundToggle = document.getElementById('bcRefundToggle');
-    var refundPanel = document.getElementById('bcRefundPanel');
-    var refundLabel = document.getElementById('bcRefundLabel');
-    var refundArrow = document.getElementById('bcRefundArrow');
-
-    if (refundToggle && refundPanel) {
-      refundToggle.addEventListener('click', function() {
-        var isOpen = refundPanel.classList.toggle('open');
-        if (refundLabel) refundLabel.textContent = isOpen ? '환불 규정 닫기' : '환불 규정 보기';
-        if (refundArrow) refundArrow.textContent = isOpen ? '\u2191' : '\u2193';
+    /* GALLERY LIGHTBOX */
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.gallery-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var img = item.querySelector('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
       });
-    }
+    });
 
-    // ===== GALLERY LIGHTBOX =====
-    var lb = document.getElementById('bcLightbox');
-    var lbImg = document.getElementById('bcLightboxImg');
-    var lbClose = document.getElementById('bcLightboxClose');
-
-    function openLightbox(src, alt) {
-      if (!lb || !lbImg) return;
-      lbImg.src = src;
-      lbImg.alt = alt || '';
-      lb.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
 
     function closeLightbox() {
-      if (!lb) return;
-      lb.classList.remove('active');
-      lbImg.src = '';
+      lightbox.classList.remove('active');
       document.body.style.overflow = '';
     }
 
-    document.querySelectorAll('.bc-gal-item').forEach(function(item) {
-      item.addEventListener('click', function() {
-        var img = item.querySelector('img');
-        var imgSrc = item.dataset.img || (img ? img.src : '');
-        var imgTitle = item.dataset.title || '';
-        openLightbox(imgSrc, imgTitle);
-      });
+    /* REFUND TOGGLE */
+    document.getElementById('refundToggle').addEventListener('click', function() {
+      var panel = document.getElementById('refundPanel');
+      var arrow = document.getElementById('refundArrow');
+      var label = document.getElementById('refundLabel');
+      var isOpen = panel.classList.toggle('open');
+      arrow.textContent = isOpen ? '\u2191' : '\u2193';
+      label.textContent = isOpen ? '환불 규정 닫기' : '환불 규정 보기';
     });
 
-    if (lbClose) lbClose.addEventListener('click', closeLightbox);
-    if (lb) {
-      lb.addEventListener('click', function(e) {
-        if (e.target === lb) closeLightbox();
-      });
+    /* MODAL */
+    var modal = document.getElementById('resultModal');
+    var modalIcon = document.getElementById('resultIcon');
+    var modalTitle = document.getElementById('resultTitle');
+    var modalMsg = document.getElementById('resultMsg');
+
+    function showModal(icon, title, msg) {
+      modalIcon.textContent = icon;
+      modalTitle.textContent = title;
+      modalMsg.textContent = msg;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeLightbox();
-        closeResultModal();
-      }
+    document.getElementById('resultClose').addEventListener('click', function() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
     });
 
-    // ===== TOAST =====
-    function showToast(msg) {
-      var existing = document.querySelector('.bc-toast');
-      if (existing) existing.remove();
-
-      var toast = document.createElement('div');
-      toast.className = 'bc-toast';
-      toast.textContent = msg;
-      document.body.appendChild(toast);
-
-      requestAnimationFrame(function() {
-        requestAnimationFrame(function() { toast.classList.add('show'); });
-      });
-
-      setTimeout(function() {
-        toast.classList.remove('show');
-        setTimeout(function() { toast.remove(); }, 300);
-      }, 4000);
-    }
-
-    // ===== RESULT MODAL (DOM-only) =====
-    var resultModal = document.getElementById('bcResultModal');
-    var resultIcon = document.getElementById('bcResultIcon');
-    var resultTitle = document.getElementById('bcResultTitle');
-    var resultMsg = document.getElementById('bcResultMsg');
-    var resultClose = document.getElementById('bcResultClose');
-
-    function showResult(success, titleText, msgText) {
-      if (!resultModal) return;
-      if (resultIcon) {
-        resultIcon.className = 'bc-modal-icon ' + (success ? 'success' : 'fail');
-        resultIcon.textContent = success ? '\u2713' : '\u2717';
-      }
-      if (resultTitle) resultTitle.textContent = titleText;
-      if (resultMsg) resultMsg.textContent = msgText;
-      resultModal.classList.add('active');
-    }
-
-    function closeResultModal() {
-      if (resultModal) resultModal.classList.remove('active');
-    }
-
-    if (resultClose) resultClose.addEventListener('click', closeResultModal);
-    if (resultModal) {
-      resultModal.addEventListener('click', function(e) {
-        if (e.target === resultModal) closeResultModal();
-      });
-    }
-
-    // ===== PORTONE PAYMENT =====
-    function startPayment(projectId, projectName, amount) {
-      if (BC_CONFIG.PORTONE_MERCHANT_ID === 'YOUR_MERCHANT_ID') {
-        showToast('결제 시스템 준비 중입니다. 전화(010-3081-3730)로 문의해주세요.');
+    /* PAYMENT (PortOne) */
+    function requestPay(type, amount, name) {
+      if (typeof IMP === 'undefined') {
+        showModal('\u26A0\uFE0F', '결제 준비 중', '결제 시스템을 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
         return;
       }
 
-      var IMP = window.IMP;
-      if (!IMP) { showToast('결제 모듈 로딩 실패. 새로고침 후 다시 시도해주세요.'); return; }
+      /* TODO: 실제 가맹점 식별코드+채널키 필요 (혜림쌤 확인 중) */
+      IMP.init('imp00000000');
 
-      IMP.init(BC_CONFIG.PORTONE_MERCHANT_ID);
       IMP.request_pay({
-        pg: 'naverpay.' + BC_CONFIG.PORTONE_CHANNEL_KEY,
+        pg: 'html5_inicis',
         pay_method: 'card',
-        merchant_uid: 'bandclub_' + projectId + '_' + Date.now(),
-        name: '[밴드클럽] ' + projectName,
+        merchant_uid: 'ufla_' + type + '_' + Date.now(),
+        name: name,
         amount: amount,
-        naverProducts: [{
-          categoryType: 'ETC',
-          categoryId: 'ETC',
-          uid: String(projectId),
-          name: '밴드클럽 - ' + projectName,
-          count: 1
-        }],
+        buyer_name: '',
+        buyer_tel: '',
         m_redirect_url: window.location.href
       }, function(rsp) {
         if (rsp.success) {
-          var body = JSON.stringify({
-            action: 'verifyPayment',
-            imp_uid: rsp.imp_uid,
-            merchant_uid: rsp.merchant_uid,
-            project_id: String(projectId),
-            project_name: projectName,
-            amount: amount,
-            buyer_name: rsp.buyer_name || '',
-            buyer_tel: rsp.buyer_tel || ''
-          });
-          fetch(BC_CONFIG.APPS_SCRIPT_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: body
-          }).catch(function() {}).finally(function() {
-            showResult(true, '결제 완료', projectName + ' 프로젝트에 등록되었습니다. OT 일정 및 상세 안내는 카카오톡으로 발송됩니다.');
-          });
+          showModal('\u2705', '결제 완료!', name + ' 결제가 완료되었습니다. 곧 연락드리겠습니다.');
         } else {
-          showResult(false, '결제 실패', rsp.error_msg || '결제가 취소되었습니다.');
+          if (rsp.error_msg && rsp.error_msg.indexOf('취소') === -1) {
+            showModal('\u274C', '결제 실패', rsp.error_msg);
+          }
         }
       });
     }
 
-    // ===== PRICING BUTTONS =====
-    var tierPayMap = [
-      { id: 'payBtnStarter',  name: '밴드 프로젝트 STARTER',  amount: 250000 },
-      { id: 'payBtnStandard', name: '밴드 프로젝트 STANDARD', amount: 250000 },
-      { id: 'payBtnRelease',  name: '밴드 프로젝트 RELEASE',  amount: 380000 }
-    ];
+    document.getElementById('payBtnPackage').addEventListener('click', function() {
+      requestPay('package', 250000, '유퍼라 패키지 8주');
+    });
 
-    tierPayMap.forEach(function(tier) {
-      var btn = document.getElementById(tier.id);
-      if (!btn) return;
-      btn.addEventListener('click', function() {
-        startPayment('BAND_' + tier.id, tier.name, tier.amount);
+    document.getElementById('payBtnJam').addEventListener('click', function() {
+      requestPay('jam', 60000, 'TENET JAM 월 회비');
+    });
+
+    /* CONTACT FORM */
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submitBtn');
+      var form = this;
+      var formData = new FormData(form);
+      var data = {};
+      formData.forEach(function(value, key) { data[key] = value; });
+
+      if (!data.name || !data.phone) {
+        showModal('\u26A0\uFE0F', '필수 정보', '이름과 연락처를 입력해주세요.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = '전송 중...';
+
+      data.source = '유퍼라 홈페이지';
+      data.timestamp = new Date().toISOString();
+
+      fetch('https://script.google.com/macros/s/AKfycbxJ0Lk7xVz1GqfDG6j3KxMCXYLPGrBG7kfT1Qw5Oo_IvHiPVNMKEWQeNkmQZ7YXBF8/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function() {
+        showModal('\u2705', '신청 완료!', '확인 후 연락드리겠습니다. 감사합니다!');
+        form.reset();
+      }).catch(function() {
+        showModal('\u274C', '전송 실패', '다시 시도하거나 010-2959-0404로 직접 연락주세요.');
+      }).finally(function() {
+        btn.disabled = false;
+        btn.textContent = '신청하기';
       });
     });
 
-    // ===== LOAD PROJECTS from Google Sheets =====
-    function buildProjectItem(p) {
-      var isOpen = p.status === '\uc624\ud508'; // '오픈'
-      var price = Number(p.price).toLocaleString('ko-KR');
-
-      var item = document.createElement('div');
-      item.className = 'bc-project-item';
-
-      // left side
-      var left = document.createElement('div');
-
-      var badge = document.createElement('span');
-      badge.className = 'bc-project-status ' + (isOpen ? 'open' : 'closed');
-      badge.textContent = isOpen ? '\ubaa8\uc9d1\uc911' : '\ub9c8\uac10'; // 모집중 / 마감
-
-      var nameEl = document.createElement('div');
-      nameEl.className = 'bc-project-name';
-      nameEl.textContent = p.name;
-
-      var descEl = document.createElement('div');
-      descEl.className = 'bc-project-desc';
-      descEl.textContent = p.description || '';
-
-      left.appendChild(badge);
-      left.appendChild(nameEl);
-      left.appendChild(descEl);
-
-      // right side
-      var right = document.createElement('div');
-      right.className = 'bc-project-right';
-
-      var priceEl = document.createElement('div');
-      priceEl.className = 'bc-project-price-val';
-      priceEl.textContent = price + '\uc6d0'; // 원
-
-      var payBtn = document.createElement('button');
-      payBtn.className = 'bc-btn-pay';
-      payBtn.disabled = !isOpen;
-      payBtn.textContent = isOpen ? '\uacb0\uc81c\ud558\uae30' : '\ub9c8\uac10'; // 결제하기 / 마감
-
-      if (isOpen) {
-        (function(pid, pname, pamount) {
-          payBtn.addEventListener('click', function() {
-            startPayment(pid, pname, pamount);
-          });
-        })(p.id, p.name, Number(p.price));
-      }
-
-      right.appendChild(priceEl);
-      right.appendChild(payBtn);
-
-      item.appendChild(left);
-      item.appendChild(right);
-      return item;
-    }
-
-    async function loadProjects() {
-      var container = document.getElementById('bcProjectsContainer');
-      if (!container) return;
-
-      try {
-        var res = await fetch(BC_CONFIG.APPS_SCRIPT_URL + '?action=getProjects');
-        var data = await res.json();
-
-        container.textContent = '';
-
-        if (!data.projects || data.projects.length === 0) {
-          var empty = document.createElement('div');
-          empty.className = 'bc-projects-empty';
-          empty.textContent = '\ud604\uc7ac \ubaa8\uc9d1 \uc911\uc778 \ud504\ub85c\uc81d\ud2b8\uac00 \uc5c6\uc2b5\ub2c8\ub2e4. \uc0c8\ub85c\uc6b4 \ud504\ub85c\uc81d\ud2b8 \uc624\ud508 \uc2dc \uc548\ub0b4\ub4dc\ub9bd\ub2c8\ub2e4.';
-          container.appendChild(empty);
-          return;
+    /* SMOOTH SCROLL */
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-
-        data.projects.forEach(function(p) {
-          container.appendChild(buildProjectItem(p));
-        });
-      } catch (err) {
-        container.textContent = '';
-        var fallback = document.createElement('div');
-        fallback.className = 'bc-projects-empty';
-        fallback.textContent = '\ud604\uc7ac \ubaa8\uc9d1 \uc911\uc778 \ud504\ub85c\uc81d\ud2b8\uac00 \uc5c6\uc2b5\ub2c8\ub2e4. \uc544\ub798 \uc2e0\uccad \ud3fc \ub610\ub294 \uc804\ud654\ub85c \ubb38\uc758\ud574\uc8fc\uc138\uc694.';
-        container.appendChild(fallback);
-      }
-    }
-
-    // ===== CONTACT FORM =====
-    var contactForm = document.getElementById('bcContactForm');
-    var submitBtn = document.getElementById('bcSubmitBtn');
-
-    if (contactForm) {
-      contactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        var data = Object.fromEntries(new FormData(contactForm));
-        if (!data.name || !data.phone || !data.type) {
-          showToast('\uc774\ub984, \uc5f0\ub77d\uc870, \uc2e0\uccad \uc720\ud615\uc744 \uc785\ub825\ud574\uc8fc\uc138\uc694.');
-          return;
-        }
-
-        if (submitBtn) { submitBtn.textContent = '\uc804\uc1a1 \uc911...'; submitBtn.disabled = true; }
-
-        var params = new URLSearchParams({
-          action: 'submitInquiry',
-          name: data.name,
-          phone: data.phone,
-          type: TYPE_LABELS[data.type] || data.type,
-          part: data.part || '',
-          message: data.message || '',
-          source: 'bandclub'
-        });
-
-        try {
-          await fetch(BC_CONFIG.APPS_SCRIPT_URL + '?' + params.toString(), { method: 'GET' });
-          showToast('\uc2e0\uccad\uc774 \uc811\uc218\ub418\uc5c8\uc2b5\ub2c8\ub2e4! \ube60\ub974\uac8c \uc5f0\ub77d\ub4dc\ub9ac\uac60\uc2b5\ub2c8\ub2e4.');
-          contactForm.reset();
-        } catch (err) {
-          var fallbackMsg = '[\ubc34\ub4dc\ud074\ub7fd \uc2e0\uccad]\n\uc774\ub984: ' + data.name + '\n\uc5f0\ub77d\uc870: ' + data.phone + '\n\uc720\ud615: ' + (TYPE_LABELS[data.type] || data.type);
-          if (navigator.clipboard) {
-            try {
-              await navigator.clipboard.writeText(fallbackMsg);
-              showToast('\uc2e0\uccad \ub0b4\uc6a9\uc774 \ubcf5\uc0ac\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \uce74\uce74\uc624\ud1a1 \ub610\ub294 \uc804\ud654\ub85c \ubcf4\ub0b4\uc8fc\uc138\uc694!');
-            } catch (e2) {
-              showToast('\uc804\ud654(010-3081-3730)\ub85c \uc2e0\uccad\ud574\uc8fc\uc138\uc694!');
-            }
-          } else {
-            showToast('\uc804\ud654(010-3081-3730)\ub85c \uc2e0\uccad\ud574\uc8fc\uc138\uc694!');
-          }
-          contactForm.reset();
-        }
-
-        if (submitBtn) { submitBtn.textContent = '\uc2e0\uccad\ud558\uae30'; submitBtn.disabled = false; }
       });
-    }
-
-    // ===== INIT =====
-    loadProjects();
-  })();
+    });
   </script>
 </body>
 </html>
