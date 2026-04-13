@@ -298,6 +298,56 @@
 
   <script src="script.js"></script>
   <script>
+  // UTM Tracking — 채널별 유입 추적
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var utmSource = params.get('utm_source') || '';
+    var utmMedium = params.get('utm_medium') || '';
+    var utmCampaign = params.get('utm_campaign') || '';
+
+    // UTM 파라미터가 있으면 세션에 저장 (페이지 이동 시에도 유지)
+    if (utmSource) {
+      sessionStorage.setItem('utm_source', utmSource);
+      sessionStorage.setItem('utm_medium', utmMedium);
+      sessionStorage.setItem('utm_campaign', utmCampaign);
+    }
+
+    // 저장된 UTM 복원
+    var source = sessionStorage.getItem('utm_source') || 'direct';
+    var medium = sessionStorage.getItem('utm_medium') || '';
+    var campaign = sessionStorage.getItem('utm_campaign') || '';
+
+    // Google Form 링크에 UTM 파라미터 자동 추가
+    var googleFormLinks = document.querySelectorAll('a[href*="google.com/forms"]');
+    googleFormLinks.forEach(function(link) {
+      var url = new URL(link.href);
+      if (source !== 'direct') {
+        url.searchParams.set('entry.UTM_SOURCE', source);
+        url.searchParams.set('entry.UTM_MEDIUM', medium);
+        url.searchParams.set('entry.UTM_CAMPAIGN', campaign);
+      }
+      link.href = url.toString();
+    });
+
+    // 자체 문의 폼에 UTM hidden 필드 추가
+    var contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      var fields = [
+        { name: 'utm_source', value: source },
+        { name: 'utm_medium', value: medium },
+        { name: 'utm_campaign', value: campaign }
+      ];
+      fields.forEach(function(f) {
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = f.name;
+        input.value = f.value;
+        contactForm.appendChild(input);
+      });
+    }
+  })();
+  </script>
+  <script>
   // Carousel
   (function() {
     var track = document.getElementById('carouselTrack');

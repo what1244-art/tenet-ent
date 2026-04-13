@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <!-- PortOne V2 SDK -->
-  <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+  <!-- PortOne SDK -->
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
   <style>
     /* ===== Payment Page Specific ===== */
     .pay-hero {
@@ -629,10 +629,11 @@
 
   <script>
   // ===== CONFIG =====
+  // TODO: 포트원 가입 후 아래 값을 교체해주세요
   const CONFIG = {
-    PORTONE_STORE_ID: 'store-e141b16e-b03c-464c-9d58-72250a90a8f6',
-    PORTONE_CHANNEL_KEY: 'channel-key-75a28054-c219-48d5-98e0-dedd78239a10',
-    APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzexiGY-zXCXcOgWH2S3g0bGVBh5kLvsAqn3C2Wp97_6iKf0mdlPbeKVE8kzxSRlbJs/exec'
+    PORTONE_MERCHANT_ID: 'YOUR_MERCHANT_ID',       // 포트원 가맹점 식별코드
+    PORTONE_CHANNEL_KEY: 'YOUR_CHANNEL_KEY',        // 포트원 채널키 (네이버페이)
+    APPS_SCRIPT_URL: 'YOUR_APPS_SCRIPT_WEB_APP_URL' // Google Apps Script 배포 URL
   };
 
   // ===== LOAD PROJECTS =====
@@ -687,45 +688,55 @@
   }
 
   // ===== PAYMENT =====
-  async function startPayment(projectId, projectName, amount) {
-    const paymentId = `bandclub_${projectId}_${Date.now()}`;
+  function startPayment(projectId, projectName, amount) {
+    if (CONFIG.PORTONE_MERCHANT_ID === 'YOUR_MERCHANT_ID') {
+      alert('결제 시스템 준비 중입니다. 잠시 후 다시 시도해주세요.');
+      return;
+    }
 
-    try {
-      const response = await PortOne.requestPayment({
-        storeId: CONFIG.PORTONE_STORE_ID,
-        channelKey: CONFIG.PORTONE_CHANNEL_KEY,
-        paymentId: paymentId,
-        orderName: `[밴드클럽] ${projectName}`,
-        totalAmount: amount,
-        currency: 'CURRENCY_KRW',
-        payMethod: 'CARD',
-        redirectUrl: window.location.href,
-      });
+    const IMP = window.IMP;
+    IMP.init(CONFIG.PORTONE_MERCHANT_ID);
 
-      if (response.code != null) {
-        alert(`결제 실패: ${response.message}`);
-        return;
-      }
+    const merchantUid = `bandclub_${projectId}_${Date.now()}`;
 
-      // Verify payment on backend
-      try {
-        const verifyRes = await fetch(CONFIG.APPS_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'verifyPayment',
-            imp_uid: response.paymentId,
-            merchant_uid: paymentId,
-            project_id: projectId,
-            project_name: projectName,
-            amount: amount,
-            buyer_name: '',
-            buyer_tel: '',
-          })
-        });
-        const result = await verifyRes.json();
+    IMP.request_pay({
+      pg: `naverpay.${CONFIG.PORTONE_CHANNEL_KEY}`,
+      pay_method: 'card',
+      merchant_uid: merchantUid,
+      name: `[밴드클럽] ${projectName}`,
+      amount: amount,
+      buyer_name: '',
+      buyer_tel: '',
+      buyer_email: '',
+      naverProducts: [{
+        categoryType: 'ETC',
+        categoryId: 'ETC',
+        uid: projectId,
+        name: `밴드클럽 - ${projectName}`,
+        count: 1,
+      }],
+      m_redirect_url: window.location.href
+    }, async function(rsp) {
+      if (rsp.success) {
+        // Verify payment on backend
+        try {
+          const verifyRes = await fetch(CONFIG.APPS_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'verifyPayment',
+              imp_uid: rsp.imp_uid,
+              merchant_uid: rsp.merchant_uid,
+              project_id: projectId,
+              project_name: projectName,
+              amount: amount,
+              buyer_name: rsp.buyer_name || '',
+              buyer_tel: rsp.buyer_tel || '',
+            })
+          });
+          const result = await verifyRes.json();
 
-        if (result.success) {
+          if (result.success) {
             showPaymentResult(true, projectName);
           } else {
             showPaymentResult(false, '결제 검증에 실패했습니다. 고객센터로 문의해주세요.');
@@ -733,10 +744,10 @@
         } catch (err) {
           showPaymentResult(true, projectName);
         }
-    } catch (err) {
-      alert('결제 중 오류가 발생했습니다. 다시 시도해주세요.');
-      console.error('Payment error:', err);
-    }
+      } else {
+        showPaymentResult(false, rsp.error_msg || '결제가 취소되었습니다.');
+      }
+    });
   }
 
   // ===== PAYMENT RESULT MODAL =====
