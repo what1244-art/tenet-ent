@@ -229,6 +229,28 @@
     }
     .link-accent:hover { gap: 10px; }
 
+    .btn-pill {
+      display: inline-block; padding: 14px 36px;
+      border: 1.5px solid var(--dark); color: var(--dark);
+      border-radius: 30px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.5px; transition: all 0.3s;
+    }
+    .btn-pill:hover {
+      background: var(--dark); color: #fff;
+    }
+    .btn-pill-light {
+      border-color: rgba(255,255,255,0.4); color: #fff;
+    }
+    .btn-pill-light:hover {
+      background: #fff; color: var(--dark);
+    }
+    .btn-pill-accent {
+      border-color: var(--accent); color: var(--accent);
+    }
+    .btn-pill-accent:hover {
+      background: var(--accent); color: #fff;
+    }
+
     /* ── ABOUT ── */
     .about-grid {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -538,7 +560,7 @@
             <div class="studio-spec"><dt>DAW</dt><dd>Pro Tools · Logic Pro X</dd></div>
             <div class="studio-spec"><dt>서비스</dt><dd>녹음 · 믹싱 · 마스터링 · 편곡</dd></div>
           </dl>
-          <a href="recording.html" class="link-accent" style="margin-top:24px;">녹음실 자세히 보기 →</a>
+          <a href="recording.html" class="btn-pill btn-pill-light" style="margin-top:28px;">녹음실 둘러보기</a>
         </div>
       </div>
     </div>
@@ -585,6 +607,9 @@
           </div>
         </div>
       </div>
+      <div style="text-align:center; margin-top:40px;" class="fi">
+        <a href="portfolio.html" class="btn-pill">공연 포트폴리오 전체보기</a>
+      </div>
     </div>
   </section>
 
@@ -601,7 +626,7 @@
             Roland TD-17 · PA 시스템 · 마이크<br>
             24시간 무인 예약 · 입장
           </p>
-          <a href="rehearsal.html" class="link-accent" style="margin-top:20px;">합주실 자세히 보기 →</a>
+          <a href="rehearsal.html" class="btn-pill" style="margin-top:24px;">합주실 둘러보기</a>
         </div>
         <div class="fi">
           <img src="images-compressed/marshall-amps.jpg" alt="합주실" class="rehearsal-img" loading="lazy">
@@ -631,7 +656,7 @@
           <p class="sec-label en">BAND CLUB — UFLA</p>
           <h2 class="sec-heading">혼자 치던 당신,<br>무대에 서는 날.</h2>
           <p class="sec-text">팀 매칭 → 8주 합주 → 홍대 라이브바 공연. 밴드클럽 유퍼라가 당신의 첫 무대를 만듭니다.</p>
-          <a href="bandclub.html" class="link-accent" style="margin-top:20px;">자세히 보기 →</a>
+          <a href="bandclub.html" class="btn-pill btn-pill-accent" style="margin-top:24px;">유퍼라 둘러보기</a>
         </div>
       </div>
     </div>

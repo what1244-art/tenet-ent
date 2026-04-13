@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>포트폴리오 — TENET Entertainment</title>
+  <meta name="description" content="테넷 엔터테인먼트 공연 포트폴리오. 팔레트 온 스테이지, 아빠들의 소꿉놀이, 유퍼라 밴드클럽, 홍길동전.">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --bg2: #f8f7f5; --dark: #1a1a1a; --text: #333;
+      --text-light: #777; --accent: #ff5a00; --border: rgba(0,0,0,0.08);
+      --nav-h: 70px; --max: 1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Pretendard','Quicksand',-apple-system,sans-serif; font-weight: 400; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { text-decoration: none; color: inherit; transition: all 0.3s; }
+    .en { font-family: 'Quicksand', sans-serif; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+    .nav-logo { font-family: 'Quicksand',sans-serif; font-size: 1.3rem; font-weight: 700; letter-spacing: 4px; color: var(--dark); }
+    .nav-back { font-size: 0.82rem; color: var(--text-light); }
+    .nav-back:hover { color: var(--accent); }
+
+    .page-header { padding: 140px 0 80px; text-align: center; }
+    .page-title { font-family: 'Quicksand',sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: 4px; margin-bottom: 12px; }
+    .page-sub { font-size: 0.95rem; color: var(--text-light); }
+
+    /* PROJECT CARDS */
+    .project { padding: 80px 0; border-top: 1px solid var(--border); }
+    .project:first-of-type { border-top: none; }
+    .project-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; }
+    .project-grid.reverse { grid-template-columns: 1fr 1.2fr; }
+    .project-grid.reverse .project-img { order: 2; }
+    .project-grid.reverse .project-info { order: 1; }
+
+    .project-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 12px; }
+    .project-label { font-family: 'Quicksand',sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+    .project-date { font-size: 0.78rem; color: var(--text-light); margin-bottom: 8px; }
+    .project-title { font-family: 'Quicksand',sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 12px; }
+    .project-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.9; margin-bottom: 20px; }
+
+    .project-stats { display: flex; gap: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .stat-num { font-family: 'Quicksand',sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--dark); }
+    .stat-num small { font-size: 0.8rem; font-weight: 400; }
+    .stat-label { font-size: 0.7rem; color: var(--text-light); margin-top: 2px; }
+
+    .project-details { margin-top: 20px; }
+    .project-details h4 { font-size: 0.82rem; font-weight: 600; color: var(--accent); margin-bottom: 8px; letter-spacing: 1px; }
+    .project-details ul { display: flex; flex-direction: column; gap: 4px; }
+    .project-details li { font-size: 0.82rem; color: var(--text-light); padding-left: 14px; position: relative; }
+    .project-details li::before { content: '·'; position: absolute; left: 0; color: var(--accent); }
+
+    .project-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 32px; border-radius: 8px; overflow: hidden; }
+    .project-gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform 0.4s; }
+    .project-gallery img:hover { transform: scale(1.04); }
+
+    /* MUSIC PRODUCTION LINK */
+    .prod-cta { text-align: center; padding: 80px 0; background: var(--bg2); }
+    .prod-cta h2 { font-family: 'Quicksand',sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 12px; }
+    .prod-cta p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 24px; }
+    .btn-pill { display: inline-block; padding: 14px 36px; border: 1.5px solid var(--dark); color: var(--dark); border-radius: 30px; font-size: 0.85rem; font-weight: 600; transition: all 0.3s; }
+    .btn-pill:hover { background: var(--dark); color: #fff; }
+
+    .footer { background: var(--dark); color: rgba(255,255,255,0.4); padding: 32px 0; text-align: center; }
+    .footer p { font-size: 0.72rem; line-height: 1.8; }
+
+    .fi { opacity: 0; transform: translateY(20px); transition: opacity 0.7s, transform 0.7s; }
+    .fi.vis { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .project-grid, .project-grid.reverse { grid-template-columns: 1fr; }
+      .project-grid.reverse .project-img, .project-grid.reverse .project-info { order: unset; }
+      .project-gallery { grid-template-columns: 1fr 1fr; }
+      .project-stats { gap: 20px; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo en">TENET</a>
+      <a href="/" class="nav-back">← 메인으로</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1 class="page-title en">PORTFOLIO</h1>
+    <p class="page-sub">테넷이 기획하고 운영한 공연 · 행사</p>
+  </div>
+
+  <!-- 팔레트 온 스테이지 -->
+  <section class="project">
+    <div class="container">
+      <div class="project-grid fi">
+        <img src="images-compressed/palette-poster.jpg" alt="팔레트 온 스테이지" class="project-img" loading="lazy">
+        <div class="project-info">
+          <p class="project-label en">CONCERT</p>
+          <p class="project-date">2026. 02. 14</p>
+          <h2 class="project-title">팔레트 온 스테이지</h2>
+          <p class="project-desc">신당 레드포인트(서울실용음악고등학교)에서 개최한 아티스트 라이브 콘서트. 4팀 아티스트가 14곡을 선보였습니다. 기획·제작·운영·홍보 전 과정을 테넷이 수행했습니다.</p>
+          <div class="project-stats">
+            <div><span class="stat-num en">110</span><div class="stat-label">관객</div></div>
+            <div><span class="stat-num en">14</span><div class="stat-label">곡 라이브</div></div>
+            <div><span class="stat-num en">4</span><div class="stat-label">아티스트</div></div>
+          </div>
+          <div class="project-details">
+            <h4>제작 범위</h4>
+            <ul>
+              <li>공연 기획 · 아티스트 섭외 · 셋리스트 구성</li>
+              <li>KV 3종 · 개인 포스터 16장 디자인</li>
+              <li>NFC 키링 100개 제작</li>
+              <li>럭키드로우 · 가위바위보 · 후기 이벤트 7종</li>
+              <li>네이버 인플루언서 20명 프로모션</li>
+              <li>하우스 운영 · 현장 관리</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 아빠들의 소꿉놀이 -->
+  <section class="project">
+    <div class="container">
+      <div class="project-grid reverse fi">
+        <img src="images-compressed/play-poster.jpg" alt="아빠들의 소꿉놀이" class="project-img" loading="lazy">
+        <div class="project-info">
+          <p class="project-label en">THEATER</p>
+          <p class="project-date">2026. 02. 27 — 03. 01</p>
+          <h2 class="project-title">아빠들의 소꿉놀이</h2>
+          <p class="project-desc">제이원씨어터에서 6회차로 진행된 연극 공연. 기획서 작성부터 캐스팅보드, 리플렛 디자인, 하우스 운영계획, 인수인계서까지 풀 프로덕션을 수행했습니다.</p>
+          <div class="project-stats">
+            <div><span class="stat-num en">200</span><div class="stat-label">관객</div></div>
+            <div><span class="stat-num en">6</span><div class="stat-label">회차</div></div>
+          </div>
+          <div class="project-details">
+            <h4>제작 범위</h4>
+            <ul>
+              <li>기획서 · 홍보 방안 · 프로모션 제안서</li>
+              <li>KV 디자인 (V3 인쇄용 + V4 웹용)</li>
+              <li>리플렛 (표지+내지) · 캐스팅보드</li>
+              <li>프로필 사진 촬영 · 블로킹 도면</li>
+              <li>하우스 운영 계획 · 현장 관리</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 유퍼라 밴드클럽 1기 -->
+  <section class="project">
+    <div class="container">
+      <div class="project-grid fi">
+        <img src="images-ufla/web/ufla-concert-02.jpg" alt="유퍼라 1기" class="project-img" loading="lazy">
+        <div class="project-info">
+          <p class="project-label en">BAND CLUB</p>
+          <p class="project-date">2026. 01 — 03</p>
+          <h2 class="project-title">유퍼라 밴드클럽 1기</h2>
+          <p class="project-desc">20명 모집, 4팀 구성. 8주간 합주 프로그램 운영 후 레드포인트에서 라이브 공연을 진행했습니다. 팀 매칭부터 무대까지 전 과정을 기획·운영했습니다.</p>
+          <div class="project-stats">
+            <div><span class="stat-num en">20</span><div class="stat-label">참가자</div></div>
+            <div><span class="stat-num en">4</span><div class="stat-label">팀</div></div>
+            <div><span class="stat-num en">8</span><div class="stat-label">주 프로그램</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="project-gallery fi">
+        <img src="images-ufla/web/ufla-concert-01.jpg" alt="유퍼라 공연" loading="lazy">
+        <img src="images-ufla/web/ufla-concert-04.jpg" alt="유퍼라 공연" loading="lazy">
+        <img src="images-ufla/web/ufla-group-02.jpg" alt="유퍼라 단체" loading="lazy">
+        <img src="images-ufla/web/ufla-practice-01.jpg" alt="유퍼라 합주" loading="lazy">
+        <img src="images-ufla/web/ufla-moment-01.jpg" alt="유퍼라 순간" loading="lazy">
+        <img src="images-ufla/web/ufla-concert-06.jpg" alt="유퍼라 공연" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 홍길동전 -->
+  <section class="project">
+    <div class="container">
+      <div class="project-grid reverse fi">
+        <img src="images-compressed/hero-studio.jpg" alt="홍길동전" class="project-img" loading="lazy">
+        <div class="project-info">
+          <p class="project-label en">LIVE STREAMING</p>
+          <p class="project-date">2025. 11</p>
+          <h2 class="project-title">홍길동전</h2>
+          <p class="project-desc">테넷 합주실 자체 인프라를 활용한 온라인 라이브 스트리밍 공연. 합주실 공간에서 실시간으로 공연을 송출했습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="prod-cta">
+    <h2 class="en">Music Production</h2>
+    <p>녹음 · 믹싱 · 마스터링 — 음악 프로덕션 포트폴리오</p>
+    <a href="production.html" class="btn-pill">프로덕션 포트폴리오 보기</a>
+  </section>
+
+  <footer class="footer">
+    <p>테넷 엔터테인먼트 · 대표 아영민, 신주호 · 사업자번호 709-59-00653<br>
+    서울 성북구 돌곶이로 9길 14 · 010-3081-3730 · &copy; 2026 TENET Entertainment</p>
+  </footer>
+
+  <script>
+  (function(){
+    var fis=document.querySelectorAll('.fi');
+    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:0.1});
+    fis.forEach(function(el){obs.observe(el)});
+  })();
+  </script>
+</body>
+</html>
