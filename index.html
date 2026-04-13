@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TENET — 당신의 소리가 실제가 되는 곳</title>
-  <meta name="description" content="서울 성북구 합주실·녹음실·밴드클럽. 24시간 25,000원 합주실. 밴드클럽으로 8주 만에 무대에 선다. 이미 결심한 당신, 더 크게 울리게 해줄게.">
-  <meta name="keywords" content="합주실, 녹음실, 밴드클럽, 성북구, 돌곶이, 서울, 밴드, 공연, 연습실, TENET">
-  <meta property="og:title" content="TENET — 당신의 소리가 실제가 되는 곳">
-  <meta property="og:description" content="이미 결심한 당신, 더 크게 울리게 해줄게. 합주실 · 녹음실 · 밴드클럽">
+  <title>TENET Entertainment — 기획부터 무대까지, 음악의 모든 것</title>
+  <meta name="description" content="테넷 엔터테인먼트. 공연 기획 · 아티스트 무대 연결 · 합주실 · 녹음실 · 밴드클럽. 서울 성북구, 24시간 운영.">
+  <meta name="keywords" content="테넷, TENET, 엔터테인먼트, 공연기획, 합주실, 녹음실, 밴드클럽, 성북구, 아티스트, 공연">
+  <meta property="og:title" content="TENET Entertainment — 기획부터 무대까지">
+  <meta property="og:description" content="공연 기획 · 아티스트 무대 연결 · 합주실 · 녹음실 · 밴드클럽. 이미 결심한 당신, 더 크게 울리게 해줄게.">
   <meta property="og:image" content="images/concert-live.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://what1244-art.github.io/tenet-ent/">
@@ -15,15 +15,41 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Fonts -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- AOS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 
   <link rel="stylesheet" href="style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"MusicStore","name":"TENET Entertainment","address":{"@type":"PostalAddress","streetAddress":"돌곶이로 9길 14","addressLocality":"성북구","addressRegion":"서울","addressCountry":"KR"},"telephone":"010-3081-3730","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"},"priceRange":"₩₩","url":"https://what1244-art.github.io/tenet-ent/"}</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EntertainmentBusiness",
+    "name": "TENET Entertainment",
+    "description": "공연 기획, 아티스트 무대 연결, 합주실, 녹음실, 밴드클럽 운영",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "돌곶이로 9길 14",
+      "addressLocality": "성북구",
+      "addressRegion": "서울",
+      "addressCountry": "KR"
+    },
+    "telephone": "010-3081-3730",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
+    },
+    "priceRange": "₩₩",
+    "url": "https://what1244-art.github.io/tenet-ent/"
+  }
+  </script>
 </head>
 <body>
 
@@ -35,12 +61,13 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
+        <li><a href="#about">회사소개</a></li>
+        <li><a href="#portfolio">포트폴리오</a></li>
         <li><a href="#spaces">공간</a></li>
         <li><a href="#bandclub">밴드클럽</a></li>
         <li><a href="#pricing">요금</a></li>
         <li><a href="#voices">후기</a></li>
-        <li><a href="#music">음악</a></li>
-        <li><a href="#findus">찾아오기</a></li>
+        <li><a href="#findus">오시는 길</a></li>
         <li>
           <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home"
              target="_blank" rel="noopener" class="nav-cta">예약하기</a>
@@ -49,23 +76,24 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ============================================================
+       HERO — 엔터테인먼트 회사 첫인상
+       ============================================================ -->
   <section class="hero" id="hero">
     <div class="hero-bg">
-      <img src="images-compressed/concert-live.jpg" alt="TENET 공연" class="hero-img" loading="eager">
+      <img src="images-compressed/concert-live.jpg" alt="TENET 공연 현장" class="hero-img" loading="eager">
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-content">
-      <p class="hero-label">SEOUL · SEONGBUK — SINCE 2022</p>
-      <h1 class="hero-title">
-        STOP PRACTICING.<br>
-        <span class="hero-accent">START PERFORMING.</span>
+      <p class="hero-label en">ENTERTAINMENT · PRODUCTION · STAGE</p>
+      <h1 class="hero-title en">
+        FROM IDEA<br>
+        <span class="hero-accent">TO STAGE.</span>
       </h1>
-      <p class="hero-sub">당신의 소리가 실제가 되는 곳</p>
+      <p class="hero-sub">기획부터 무대까지, 음악의 모든 것.<br>테넷 엔터테인먼트가 만듭니다.</p>
       <div class="hero-actions">
-        <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home"
-           target="_blank" rel="noopener" class="btn btn-primary">합주실 예약</a>
-        <a href="#bandclub" class="btn btn-ghost">밴드클럽 보기</a>
+        <a href="#portfolio" class="btn btn-cream">포트폴리오 보기</a>
+        <a href="#spaces" class="btn btn-ghost">공간 둘러보기</a>
       </div>
     </div>
     <a href="#proof" class="hero-scroll" aria-label="아래로">
@@ -73,30 +101,32 @@
     </a>
   </section>
 
-  <!-- PROOF -->
+  <!-- ============================================================
+       PROOF — 실적 수치
+       ============================================================ -->
   <section class="proof" id="proof">
     <div class="container">
       <div class="proof-grid">
         <div class="proof-item" data-aos="fade-up" data-aos-delay="0">
           <div class="proof-num-wrap">
-            <span class="proof-num" data-target="4800">0</span>
-            <span class="proof-unit">+</span>
-          </div>
-          <p class="proof-label">누적 예약</p>
-        </div>
-        <div class="proof-item" data-aos="fade-up" data-aos-delay="100">
-          <div class="proof-num-wrap">
-            <span class="proof-num" data-target="320">0</span>
-            <span class="proof-unit">+</span>
-          </div>
-          <p class="proof-label">밴드 팀</p>
-        </div>
-        <div class="proof-item" data-aos="fade-up" data-aos-delay="200">
-          <div class="proof-num-wrap">
             <span class="proof-num" data-target="40">0</span>
             <span class="proof-unit">+</span>
           </div>
           <p class="proof-label">공연 기획</p>
+        </div>
+        <div class="proof-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="proof-num-wrap">
+            <span class="proof-num" data-target="530">0</span>
+            <span class="proof-unit">+</span>
+          </div>
+          <p class="proof-label">무대에 선 아티스트</p>
+        </div>
+        <div class="proof-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="proof-num-wrap">
+            <span class="proof-num" data-target="4800">0</span>
+            <span class="proof-unit">+</span>
+          </div>
+          <p class="proof-label">누적 예약</p>
         </div>
         <div class="proof-item" data-aos="fade-up" data-aos-delay="300">
           <div class="proof-num-wrap">
@@ -109,7 +139,211 @@
     </div>
   </section>
 
-  <!-- SPACES -->
+  <!-- ============================================================
+       ABOUT — 엔터 회사 정체성 (영민대표 피드백 반영)
+       ============================================================ -->
+  <section class="about" id="about" style="padding:100px 0; background:var(--bg);">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+        <div data-aos="fade-right">
+          <p class="section-tag">ABOUT TENET</p>
+          <h2 class="section-title" style="text-align:left; margin-bottom:20px;">
+            합주실이 아닙니다.<br>
+            <span style="color:var(--cream);">엔터테인먼트 회사입니다.</span>
+          </h2>
+          <p style="font-size:0.95rem; color:var(--gray); line-height:1.85; margin-bottom:24px;">
+            테넷 엔터테인먼트는 <strong style="color:var(--text);">공연 기획과 아티스트 무대 연결</strong>을 핵심으로,
+            합주실·녹음실·밴드클럽을 운영하며 음악인의 전체 여정을 지원합니다.
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:32px;">
+            <div style="padding:20px; background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius);">
+              <strong style="display:block; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; color:var(--cream); letter-spacing:2px; margin-bottom:6px;">01</strong>
+              <span style="font-size:0.85rem; color:var(--text-dim);">공연 기획 · 제작</span>
+            </div>
+            <div style="padding:20px; background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius);">
+              <strong style="display:block; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; color:var(--cream); letter-spacing:2px; margin-bottom:6px;">02</strong>
+              <span style="font-size:0.85rem; color:var(--text-dim);">아티스트 무대 연결</span>
+            </div>
+            <div style="padding:20px; background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius);">
+              <strong style="display:block; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; color:var(--cream); letter-spacing:2px; margin-bottom:6px;">03</strong>
+              <span style="font-size:0.85rem; color:var(--text-dim);">합주실 · 녹음실 운영</span>
+            </div>
+            <div style="padding:20px; background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius);">
+              <strong style="display:block; font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700; color:var(--cream); letter-spacing:2px; margin-bottom:6px;">04</strong>
+              <span style="font-size:0.85rem; color:var(--text-dim);">밴드클럽 · 음악 교육</span>
+            </div>
+          </div>
+          <a href="#portfolio" class="btn btn-ghost">프로젝트 보기 →</a>
+        </div>
+        <div data-aos="fade-left">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; border-radius:var(--radius); overflow:hidden;">
+            <img src="images-compressed/concert-group.jpg" alt="공연 단체" style="width:100%; height:200px; object-fit:cover; grid-row:1/3;">
+            <img src="images-compressed/concert-pose.jpg" alt="공연 포즈" style="width:100%; height:96px; object-fit:cover;">
+            <img src="images-compressed/studio-screen.jpg" alt="녹음실" style="width:100%; height:96px; object-fit:cover;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ECOSYSTEM — 생태계 프로세스
+       ============================================================ -->
+  <section style="padding:80px 0; background:var(--bg2); border-top:1px solid rgba(255,255,255,0.05); border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-tag">ECOSYSTEM</p>
+        <h2 class="section-title">TENET 생태계</h2>
+        <p class="section-desc">기획부터 발매까지, 음악인이 필요한 모든 인프라를 한 곳에서.</p>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:0;" data-aos="fade-up" data-aos-delay="100">
+        <div style="text-align:center; padding:24px 28px;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:2rem; font-weight:900; color:var(--cream); line-height:1; margin-bottom:8px;">01</div>
+          <div style="font-size:0.9rem; font-weight:700; color:var(--white); margin-bottom:4px;">기획</div>
+          <div style="font-size:0.75rem; color:var(--text-faint);">공연 컨셉 · 제작</div>
+        </div>
+        <div style="color:var(--text-faint); font-size:1.2rem;">→</div>
+        <div style="text-align:center; padding:24px 28px;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:2rem; font-weight:900; color:var(--cream); line-height:1; margin-bottom:8px;">02</div>
+          <div style="font-size:0.9rem; font-weight:700; color:var(--white); margin-bottom:4px;">연습</div>
+          <div style="font-size:0.75rem; color:var(--text-faint);">24시간 합주실</div>
+        </div>
+        <div style="color:var(--text-faint); font-size:1.2rem;">→</div>
+        <div style="text-align:center; padding:24px 28px;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:2rem; font-weight:900; color:var(--cream); line-height:1; margin-bottom:8px;">03</div>
+          <div style="font-size:0.9rem; font-weight:700; color:var(--white); margin-bottom:4px;">녹음</div>
+          <div style="font-size:0.75rem; color:var(--text-faint);">전문 레코딩</div>
+        </div>
+        <div style="color:var(--text-faint); font-size:1.2rem;">→</div>
+        <div style="text-align:center; padding:24px 28px;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:2rem; font-weight:900; color:var(--cream); line-height:1; margin-bottom:8px;">04</div>
+          <div style="font-size:0.9rem; font-weight:700; color:var(--white); margin-bottom:4px;">촬영</div>
+          <div style="font-size:0.75rem; color:var(--text-faint);">콘텐츠 제작</div>
+        </div>
+        <div style="color:var(--text-faint); font-size:1.2rem;">→</div>
+        <div style="text-align:center; padding:24px 28px;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:2rem; font-weight:900; color:var(--cream); line-height:1; margin-bottom:8px;">05</div>
+          <div style="font-size:0.9rem; font-weight:700; color:var(--white); margin-bottom:4px;">공연</div>
+          <div style="font-size:0.75rem; color:var(--text-faint);">무대 · 행사</div>
+        </div>
+        <div style="color:var(--text-faint); font-size:1.2rem;">→</div>
+        <div style="text-align:center; padding:24px 28px;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:2rem; font-weight:900; color:var(--cream); line-height:1; margin-bottom:8px;">06</div>
+          <div style="font-size:0.9rem; font-weight:700; color:var(--white); margin-bottom:4px;">발매</div>
+          <div style="font-size:0.75rem; color:var(--text-faint);">음원 유통</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PORTFOLIO — 공연 기획 실적 (영민대표 피드백 핵심)
+       ============================================================ -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-tag">PORTFOLIO</p>
+        <h2 class="section-title">우리가 만든 무대</h2>
+        <p class="section-desc">기획부터 무대까지, 테넷이 직접 만들고 운영한 프로젝트입니다.</p>
+      </div>
+
+      <div class="portfolio-grid">
+        <!-- 팔레트 온 스테이지 -->
+        <div class="portfolio-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="portfolio-card-img">
+            <img src="images-compressed/palette-poster.jpg" alt="팔레트 온 스테이지" loading="lazy">
+            <span class="portfolio-card-badge">CONCERT</span>
+          </div>
+          <div class="portfolio-card-body">
+            <p class="portfolio-card-date">2026. 02. 14</p>
+            <h3 class="portfolio-card-title">팔레트 온 스테이지</h3>
+            <p class="portfolio-card-desc">
+              신당 레드포인트. 4팀 아티스트 14곡 라이브.
+              NFC 키링, 럭키드로우, 네이버 인플루언서 프로모션까지 기획·제작·운영 전부 수행.
+            </p>
+            <div class="portfolio-card-stats">
+              <div class="portfolio-stat">
+                <span class="portfolio-stat-num en">110</span>
+                <span class="portfolio-stat-label">관객</span>
+              </div>
+              <div class="portfolio-stat">
+                <span class="portfolio-stat-num en">220<span style="font-size:0.8rem;">만</span></span>
+                <span class="portfolio-stat-label">매출</span>
+              </div>
+              <div class="portfolio-stat">
+                <span class="portfolio-stat-num en">14</span>
+                <span class="portfolio-stat-label">곡 라이브</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 아빠들의 소꿉놀이 -->
+        <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="portfolio-card-img">
+            <img src="images-compressed/concert-pose.jpg" alt="아빠들의 소꿉놀이" loading="lazy">
+            <span class="portfolio-card-badge">THEATER</span>
+          </div>
+          <div class="portfolio-card-body">
+            <p class="portfolio-card-date">2026. 02. 27 — 03. 01</p>
+            <h3 class="portfolio-card-title">아빠들의 소꿉놀이</h3>
+            <p class="portfolio-card-desc">
+              제이원씨어터, 6회차 연극 공연.
+              기획서·캐스팅·리플렛·하우스 운영까지 풀 프로덕션 수행.
+            </p>
+            <div class="portfolio-card-stats">
+              <div class="portfolio-stat">
+                <span class="portfolio-stat-num en">200</span>
+                <span class="portfolio-stat-label">관객</span>
+              </div>
+              <div class="portfolio-stat">
+                <span class="portfolio-stat-num en">400<span style="font-size:0.8rem;">만</span></span>
+                <span class="portfolio-stat-label">매출</span>
+              </div>
+              <div class="portfolio-stat">
+                <span class="portfolio-stat-num en">6</span>
+                <span class="portfolio-stat-label">회차</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 유퍼라 1기 -->
+        <div class="portfolio-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="portfolio-card-img">
+            <img src="images-ufla/web/ufla-concert-02.jpg" alt="유퍼라 밴드클럽 1기" loading="lazy">
+            <span class="portfolio-card-badge">BAND CLUB</span>
+          </div>
+          <div class="portfolio-card-body">
+            <p class="portfolio-card-date">2026. 01 — 03</p>
+            <h3 class="portfolio-card-title">유퍼라 밴드클럽 1기</h3>
+            <p class="portfolio-card-desc">
+              20명 모집, 4팀 구성. 8주 합주 후 레드포인트 라이브 공연.
+              팀 매칭부터 무대까지 전 과정 운영.
+            </p>
+            <div class="portfolio-card-stats">
+              <div class="portfolio-stat">
+                <span class="portfolio-stat-num en">20</span>
+                <span class="portfolio-stat-label">참가자</span>
+              </div>
+              <div class="portfolio-stat">
+                <span class="portfolio-stat-num en">4</span>
+                <span class="portfolio-stat-label">팀</span>
+              </div>
+              <div class="portfolio-stat">
+                <span class="portfolio-stat-num en">8</span>
+                <span class="portfolio-stat-label">주 프로그램</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SPACES — 합주실 + 녹음실
+       ============================================================ -->
   <section class="spaces" id="spaces">
     <div class="container">
       <div class="section-header" data-aos="fade-up">
@@ -127,7 +361,7 @@
             </div>
           </div>
           <div class="space-card-body">
-            <p class="space-card-tag">REHEARSAL ROOM</p>
+            <p class="space-card-tag en">REHEARSAL ROOM</p>
             <h3 class="space-card-title">합주실</h3>
             <p class="space-card-desc">
               Marshall · Fender · Roland 풀셋업. 방음 최적화 스튜디오에서
@@ -138,8 +372,9 @@
               <li>Roland TD-17 전자드럼</li>
               <li>Markbass 베이스앰프</li>
               <li>PA 시스템 · 마이크</li>
+              <li>방 4개 · 방음 최적화</li>
             </ul>
-            <p class="space-card-price">25,000<span>원 / 시간</span></p>
+            <p class="space-card-price en">25,000<span>원 / 시간</span></p>
           </div>
         </div>
 
@@ -152,7 +387,7 @@
             </div>
           </div>
           <div class="space-card-body">
-            <p class="space-card-tag">RECORDING STUDIO</p>
+            <p class="space-card-tag en">RECORDING STUDIO</p>
             <h3 class="space-card-title">녹음실</h3>
             <p class="space-card-desc">
               데모부터 음반까지. 엔지니어 협업 가능,
@@ -164,36 +399,130 @@
               <li>Focusrite Clarett 인터페이스</li>
               <li>믹싱 · 마스터링 옵션</li>
             </ul>
-            <p class="space-card-price">별도 문의<span></span></p>
+            <p class="space-card-price">별도 문의</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BANDCLUB BANNER -->
-  <section class="bandclub-banner" id="bandclub">
-    <div class="bandclub-bg">
-      <img src="images-compressed/concert-group.jpg" alt="밴드클럽 공연" loading="lazy">
-      <div class="bandclub-overlay"></div>
-    </div>
+  <!-- ============================================================
+       EQUIPMENT — 장비 갤러리
+       ============================================================ -->
+  <section class="equipment">
     <div class="container">
-      <div class="bandclub-content" data-aos="fade-up">
-        <p class="section-tag" style="color:#E8D5B7">BAND CLUB</p>
-        <h2 class="bandclub-title">
-          이미 결심한 당신,<br>
-          <span class="hero-accent">더 크게 울리게 해줄게.</span>
-        </h2>
-        <p class="bandclub-desc">
-          팀 매칭 → 8주 합주 → 실제 무대.<br>
-          혼자 치던 당신이 밴드가 됩니다.
-        </p>
-        <a href="bandclub.html" class="btn btn-primary">밴드클럽 자세히 보기</a>
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-tag">EQUIPMENT</p>
+        <h2 class="section-title">장비를 확인하세요</h2>
+      </div>
+      <div class="equip-grid">
+        <div class="equip-item" data-aos="fade-up" data-aos-delay="0">
+          <img src="images-compressed/marshall-amps.jpg" alt="Marshall JCM" loading="lazy">
+          <div class="equip-item-label">
+            <strong>Marshall JCM</strong>
+            <span>기타 앰프</span>
+          </div>
+        </div>
+        <div class="equip-item" data-aos="fade-up" data-aos-delay="50">
+          <img src="images-compressed/markbass.jpg" alt="Markbass" loading="lazy">
+          <div class="equip-item-label">
+            <strong>Markbass</strong>
+            <span>베이스 앰프</span>
+          </div>
+        </div>
+        <div class="equip-item" data-aos="fade-up" data-aos-delay="100">
+          <img src="images-compressed/drums.jpg" alt="Roland TD-17" loading="lazy">
+          <div class="equip-item-label">
+            <strong>Roland TD-17</strong>
+            <span>전자드럼</span>
+          </div>
+        </div>
+        <div class="equip-item" data-aos="fade-up" data-aos-delay="150">
+          <img src="images-compressed/practice-room.jpg" alt="합주실 전경" loading="lazy">
+          <div class="equip-item-label">
+            <strong>방음 스튜디오</strong>
+            <span>합주실 전경</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
+  <!-- ============================================================
+       BANDCLUB BANNER — 유퍼라 연결
+       ============================================================ -->
+  <section class="bandclub-banner" id="bandclub">
+    <div class="bandclub-bg">
+      <img src="images-ufla/web/ufla-concert-05.jpg" alt="밴드클럽 공연" loading="lazy">
+      <div class="bandclub-overlay"></div>
+    </div>
+    <div class="container">
+      <div class="bandclub-content" data-aos="fade-up">
+        <p class="section-tag" style="color:var(--cream);">BAND CLUB — UFLA</p>
+        <h2 class="bandclub-title">
+          혼자 치던 당신,<br>
+          <span style="color:var(--accent);">무대에 서는 날.</span>
+        </h2>
+        <p class="bandclub-desc">
+          팀 매칭 → 8주 합주 → 홍대 라이브바 공연.<br>
+          밴드클럽 유퍼라에서 당신이 밴드가 됩니다.
+        </p>
+        <div class="bandclub-features">
+          <div class="bandclub-feature">
+            <strong class="en">8</strong>
+            <span>주 프로그램</span>
+          </div>
+          <div class="bandclub-feature">
+            <strong class="en">250K</strong>
+            <span>원 패키지</span>
+          </div>
+          <div class="bandclub-feature">
+            <strong class="en">LIVE</strong>
+            <span>홍대 무대</span>
+          </div>
+        </div>
+        <a href="bandclub.html" class="btn btn-primary">유퍼라 자세히 보기 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       INSTRUCTORS — 강사진
+       ============================================================ -->
+  <section class="instructors" id="instructors">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <p class="section-tag">INSTRUCTORS</p>
+        <h2 class="section-title">함께하는 강사진</h2>
+        <p class="section-desc">밴드클럽 1기부터 함께한 전담 강사진이 여러분의 합주를 이끕니다.</p>
+      </div>
+
+      <div class="instructors-grid">
+        <div class="instructor-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="instructor-avatar">B</div>
+          <h3 class="instructor-name">현석 선생님</h3>
+          <p class="instructor-role">베이스 · 밴드 디렉터</p>
+          <p class="instructor-desc">
+            밴드클럽 1기부터 함께한 베이스 전담 강사.
+            팀 합주 코칭과 공연 리허설을 이끕니다.
+          </p>
+        </div>
+        <div class="instructor-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="instructor-avatar">G</div>
+          <h3 class="instructor-name">현우 선생님</h3>
+          <p class="instructor-role">기타 · 밴드 디렉터</p>
+          <p class="instructor-desc">
+            기타 파트 전담 강사.
+            곡 선정부터 구간 분해, 무대 동선까지 케어합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOW IT WORKS — 이용 방법
+       ============================================================ -->
   <section class="how" id="how">
     <div class="container">
       <div class="section-header" data-aos="fade-up">
@@ -203,7 +532,7 @@
 
       <div class="how-steps">
         <div class="how-step" data-aos="fade-up" data-aos-delay="0">
-          <div class="how-step-num">01</div>
+          <div class="how-step-num en">01</div>
           <div class="how-step-body">
             <h3>예약 · 입장</h3>
             <p>네이버 예약 또는 카카오로 시간을 잡습니다. 코드 받고 혼자 입장 가능, 24시간 운영.</p>
@@ -211,7 +540,7 @@
         </div>
         <div class="how-step-divider" aria-hidden="true"></div>
         <div class="how-step" data-aos="fade-up" data-aos-delay="100">
-          <div class="how-step-num">02</div>
+          <div class="how-step-num en">02</div>
           <div class="how-step-body">
             <h3>연주 · 녹음</h3>
             <p>장비는 다 세팅되어 있습니다. 그냥 치면 됩니다. 녹음이 필요하면 스튜디오로.</p>
@@ -219,7 +548,7 @@
         </div>
         <div class="how-step-divider" aria-hidden="true"></div>
         <div class="how-step" data-aos="fade-up" data-aos-delay="200">
-          <div class="how-step-num">03</div>
+          <div class="how-step-num en">03</div>
           <div class="how-step-body">
             <h3>무대 · 기록</h3>
             <p>밴드클럽 합류하면 공연 무대까지. TENET이 기획하고, 당신이 섭니다.</p>
@@ -229,7 +558,9 @@
     </div>
   </section>
 
-  <!-- PRICING -->
+  <!-- ============================================================
+       PRICING — 요금
+       ============================================================ -->
   <section class="pricing" id="pricing">
     <div class="container">
       <div class="section-header" data-aos="fade-up">
@@ -241,13 +572,13 @@
         <div class="pricing-card" data-aos="fade-up" data-aos-delay="0">
           <p class="pricing-card-tag">합주실</p>
           <div class="pricing-amount">
-            <span class="pricing-num">25,000</span>
+            <span class="pricing-num en">25,000</span>
             <span class="pricing-unit">원 / 시간</span>
           </div>
           <ul class="pricing-features">
             <li>장비 풀셋업 포함</li>
             <li>24시간 예약·입장</li>
-            <li>방음 최적화 룸</li>
+            <li>방음 최적화 룸 4개</li>
             <li>PA · 마이크 포함</li>
             <li>인원 제한 없음</li>
           </ul>
@@ -256,19 +587,19 @@
         </div>
 
         <div class="pricing-card pricing-card-featured" data-aos="fade-up" data-aos-delay="100">
-          <div class="pricing-badge">MOST POPULAR</div>
-          <p class="pricing-card-tag">밴드클럽</p>
+          <div class="pricing-badge en">MOST POPULAR</div>
+          <p class="pricing-card-tag">밴드클럽 유퍼라</p>
           <div class="pricing-amount">
-            <span class="pricing-num">60,000</span>
-            <span class="pricing-unit">원 ~</span>
+            <span class="pricing-num en">250,000</span>
+            <span class="pricing-unit">원</span>
           </div>
-          <p class="pricing-range">기본 60,000원 / 풀패키지 250,000원</p>
+          <p class="pricing-range">8주 풀패키지 (강사+매칭+공연+뒷풀이)</p>
           <ul class="pricing-features">
             <li>팀 매칭 서비스</li>
             <li>8주 정기 합주 세션</li>
-            <li>공연 기획 · 무대</li>
-            <li>SNS 기록 촬영</li>
-            <li>밴드클럽 커뮤니티</li>
+            <li>홍대 라이브바 공연</li>
+            <li>강사 1:1 코칭</li>
+            <li>SNS 기록 촬영 · 에프터파티</li>
           </ul>
           <a href="bandclub.html" class="btn btn-primary btn-full">자세히 보기</a>
         </div>
@@ -292,7 +623,9 @@
     </div>
   </section>
 
-  <!-- VOICES -->
+  <!-- ============================================================
+       VOICES — 후기
+       ============================================================ -->
   <section class="voices" id="voices">
     <div class="container">
       <div class="section-header" data-aos="fade-up">
@@ -321,7 +654,7 @@
           </p>
           <div class="voice-author">
             <span class="voice-name">박 * 연</span>
-            <span class="voice-role">보컬 · 밴드클럽 5기</span>
+            <span class="voice-role">보컬 · 밴드클럽 1기</span>
           </div>
         </div>
 
@@ -340,7 +673,9 @@
     </div>
   </section>
 
-  <!-- FIND US -->
+  <!-- ============================================================
+       FIND US — 찾아오기 + FAQ
+       ============================================================ -->
   <section class="findus" id="findus">
     <div class="container">
       <div class="section-header" data-aos="fade-up">
@@ -362,7 +697,7 @@
               <span class="findus-icon">📍</span>
               <div>
                 <p class="findus-info-label">주소</p>
-                <p class="findus-info-value">서울 성북구 돌곶이로 (6호선 돌곶이역 3번 출구 도보 3분)</p>
+                <p class="findus-info-value">서울 성북구 돌곶이로 9길 14 (6호선 돌곶이역 3번 출구 도보 3분)</p>
               </div>
             </div>
             <div class="findus-info-item">
@@ -370,6 +705,13 @@
               <div>
                 <p class="findus-info-label">운영시간</p>
                 <p class="findus-info-value">24시간 · 연중무휴</p>
+              </div>
+            </div>
+            <div class="findus-info-item">
+              <span class="findus-icon">📞</span>
+              <div>
+                <p class="findus-info-label">대표번호</p>
+                <p class="findus-info-value">010-3081-3730</p>
               </div>
             </div>
             <div class="findus-info-item">
@@ -385,7 +727,6 @@
         <div class="faq" data-aos="fade-left">
           <h3 class="faq-title">자주 묻는 질문</h3>
           <div class="faq-list" id="faqList">
-
             <div class="faq-item">
               <button class="faq-q" aria-expanded="false">
                 예약은 어떻게 하나요?
@@ -396,7 +737,16 @@
                 예약 확정 후 입장 코드가 발송됩니다.
               </div>
             </div>
-
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false">
+                공연 기획은 어떻게 의뢰하나요?
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a">
+                카카오 채널로 문의해 주세요. 공연 규모와 컨셉에 따라
+                기획·제작·운영 전 과정을 함께 설계합니다.
+              </div>
+            </div>
             <div class="faq-item">
               <button class="faq-q" aria-expanded="false">
                 인원 제한이 있나요?
@@ -407,7 +757,6 @@
                 편안하게 팀 전체가 이용 가능합니다.
               </div>
             </div>
-
             <div class="faq-item">
               <button class="faq-q" aria-expanded="false">
                 장비를 직접 가져와도 되나요?
@@ -418,7 +767,6 @@
                 앰프와 드럼, PA는 비치되어 있습니다.
               </div>
             </div>
-
             <div class="faq-item">
               <button class="faq-q" aria-expanded="false">
                 당일 예약도 가능한가요?
@@ -429,29 +777,6 @@
                 당일 예약할 수 있습니다.
               </div>
             </div>
-
-            <div class="faq-item">
-              <button class="faq-q" aria-expanded="false">
-                주차 가능한가요?
-                <span class="faq-icon" aria-hidden="true">+</span>
-              </button>
-              <div class="faq-a">
-                건물 내 주차 공간이 있으며, 인근 공영주차장도 이용 가능합니다.
-                대중교통은 돌곶이역 3번 출구 도보 3분 거리입니다.
-              </div>
-            </div>
-
-            <div class="faq-item">
-              <button class="faq-q" aria-expanded="false">
-                취소·환불 정책은?
-                <span class="faq-icon" aria-hidden="true">+</span>
-              </button>
-              <div class="faq-a">
-                이용 시작 24시간 전까지는 100% 환불 가능합니다.
-                그 이후는 취소 수수료가 발생할 수 있습니다.
-              </div>
-            </div>
-
             <div class="faq-item">
               <button class="faq-q" aria-expanded="false">
                 밴드클럽은 초보자도 신청 가능한가요?
@@ -462,7 +787,6 @@
                 중요한 건 악기를 다루는 것이지 실력이 아닙니다.
               </div>
             </div>
-
             <div class="faq-item">
               <button class="faq-q" aria-expanded="false">
                 녹음실 이용 시 별도 문의가 필요한가요?
@@ -473,42 +797,21 @@
                 카카오 채널로 사전 문의 후 예약합니다.
               </div>
             </div>
-
-            <div class="faq-item">
-              <button class="faq-q" aria-expanded="false">
-                공연 기획은 어떻게 신청하나요?
-                <span class="faq-icon" aria-hidden="true">+</span>
-              </button>
-              <div class="faq-a">
-                밴드클럽 참여 시 공연 기회가 자동으로 포함됩니다.
-                독립 밴드의 자체 공연 기획도 카카오 채널로 문의해 주세요.
-              </div>
-            </div>
-
-            <div class="faq-item">
-              <button class="faq-q" aria-expanded="false">
-                합주 중 음료·음식 반입이 되나요?
-                <span class="faq-icon" aria-hidden="true">+</span>
-              </button>
-              <div class="faq-a">
-                음료는 밀폐 용기에 한해 반입 가능합니다.
-                음식은 장비 보호를 위해 합주실 내 취식을 제한합니다.
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MUSIC -->
+  <!-- ============================================================
+       MUSIC — YouTube 채널
+       ============================================================ -->
   <section class="music-section" id="music">
     <div class="container">
       <div class="section-header" data-aos="fade-up">
         <p class="section-tag">MUSIC</p>
         <h2 class="section-title">음악듣는 고양이 TENET</h2>
-        <p class="section-desc" style="max-width:520px;margin:0 auto">매일 새로운 감성 음악. 카페 재즈부터 수면 음악까지, AI가 만들고 사람이 다듬습니다.</p>
+        <p class="section-desc">매일 새로운 감성 음악. 카페 재즈부터 수면 음악까지, AI가 만들고 사람이 다듬습니다.</p>
       </div>
       <div class="music-grid" data-aos="fade-up" data-aos-delay="100">
         <div class="music-player-wrap">
@@ -533,17 +836,19 @@
             <span>🌆 도시 감성</span>
             <span>🎹 피아노</span>
           </div>
-          <a href="https://www.youtube.com/@tenet-music" class="btn btn-ghost" id="ytLink" target="_blank" rel="noopener">YouTube에서 듣기 →</a>
+          <a href="https://www.youtube.com/@tenet-music" class="btn btn-ghost" target="_blank" rel="noopener">YouTube에서 듣기 →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA STRIP -->
+  <!-- ============================================================
+       CTA STRIP
+       ============================================================ -->
   <section class="cta-strip">
     <div class="container">
       <div class="cta-strip-inner" data-aos="fade-up">
-        <h2 class="cta-strip-title">지금 바로 시작하세요.</h2>
+        <h2 class="cta-strip-title en">READY TO PLAY?</h2>
         <p class="cta-strip-sub">이미 결심했다면, 나머지는 TENET이 합니다.</p>
         <div class="cta-strip-actions">
           <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home"
@@ -554,13 +859,15 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" class="footer-logo">TENET</a>
-          <p class="footer-tagline">당신의 소리가 실제가 되는 곳</p>
+          <a href="/" class="footer-logo en">TENET</a>
+          <p class="footer-tagline">기획부터 무대까지, 음악의 모든 것</p>
           <div class="footer-socials">
             <a href="https://www.instagram.com/tenet_bandclub" target="_blank" rel="noopener" aria-label="인스타그램">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -572,12 +879,18 @@
                 <path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.76 1.68 5.19 4.2 6.66L5.1 21l4.08-2.1c.9.24 1.83.36 2.82.36 5.52 0 10-3.48 10-7.8C22 6.48 17.52 3 12 3z"/>
               </svg>
             </a>
+            <a href="https://www.youtube.com/@tenet-music" target="_blank" rel="noopener" aria-label="유튜브">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
           </div>
         </div>
 
         <div class="footer-links">
-          <h4>공간</h4>
+          <h4>서비스</h4>
           <ul>
+            <li><a href="#portfolio">공연 기획</a></li>
             <li><a href="#spaces">합주실</a></li>
             <li><a href="#spaces">녹음실</a></li>
             <li><a href="#bandclub">밴드클럽</a></li>
@@ -588,8 +901,9 @@
           <h4>정보</h4>
           <ul>
             <li><a href="#pricing">요금표</a></li>
-            <li><a href="#findus">찾아오기</a></li>
+            <li><a href="#findus">오시는 길</a></li>
             <li><a href="#findus">FAQ</a></li>
+            <li><a href="#instructors">강사진</a></li>
           </ul>
         </div>
 
@@ -603,7 +917,7 @@
 
       <div class="footer-bottom">
         <p>&copy; 2026 TENET Entertainment. All rights reserved.</p>
-        <p class="footer-addr">서울 성북구 돌곶이로 · 사업자번호 709-59-00653</p>
+        <p class="footer-addr">테넷 엔터테인먼트 · 대표 아영민, 신주호 · 사업자번호 709-59-00653 · 서울 성북구 돌곶이로 9길 14 · 010-3081-3730</p>
       </div>
     </div>
   </footer>
