@@ -143,14 +143,16 @@
     }
     .hero-title {
       font-family: 'Quicksand', sans-serif;
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: 700; letter-spacing: 6px;
-      margin-bottom: 16px;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 700; letter-spacing: 12px;
+      margin-bottom: 20px;
+      line-height: 0.95;
     }
     .hero-sub {
       font-size: 1rem; font-weight: 300;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.7);
       line-height: 1.9;
+      letter-spacing: 1px;
     }
     .hero-scroll {
       position: absolute; bottom: 32px; left: 50%;
@@ -170,7 +172,7 @@
 
     /* ── FULL VISUAL BANNER (Glue Hotel style) ── */
     .visual {
-      position: relative; height: 70vh; min-height: 400px;
+      position: relative; height: 80vh; min-height: 450px;
       overflow: hidden; display: flex; align-items: center; justify-content: center;
       text-align: center; color: #fff;
     }
@@ -210,9 +212,9 @@
     }
     .sec-heading {
       font-family: 'Quicksand', sans-serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 700; line-height: 1.35;
-      color: inherit; margin-bottom: 16px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.25;
+      color: inherit; margin-bottom: 20px;
       letter-spacing: -0.5px;
     }
     .sec-text {
@@ -245,8 +247,10 @@
       background: var(--accent);
     }
     .about-img {
-      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      width: 110%; aspect-ratio: 3/4; object-fit: cover;
       border-radius: 12px;
+      margin-left: -5%;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.08);
     }
 
     /* ── PORTFOLIO ── */
@@ -262,12 +266,13 @@
       width: 100%; aspect-ratio: 4/3; object-fit: cover;
       transition: transform 0.6s ease;
     }
-    .port-item:hover img { transform: scale(1.04); }
+    .port-item:hover img { transform: scale(1.06); filter: brightness(0.95); }
     .port-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
       display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 24px;
+      padding: 28px;
+      transition: background 0.4s;
     }
     .port-date {
       font-family: 'Quicksand', sans-serif;
@@ -289,8 +294,8 @@
     .studio-photos {
       display: grid; gap: 8px; border-radius: 12px; overflow: hidden;
     }
-    .studio-photos img:first-child { width: 100%; height: 480px; object-fit: cover; }
-    .studio-photos img:last-child { width: 100%; height: 280px; object-fit: cover; }
+    .studio-photos img:first-child { width: 100%; height: 520px; object-fit: cover; border-radius: 12px; }
+    .studio-photos img:last-child { width: 100%; height: 300px; object-fit: cover; border-radius: 12px; }
     .studio-specs {
       margin-top: 24px; display: flex; flex-direction: column; gap: 14px;
     }
@@ -691,8 +696,26 @@
     if(links)links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');tog.classList.remove('open')})});
     document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();window.scrollTo({top:t.offsetTop-70,behavior:'smooth'})}})});
     var fis=document.querySelectorAll('.fi');
-    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:0.12});
+    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:0.1});
     fis.forEach(function(el){obs.observe(el)});
+    // Parallax on hero
+    var heroImg=document.querySelector('.hero-bg img');
+    if(heroImg&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+      window.addEventListener('scroll',function(){
+        var s=window.scrollY;
+        if(s<window.innerHeight){heroImg.style.transform='translateY('+s*0.3+'px)'}
+      },{passive:true});
+    }
+    // Parallax on visual breaks
+    document.querySelectorAll('.visual img').forEach(function(img){
+      window.addEventListener('scroll',function(){
+        var rect=img.parentElement.getBoundingClientRect();
+        if(rect.top<window.innerHeight&&rect.bottom>0){
+          var progress=(window.innerHeight-rect.top)/(window.innerHeight+rect.height);
+          img.style.transform='translateY('+(progress*40-20)+'px) scale(1.05)';
+        }
+      },{passive:true});
+    });
     document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.parentElement,ans=item.querySelector('.faq-a'),icon=btn.querySelector('.faq-icon');var open=item.classList.toggle('open');ans.style.maxHeight=open?ans.scrollHeight+'px':'0';ans.style.paddingBottom=open?'16px':'0';icon.style.transform=open?'rotate(45deg)':'none'})});
   })();
   </script>
