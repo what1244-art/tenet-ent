@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>합주실 — TENET Entertainment</title>
-  <meta name="description" content="테넷 24시간 합주실. 방음 최적화 4개 룸. Marshall, Fender, Roland, Markbass 풀셋업. 시간당 25,000원.">
+  <meta name="description" content="테넷 합주실. 밴드 전용 합주 공간. Mesa Boogie, Marshall, Ludwig, Yamaha MODX. 멀티트랙 녹음·인이어 모니터링.">
   <meta property="og:title" content="TENET 합주실">
   <meta property="og:image" content="images-compressed/marshall-amps.jpg">
   <meta name="theme-color" content="#ffffff">
@@ -18,161 +18,148 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #ffffff; --bg2: #f8f7f5; --dark: #1a1a1a; --text: #333;
-      --text-light: #777; --accent: #ff5a00; --border: rgba(0,0,0,0.08);
+      --bg: #ffffff; --bg2: #f8f7f5; --bg3: #eeecea; --dark: #1a1a1a;
+      --text: #333; --text-light: #777; --text-faint: #aaa;
+      --accent: #ff5a00; --border: rgba(0,0,0,0.08);
       --nav-h: 70px; --max: 1200px;
     }
     html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: 'Pretendard', 'Quicksand', -apple-system, sans-serif;
-      font-weight: 400; line-height: 1.7; -webkit-font-smoothing: antialiased;
-    }
+    body { background: var(--bg); color: var(--text); font-family: 'Pretendard','Quicksand',-apple-system,sans-serif; font-weight: 400; line-height: 1.7; -webkit-font-smoothing: antialiased; }
     img { display: block; max-width: 100%; height: auto; }
-    a { text-decoration: none; color: inherit; transition: color 0.3s; }
+    a { text-decoration: none; color: inherit; transition: all 0.3s; }
     .en { font-family: 'Quicksand', sans-serif; }
     .container { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+    .container-narrow { max-width: 900px; margin: 0 auto; padding: 0 32px; }
 
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: var(--nav-h);
-      background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 100%; max-width: var(--max); margin: 0 auto; padding: 0 32px;
-    }
-    .nav-logo {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1.3rem; font-weight: 700; letter-spacing: 4px; color: var(--dark);
-    }
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+    .nav-logo { font-family: 'Quicksand',sans-serif; font-size: 1.3rem; font-weight: 700; letter-spacing: 4px; color: var(--dark); }
     .nav-back { font-size: 0.82rem; color: var(--text-light); }
     .nav-back:hover { color: var(--accent); }
 
-    .page-hero {
-      position: relative; height: 60vh; min-height: 350px;
-      overflow: hidden; display: flex; align-items: center;
-      justify-content: center; text-align: center; color: #fff;
-      margin-top: var(--nav-h);
-    }
-    .page-hero img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .page-hero-dim { position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
-    .page-hero-body { position: relative; z-index: 1; }
-    .page-hero-title {
-      font-family: 'Quicksand', sans-serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700; letter-spacing: 4px; margin-bottom: 8px;
-    }
-    .page-hero-sub { font-size: 0.95rem; color: rgba(255,255,255,0.7); }
+    /* HERO */
+    .hero { position: relative; height: 75vh; min-height: 450px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; margin-top: var(--nav-h); }
+    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-dim { position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
+    .hero-body { position: relative; z-index: 1; }
+    .hero-title { font-family: 'Quicksand',sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: 8px; margin-bottom: 12px; }
+    .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.65); letter-spacing: 1px; }
 
-    .sec { padding: 100px 0; }
+    /* SECTIONS */
+    .sec { padding: 120px 0; }
     .sec-gray { background: var(--bg2); }
-    .sec-label {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 4px;
-      color: var(--accent); text-transform: uppercase; margin-bottom: 12px;
-    }
-    .sec-heading {
-      font-family: 'Quicksand', sans-serif;
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 700; line-height: 1.35; margin-bottom: 16px;
-    }
-    .sec-text {
-      font-size: 0.92rem; color: var(--text-light); line-height: 1.9; max-width: 520px;
-    }
+    .sec-dark { background: var(--dark); color: #fff; }
+    .sec-label { font-family: 'Quicksand',sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+    .sec-heading { font-family: 'Quicksand',sans-serif; font-size: clamp(1.5rem, 3vw, 2.4rem); font-weight: 700; line-height: 1.3; margin-bottom: 16px; }
+    .sec-text { font-size: 0.92rem; color: var(--text-light); line-height: 2; max-width: 560px; }
 
-    /* ROOM GRID */
-    .room-grid {
+    /* INTRO 2-COL */
+    .intro-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+    .intro-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 12px; }
+
+    /* EQUIPMENT SHOWCASE */
+    .equip-row {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 16px; margin-top: 48px;
+      gap: 0; border-bottom: 1px solid var(--border);
+      min-height: 360px;
     }
-    .room-card {
-      position: relative; border-radius: 12px; overflow: hidden;
+    .equip-row:last-child { border-bottom: none; }
+    .equip-row.reverse .equip-photo { order: 2; }
+    .equip-row.reverse .equip-info { order: 1; }
+
+    .equip-photo {
+      position: relative; overflow: hidden; background: var(--bg2);
     }
-    .room-card img {
-      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+    .equip-photo img {
+      width: 100%; height: 100%; object-fit: cover;
       transition: transform 0.6s;
     }
-    .room-card:hover img { transform: scale(1.03); }
-    .room-card-label {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 16px 20px;
-      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    .equip-photo:hover img { transform: scale(1.03); }
+    .equip-placeholder {
+      width: 100%; height: 100%; min-height: 360px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
+      gap: 12px;
     }
-    .room-card-label strong {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1rem; font-weight: 700; color: #fff; letter-spacing: 2px;
+    .equip-placeholder-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; color: var(--text-faint);
     }
-
-    /* EQUIPMENT */
-    .equip-list {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 20px; margin-top: 40px;
-    }
-    .equip-item {
-      padding: 24px; border: 1px solid var(--border);
-      border-radius: 12px; transition: border-color 0.3s;
-    }
-    .equip-item:hover { border-color: var(--accent); }
-    .equip-item h3 {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;
-    }
-    .equip-item p { font-size: 0.82rem; color: var(--text-light); }
-
-    /* PRICE */
-    .price-box {
-      text-align: center; padding: 60px 32px;
-      background: var(--dark); color: #fff; border-radius: 12px;
-      margin-top: 48px;
-    }
-    .price-num {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 3rem; font-weight: 700;
-    }
-    .price-unit { font-size: 1rem; color: rgba(255,255,255,0.6); }
-    .price-features {
-      display: flex; gap: 32px; justify-content: center;
-      margin-top: 20px; flex-wrap: wrap;
-    }
-    .price-features span {
-      font-size: 0.85rem; color: rgba(255,255,255,0.5);
+    .equip-placeholder-text {
+      font-size: 0.75rem; color: var(--text-faint);
+      letter-spacing: 1px;
     }
 
-    .cta-bar {
-      text-align: center; padding: 80px 32px;
-      background: var(--accent); color: #fff;
+    .equip-info {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 48px 40px;
     }
-    .cta-bar h2 {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1.6rem; font-weight: 700; margin-bottom: 16px;
+    .equip-type {
+      font-family: 'Quicksand',sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 3px;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 8px;
     }
-    .cta-btn {
-      display: inline-block; padding: 14px 36px;
-      background: #fff; color: var(--accent);
-      font-size: 0.9rem; font-weight: 600; border-radius: 30px;
-      transition: opacity 0.3s;
+    .equip-name {
+      font-family: 'Quicksand',sans-serif;
+      font-size: 1.5rem; font-weight: 700; margin-bottom: 12px;
+      letter-spacing: -0.5px;
     }
-    .cta-btn:hover { opacity: 0.9; }
+    .equip-desc {
+      font-size: 0.88rem; color: var(--text-light); line-height: 1.9;
+      margin-bottom: 20px;
+    }
+    .equip-specs {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .equip-specs li {
+      font-size: 0.8rem; color: var(--text-faint);
+      padding-left: 12px; position: relative;
+    }
+    .equip-specs li::before {
+      content: ''; position: absolute; left: 0; top: 8px;
+      width: 4px; height: 4px; border-radius: 50%; background: var(--accent);
+    }
 
-    .footer {
-      background: var(--dark); color: rgba(255,255,255,0.4);
-      padding: 32px 0; text-align: center;
+    /* SERVICES */
+    .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+    .service-card {
+      padding: 32px 28px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 12px; transition: border-color 0.3s, transform 0.3s;
     }
-    .footer p { font-size: 0.72rem; line-height: 1.8; }
+    .service-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .service-card h3 { font-family: 'Quicksand',sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .service-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.8; }
+    .service-badge {
+      display: inline-block; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 1px; color: var(--accent); background: rgba(255,90,0,0.08);
+      padding: 4px 10px; border-radius: 20px; margin-bottom: 12px;
+    }
+
+    /* CTA */
+    .cta { text-align: center; padding: 100px 32px; background: var(--dark); color: #fff; }
+    .cta h2 { font-family: 'Quicksand',sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin-bottom: 12px; }
+    .cta p { font-size: 0.9rem; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+    .cta-btn { display: inline-block; padding: 16px 40px; background: var(--accent); color: #fff; font-size: 0.9rem; font-weight: 600; border-radius: 30px; transition: background 0.3s; }
+    .cta-btn:hover { background: #e54e00; }
+
+    .footer { background: var(--dark); color: rgba(255,255,255,0.35); padding: 32px 0; text-align: center; }
+    .footer p { font-size: 0.7rem; line-height: 1.8; }
 
     .fi { opacity: 0; transform: translateY(20px); transition: opacity 0.7s, transform 0.7s; }
     .fi.vis { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 768px) {
-      .room-grid { grid-template-columns: 1fr; }
-      .equip-list { grid-template-columns: 1fr; }
-      .price-features { flex-direction: column; gap: 8px; }
-      .sec { padding: 72px 0; }
+      .intro-grid { grid-template-columns: 1fr; }
+      .equip-row, .equip-row.reverse { grid-template-columns: 1fr; min-height: auto; }
+      .equip-row.reverse .equip-photo, .equip-row.reverse .equip-info { order: unset; }
+      .equip-placeholder { min-height: 240px; }
+      .equip-info { padding: 32px 24px; }
+      .service-grid { grid-template-columns: 1fr; }
+      .sec { padding: 80px 0; }
     }
   </style>
 </head>
@@ -185,91 +172,159 @@
     </div>
   </nav>
 
-  <section class="page-hero">
-    <img src="images-compressed/marshall-amps.jpg" alt="합주실" loading="eager">
-    <div class="page-hero-dim"></div>
-    <div class="page-hero-body">
-      <h1 class="page-hero-title en">REHEARSAL ROOM</h1>
-      <p class="page-hero-sub">24시간 · 4개 룸 · 풀셋업</p>
+  <section class="hero">
+    <img src="images-compressed/marshall-amps.jpg" alt="테넷 합주실" loading="eager">
+    <div class="hero-dim"></div>
+    <div class="hero-body">
+      <h1 class="hero-title en">REHEARSAL<br>STUDIO</h1>
+      <p class="hero-sub">밴드 전용 합주 공간 · 멀티트랙 녹음 · 인이어 모니터링</p>
     </div>
   </section>
 
+  <!-- INTRO -->
   <section class="sec">
     <div class="container">
-      <div class="fi" style="text-align:center; max-width:600px; margin:0 auto;">
-        <p class="sec-label en">ROOMS</p>
-        <h2 class="sec-heading">방음 최적화 4개 룸</h2>
-        <p class="sec-text" style="margin:0 auto;">각 룸마다 프로 장비 풀셋업. 24시간 무인 예약 · 코드 입장. 인원 제한 없음.</p>
-      </div>
-      <div class="room-grid fi">
-        <div class="room-card">
-          <img src="images-compressed/marshall-amps.jpg" alt="Marshall 앰프" loading="lazy">
-          <div class="room-card-label"><strong class="en">Marshall JCM</strong></div>
+      <div class="intro-grid fi">
+        <div>
+          <p class="sec-label en">ABOUT THE SPACE</p>
+          <h2 class="sec-heading">단순한 연습실이<br>아닙니다</h2>
+          <p class="sec-text">지층 우측에 위치한 밴드 전용 합주 공간. 단순 연습 공간이 아닌, 멀티트랙 녹음과 인이어 모니터링까지 고려해 구성했습니다. 합주하면서 바로 데모를 뽑고, 공연 환경 그대로 리허설할 수 있는 곳.</p>
         </div>
-        <div class="room-card">
-          <img src="images-compressed/drums.jpg" alt="드럼" loading="lazy">
-          <div class="room-card-label"><strong class="en">Roland TD-17</strong></div>
-        </div>
-        <div class="room-card">
-          <img src="images-compressed/markbass.jpg" alt="Markbass" loading="lazy">
-          <div class="room-card-label"><strong class="en">Markbass</strong></div>
-        </div>
-        <div class="room-card">
-          <img src="images-compressed/marshall-amps.jpg" alt="합주실 전경" loading="lazy">
-          <div class="room-card-label"><strong>합주실 전경</strong></div>
-        </div>
+        <img src="images-compressed/practice-room.jpg" alt="합주실 내부" class="intro-img" loading="lazy">
       </div>
     </div>
   </section>
 
-  <section class="sec sec-gray">
-    <div class="container">
+  <!-- EQUIPMENT SHOWCASE -->
+  <section class="sec sec-gray" style="padding-bottom:0;">
+    <div class="container-narrow" style="margin-bottom:48px;">
       <div class="fi" style="text-align:center;">
         <p class="sec-label en">EQUIPMENT</p>
-        <h2 class="sec-heading">장비</h2>
+        <h2 class="sec-heading">장비 라인업</h2>
+        <p class="sec-text" style="margin:0 auto;">프로 레벨 장비로 세팅된 밴드 합주 환경.</p>
       </div>
-      <div class="equip-list fi">
-        <div class="equip-item">
-          <h3 class="en">Marshall JCM</h3>
-          <p>기타 앰프</p>
-        </div>
-        <div class="equip-item">
-          <h3 class="en">Fender Blues Junior</h3>
-          <p>기타 앰프</p>
-        </div>
-        <div class="equip-item">
-          <h3 class="en">Markbass</h3>
-          <p>베이스 앰프</p>
-        </div>
-        <div class="equip-item">
-          <h3 class="en">Roland TD-17</h3>
-          <p>전자드럼</p>
-        </div>
-        <div class="equip-item">
-          <h3>PA 시스템</h3>
-          <p>스피커 · 모니터</p>
-        </div>
-        <div class="equip-item">
-          <h3>마이크</h3>
-          <p>보컬 · 악기</p>
-        </div>
-      </div>
+    </div>
 
-      <div class="price-box fi">
-        <p class="price-num en">25,000<span class="price-unit"> 원 / 시간</span></p>
-        <div class="price-features">
-          <span>장비 포함</span>
-          <span>24시간 운영</span>
-          <span>인원 무제한</span>
-          <span>무인 입장</span>
+    <!-- Mesa Boogie Mark V + Marshall Modern Vintage -->
+    <div class="equip-row fi">
+      <div class="equip-photo">
+        <img src="images-compressed/marshall-amps.jpg" alt="기타 앰프" loading="lazy">
+      </div>
+      <div class="equip-info">
+        <p class="equip-type en">GUITAR AMP</p>
+        <h3 class="equip-name en">Mesa Boogie Mark V<br>Marshall Modern Vintage</h3>
+        <p class="equip-desc">클린부터 하이게인까지 폭넓은 톤을 커버하는 듀얼 앰프 셋업. Mesa Boogie의 정교한 3채널 사운드와 Marshall 특유의 브리티시 크런치를 모두 사용할 수 있습니다.</p>
+        <ul class="equip-specs">
+          <li>Mesa Boogie Mark V — 3채널, 90W</li>
+          <li>Marshall Modern Vintage — 클래식 브리티시 톤</li>
+          <li>클린 · 크런치 · 하이게인 전 영역 대응</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Markbass Mark III -->
+    <div class="equip-row reverse fi">
+      <div class="equip-photo">
+        <img src="images-compressed/markbass.jpg" alt="베이스 앰프" loading="lazy">
+      </div>
+      <div class="equip-info">
+        <p class="equip-type en">BASS AMP</p>
+        <h3 class="equip-name en">Markbass Mark III</h3>
+        <p class="equip-desc">이탈리안 엔지니어링의 베이스 앰프. 가볍고 강력한 출력으로 밴드 합주에서도 묻히지 않는 단단한 저음을 제공합니다.</p>
+        <ul class="equip-specs">
+          <li>경량 설계, 강력한 출력</li>
+          <li>선명하고 단단한 로우엔드</li>
+          <li>다양한 장르 대응</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Ludwig Drum -->
+    <div class="equip-row fi">
+      <div class="equip-photo">
+        <img src="images-compressed/drums.jpg" alt="드럼 세트" loading="lazy">
+      </div>
+      <div class="equip-info">
+        <p class="equip-type en">DRUM</p>
+        <h3 class="equip-name en">Ludwig Acoustic Drum Set</h3>
+        <p class="equip-desc">Ludwig 어쿠스틱 드럼 세트. 풍부한 울림과 자연스러운 어택감으로 밴드 합주 본연의 그루브를 느낄 수 있습니다.</p>
+        <ul class="equip-specs">
+          <li>풀 어쿠스틱 셋업</li>
+          <li>자연스러운 울림과 다이내믹</li>
+          <li>하드웨어 · 심벌 포함</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Yamaha MODX+8 -->
+    <div class="equip-row reverse fi">
+      <div class="equip-photo">
+        <div class="equip-placeholder">
+          <div class="equip-placeholder-icon">🎹</div>
+          <span class="equip-placeholder-text en">PHOTO COMING SOON</span>
+        </div>
+      </div>
+      <div class="equip-info">
+        <p class="equip-type en">KEYBOARD</p>
+        <h3 class="equip-name en">Yamaha MODX+8 <span style="font-size:0.85rem;color:var(--text-faint);">x 2</span></h3>
+        <p class="equip-desc">Yamaha의 FM-X + AWM2 듀얼 사운드 엔진 탑재 88건반 신디사이저 2대. 피아노부터 신스까지 폭넓은 사운드를 커버합니다.</p>
+        <ul class="equip-specs">
+          <li>88건반 풀사이즈 2대 구비</li>
+          <li>FM-X + AWM2 듀얼 사운드 엔진</li>
+          <li>피아노 · 오르간 · 신스 · 패드</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PA System -->
+    <div class="equip-row fi">
+      <div class="equip-photo">
+        <div class="equip-placeholder">
+          <div class="equip-placeholder-icon">🔊</div>
+          <span class="equip-placeholder-text en">PHOTO COMING SOON</span>
+        </div>
+      </div>
+      <div class="equip-info">
+        <p class="equip-type en">PA SYSTEM</p>
+        <h3 class="equip-name">메인 PA 시스템</h3>
+        <p class="equip-desc">보컬과 악기 밸런스를 잡아주는 메인 PA 시스템. 합주 중 모니터링 환경을 안정적으로 제공합니다.</p>
+        <ul class="equip-specs">
+          <li>메인 스피커 + 모니터 스피커</li>
+          <li>보컬 · 키보드 모니터링</li>
+          <li>밸런스 조절 가능</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADDITIONAL SERVICES -->
+  <section class="sec">
+    <div class="container">
+      <div class="fi" style="text-align:center;">
+        <p class="sec-label en">ADDITIONAL SERVICES</p>
+        <h2 class="sec-heading">부가 서비스</h2>
+        <p class="sec-text" style="margin:0 auto;">합주 그 이상을 원한다면. 사전 문의 후 이용 가능합니다.</p>
+      </div>
+      <div class="service-grid fi">
+        <div class="service-card">
+          <span class="service-badge">사전문의 필수</span>
+          <h3>밴드 멀티트랙 녹음</h3>
+          <p>보컬 · 드럼 · 기타 · 베이스 파트별 개별 트랙 녹음. 합주 중 실시간으로 녹음하여 데모 및 포트폴리오 음원 제작 소스로 활용할 수 있습니다.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-badge">사전문의 필수</span>
+          <h3>무선 인이어 모니터링</h3>
+          <p>파트별 모니터 밸런스를 개별 세팅. 볼륨 스트레스를 줄이고, 실제 공연 환경과 동일한 조건에서 리허설할 수 있습니다.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="cta-bar">
-    <h2>지금 예약하세요</h2>
-    <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home" target="_blank" rel="noopener" class="cta-btn en">네이버 예약 →</a>
+  <!-- CTA -->
+  <section class="cta">
+    <h2 class="en">합주실 예약</h2>
+    <p>네이버 예약으로 간편하게 예약하세요.</p>
+    <a href="https://map.naver.com/p/search/%ED%85%8C%EB%84%B7%20%ED%95%A9%EC%A3%BC%EC%8B%A4/place/1404098636?placePath=/home" target="_blank" rel="noopener" class="cta-btn">네이버 예약 →</a>
   </section>
 
   <footer class="footer">
@@ -281,7 +336,7 @@
   <script>
   (function(){
     var fis=document.querySelectorAll('.fi');
-    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:0.12});
+    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:0.08});
     fis.forEach(function(el){obs.observe(el)});
   })();
   </script>
